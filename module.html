@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+    <style>
+        .navbar .breadcrumb {
+            background-color:#fff;
+        }
+        .navbar .breadcrumb .li {
+            margin-left: 20px;
+        }
+        .navbar .control-label {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .navbar {
+            margin-bottom:0;
+        }
+        .jumbotron {
+            margin-bottom:0;
+            margin-top:0;
+        }
+        .nav .t1{
+            background-color:#fff;
+        }
+        .table {
+            background-color:#fff;
+        }
+        body
+        {
+            background-image:url('img/bg_2.jpeg');
+            background-color:#cccccc;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="control-label">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Traffic Light Feedback System</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav" id="mainNav">
+                    <li><a href="./index.html">Home</a></li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">App engineering</a></li>
+                            <li><a href="#">Machine learning</a></li>
+                            <li><a href="#">Software engineering</a></li>
+                            <li><a href="#">Artificial intelligence</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="admin.html">Admin</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="myAccount">
+                    <li><a href="#">Hi, lecture</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1> App Engineering </h1>
+            <p> This is COMP0067, which teaches students how to develop a real project from the frontend to the backend. </p>
+            <!--            <p><a class="btn bg-info btn-lg" href="#" role="button">2131</a></p>-->
+        </div>
+    </div>
+
+    <nav class="navbar" role="navigation">
+        <ol class="breadcrumb">
+            <li class="li"><a href="./index.html">Home</a></li>
+            <li class="active">App engineering</li>
+        </ol>
+    </nav>
+
+    <div class="container">
+        <ul id="myTab" class="nav nav-pills nav-justified" role="tablist">
+            <li role="presentation" class="active"><a href="#Students_need_attention" data-toggle="tab" class="t1">Students need attention</a></li>
+            <li role="presentation"><a href="#Groups_need_attention" data-toggle="tab" class="t1">Groups need attention</a></li>
+            <li role="presentation"><a href="#Student_list" data-toggle="tab" class="t1">Student list</a></li>
+            <li role="presentation"><a href="#Group_list" data-toggle="tab" class="t1">Group list</a></li>
+        </ul>
+        <div id="mytab-content" class="tab-content">
+            <div class="tab-pane fade in active" id="Students_need_attention">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Performance</th>
+                            <th>Feedback</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="student.html">Tim</a></td>
+                            <td>20</td>
+                            <td>0</td>
+                            <td>Worst. <small>(<a href="student.html">Click</a> to see the details.)</small></td>
+                        </tr>
+                        <tr>
+                            <td>Sara</td>
+                            <td>26</td>
+                            <td>1</td>
+                            <td>Bad. <small>(<a href="student.html">Click</a> to see the details.)</small></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="Groups_need_attention">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Group number</th>
+                        <th>Project</th>
+                        <th>Team leader</th>
+                        <th>2nd member</th>
+                        <th>3rd member</th>
+                        <th>Average Performance</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><a href="group.html">2</a></td>
+                        <td>Mobile App development</td>
+                        <th>Johnson</th>
+                        <th>Ben</th>
+                        <th>Ken</th>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Medical Care System</td>
+                        <th>Tony</th>
+                        <th>Steven</th>
+                        <th>Sue</th>
+                        <td>1</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="Student_list">
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="search">
+                    </div>
+                </form>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>ID</th>
+                            <th>Project name</th>
+                            <th>Phone number</th>
+                            <th>Email</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="student.html">Tim</a></td>
+                            <td>20</td>
+                            <th>Project 1</th>
+                            <th>138728479</th>
+                            <th>1@gmail.com</th>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>Sara</td>
+                            <td>26</td>
+                            <th>Project 2</th>
+                            <th>138721479</th>
+                            <th>32@gmail.com</th>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Sara</td>
+                            <td>26</td>
+                            <th>Project 2</th>
+                            <th>138721479</th>
+                            <th>32@gmail.com</th>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Sara</td>
+                            <td>26</td>
+                            <th>Project 2</th>
+                            <th>138721479</th>
+                            <th>32@gmail.com</th>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Sara</td>
+                            <td>26</td>
+                            <th>Project 2</th>
+                            <th>138721479</th>
+                            <th>32@gmail.com</th>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Sara</td>
+                            <td>26</td>
+                            <th>Project 2</th>
+                            <th>138721479</th>
+                            <th>32@gmail.com</th>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="Group_list">
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="search">
+                    </div>
+                </form>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Group number</th>
+                            <th>Project</th>
+                            <th>Team leader</th>
+                            <th>2nd member</th>
+                            <th>3rd member</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="group.html">1</a></td>
+                            <td>Medical Care System</td>
+                            <th>Tony</th>
+                            <th>Steven</th>
+                            <th>Sue</th>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Mobile App development</td>
+                            <th>Johnson</th>
+                            <th>Ben</th>
+                            <th>Ken</th>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Medical Care System</td>
+                            <th>Tony</th>
+                            <th>Steven</th>
+                            <th>Sue</th>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Mobile App development</td>
+                            <th>Johnson</th>
+                            <th>Ben</th>
+                            <th>Ken</th>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Medical Care System</td>
+                            <th>Tony</th>
+                            <th>Steven</th>
+                            <th>Sue</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="index.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+
+<script>
+    // $("#mainNav a").click(function(e){
+    //     e.preventDefault();
+    //     $(this).tab("show");
+    // })
+    $("#myTab a").click(function(e){
+        e.preventDefault();
+        $(this).tab("show");
+    })
+</script>
+
+</body>
+</html>
