@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
+    <style>
+        .navbar .breadcrumb {
+            background-color:#fff;
+        }
+        .navbar .breadcrumb .li {
+            background-color:#fff;
+            margin-left: 20px;
+        }
+        .navbar .control-label {
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .navbar {
+            margin-bottom:0;
+        }
+        .jumbotron {
+            margin-bottom:0;
+            margin-top:0;
+        }
+        body
+        {
+            background-image:url('/public/img/bg_2.jpeg');
+            background-color:#cccccc;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="control-label">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Traffic Light Feedback System</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav" id="mainNav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+
+                        </ul>
+                    </li>
+                    <li><a href="/views/admin.html">Admin</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="myAccount">
+                    <li><a href="#">Hi, lecture</a></li>
+                    <li><a href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1> Welcome</h1>
+            <p> Hi lecturer, start to use Traffic Light Feedback System now!</p>
+<!--            <p><a class="btn bg-info btn-lg" href="#" role="button">2131</a></p>-->
+        </div>
+    </div>
+
+    <nav class="navbar" role="navigation">
+        <ol class="breadcrumb">
+            <li class="li">Home</li>
+        </ol>
+    </nav>
+
+    <div class="module_review container">
+
+    </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="index.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script>
+    // $("#mainNav a").click(function(e){
+    //     e.preventDefault();
+    //     $(this).tab("show");
+    // })
+    var module=["App engineering", "Software engineering", "Artificial intelligence", "Machine learning", "Algorithm"]
+    function setModule() {
+        for (var i = 0; i < module.length; i++){
+            $(".module_review").append('<div class="accordion" id="accordion'+i+'">\n' +
+                '            <div class="accordion-group">\n' +
+                '                <div class="accordion-heading list-group-item list-group-item-info">\n' +
+                '                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion'+i+'" href="#collapse'+i+'">\n' +
+                '                        <h4 class="accordion-heading">'+module[i]+'\n' +
+                '                            <span class="caret"></span>\n' +
+                '                            <small>(Click the bar to expand more information about this module!!!)</small>\n' +
+                '                        </h4>\n' +
+                '                    </a>\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '            <div id="collapse'+i+'" class="accordion-body collapse">\n' +
+                '                <div class="accordion-inner list-group-item list-group-item-text">\n' +
+                '                    <img src="public/img/doctor_1.jpeg"  width="250" height="250">\n' +
+                '                    <img src="public/img/doctor_1.jpeg"  width="250" height="250">\n' +
+                '                    <img src="public/img/doctor_1.jpeg"  width="250" height="250">\n' +
+                '                </div>\n' +
+                '            </div>\n' +
+                '        </div>')
+            $(".dropdown-menu").append('<li><a href="/views/module.html">'+module[i]+'</a></li>')
+            // console.log(module[i])
+        }
+    }
+    setModule()
+</script>
+
+</body>
+</html>
