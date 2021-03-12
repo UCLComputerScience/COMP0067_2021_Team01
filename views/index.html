@@ -43,14 +43,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             {{each module}}
-                            <li><a href="module">{{$value.name}}</a></li>
+                            <li><a href="module?moduleID={{$value.moduleID}}">{{$value.moduleName}}</a></li>
                             {{/each}}
                         </ul>
                     </li>
                     <li><a href="admin">Admin</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="myAccount">
-                    <li><a href="#">Hi, lecture</a></li>
+                    <li><a href="#">Hi, {{uname}}</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
                 </ul>
             </div>
@@ -60,7 +60,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1> Welcome</h1>
-            <p> Hi lecturer, start to use Traffic Light Feedback System now!</p>
+            <p> Hi lecturer {{uname}}, start to use Traffic Light Feedback System now!</p>
 <!--            <p><a class="btn bg-info btn-lg" href="#" role="button">2131</a></p>-->
         </div>
     </div>
@@ -76,17 +76,16 @@
             {{each module}}
             <div class="accordion-group">
                 <div class="accordion-heading list-group-item list-group-item-info">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=#{{$value.name}}>
-                        <h4 class="accordion-heading">{{$value.name}}<span class="caret"></span>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=#{{$value.moduleID}}>
+                        <h4 class="accordion-heading">{{$value.moduleName}}<span class="caret"></span>
                             <small>(Click the bar to expand more information about this module!!!)</small>
                         </h4>
                     </a>
                 </div>
             </div>
-            <div id={{$value.name}} class="accordion-body collapse">
+            <div id={{$value.moduleID}} class="accordion-body collapse">
                 <div class="accordion-inner list-group-item list-group-item-text">
-                    <img src="/public/img/doctor_1.jpeg"  width="250" height="250">
-                    <p>{{$value.info}}</p>
+                    <p>{{$value.description}}</p>
                 </div>
             </div>
             {{/each}}
@@ -107,7 +106,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/">Logout</a>
+                    <a class="btn btn-primary" href="login">Logout</a>
                 </div>
             </div>
         </div>
