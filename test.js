@@ -34,23 +34,24 @@ web.get('/pwError', function(req, res){
 web.post('/login', function(req, res){
     var user = req.body
     req.session.uname = user.uname
-    var queryLogin = 'SELECT `password` FROM `lecturer` WHERE `username`="'+user.uname+'"'
+    var queryLogin = 'SELECT `password`, `userType` FROM `LoginInfo` WHERE `username`="'+user.uname+'"'
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'username',
         password: 'password',
-        database: 'traffic_feedback_system'
+        database: 'feedbackSystem'
     })
     connection.connect()
 
-    connection.query(queryLogin, function (error, results) {
+    connection.query(queryLogin, function (error, loginInfo) {
         if (error) {
             console.log(error)
         }
-        if (results.length === 0) {
+        if (loginInfo.length === 0) {
             res.redirect('/pwError')
         }
-        else if (results[0].password === user.upassword) {
+        else if (loginInfo[0].password === user.upassword) {
+            if (loginInfo[0].userType === "lecturer")
             res.redirect('/')
         }
         else {
@@ -66,91 +67,132 @@ web.get('/', function(req, res){
     } else {
         res.redirect('/expire')
     }
-    var querySelect = 'SELECT * FROM module'
+    var querySelect = 'SELECT * FROM Module'
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'username',
         password: 'password',
-        database: 'traffic_feedback_system'
+        database: 'feedbackSystem'
     })
     connection.connect()
-    connection.query(querySelect, function (error, results) {
+    connection.query(querySelect, function (error, allMod) {
         if (error) {
             console.log(error)
         }
-        res.render('index.html', {
-            module: results,
-            uname: uname
-        })
+        req.session.allModules = allMod
+        var allModules = req.session.allModules
+        var html = [
+            "Sorry lecturer, you haven't registered a module",
+            "Please go to ",
+            "Admin page ",
+            "to create your module"
+            ]
+        if (allModules.length ===0){
+            res.render('index.html', {
+                html: html,
+                modules: allModules,
+                uname: uname
+            })
+        } else {
+            res.render('index.html', {
+                html: '',
+                modules: allModules,
+                uname: uname
+            })
+        }
     })
-    connection.end()
+    // connection.end()
 })
 
 web.get('/module', function(req, res){
     if (req.session.uname) {
         var uname = req.session.uname
+        var allModule = req.session.allModules
     } else {
         res.redirect('/login')
     }
     var reqObj = req.query
     req.session.moduleID = reqObj.moduleID
-    var moduleID = req.session.moduleID
-    var querySelectAllModule = 'SELECT * FROM module'
-    var querySelectCurrentModule = 'SELECT * FROM module where `moduleID`="'+moduleID+'"'
-    var querySelectAllStu = 'SELECT * FROM student where `Module`="'+moduleID+'"'
-    var querySelectAttStu = 'SELECT * FROM student where `Module`="'+moduleID+'" and `Feedback5`<=2'
-    var querySelectAllGroup = 'SELECT * FROM grouping where `Module`="'+moduleID+'"'
-    var querySelectAttGroup = 'SELECT * FROM grouping where `Module`="'+moduleID+'" and `Feedback5`<=2'
+    var selectedModuleID = req.session.moduleID
 
+    var querySelectCurrentModule = 'SELECT * FROM Module where `moduleCode`="'+selectedModuleID+'"'
+    var querySelectAllStu = 'SELECT * FROM `ModStuTe` JOIN `Student` ON ModStuTe.studentSPR=Student.studentSPR ' +
+        'JOIN `ProjectInfo` ON (ModStuTe.teamNumber=ProjectInfo.teamNumber and ModStuTe.moduleCode=ProjectInfo.moduleCode) ' +
+        'WHERE ModStuTe.moduleCode="'+selectedModuleID+'"'
+    var querySelectStudentAverageScore = 'SELECT StudentFeedback.studentSPR, AVG(StudentFeedback.score) avgScore FROM `StudentFeedback` JOIN `ModStuTe` ON (ModStuTe.moduleCode=StudentFeedback.moduleCode ' +
+        'and ModStuTe.studentSPR=StudentFeedback.studentSPR) GROUP BY (ModStuTe.studentSPR)'
+    // var querySelectStudentLastScore = '(SELECT StudentFeedback.studentSPR, StudentFeedback.score, StudentFeedback.weekNumber weekNumber FROM `StudentFeedback` ' +
+    //     'LEFT JOIN (SELECT MAX(StudentFeedback.weekNumber) maxWeek FROM `StudentFeedback` GROUP BY StudentFeedback.studentSPR) ON (weekNumber=maxWeek)' +
+    //     'JOIN `ModStuTe` ON (ModStuTe.studentSPR=StudentFeedback.studentSPR)'
+    var queryAllStudentTable = 'SELECT * FROM `ModStuTe` JOIN `Student` ON ModStuTe.studentSPR=Student.studentSPR ' +
+        'JOIN `ProjectInfo` ON (ModStuTe.teamNumber=ProjectInfo.teamNumber and ModStuTe.moduleCode=ProjectInfo.moduleCode) ' +
+        'JOIN ('+querySelectStudentAverageScore+') AS stuAvgScore ON (ModStuTe.studentSPR=stuAvgScore.studentSPR)' +
+        'JOIN ' +
+        'WHERE ModStuTe.moduleCode="'+selectedModuleID+'"'
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'username',
         password: 'password',
-        database: 'traffic_feedback_system'
+        database: 'feedbackSystem'
     })
     connection.connect()
-    connection.query(querySelectAllModule, function (error, AllMod) {
+
+    connection.query(querySelectCurrentModule, function (error, currentModuleName) {
         if (error) {
             console.log(error)
         }
-        connection.query(querySelectCurrentModule, function (error, CurMod) {
+        connection.query(queryAllStudentTable, function (error, allStuInfo) {
             if (error) {
                 console.log(error)
             }
-            connection.query(querySelectAttStu, function (error, AttStu) {
-                if (error) {
-                    console.log(error)
-                }
-                connection.query(querySelectAllStu, function (error, AllStu) {
-                    if (error) {
-                        console.log(error)
-                    }
-                    connection.query(querySelectAttGroup, function (error, AttGroup) {
-                        if (error) {
-                            console.log(error)
-                        }
-                        connection.query(querySelectAllGroup, function (error, AllGroup) {
-                            console.log("*******************")
-                            console.log(AllGroup)
-                            console.log("*******************")
-                            if (error) {
-                                console.log(error)
-                            }
-                            res.render('module.html', {
-                                uname: uname,
-                                modules: AllMod,
-                                module: CurMod[0],
-                                attStudents: AttStu,
-                                allStudents: AllStu,
-                                attGroups: AttGroup,
-                                allGroups: AllGroup
-                            })
-                        })
-                    })
-                })
+            // console.log(allStudents)
+            // console.log(allStuInfo)
+            res.render('module.html', {
+                uname: uname,
+                modules: allModule,
+                module: currentModuleName[0],
+                allStudents: allStuInfo
             })
         })
     })
+
+
+
+        // connection.query(querySelectCurrentModule, function (error, CurMod) {
+        //     if (error) {
+        //         console.log(error)
+        //     }
+        //     connection.query(querySelectAttStu, function (error, AttStu) {
+        //         if (error) {
+        //             console.log(error)
+        //         }
+        //         connection.query(querySelectAllStu, function (error, AllStu) {
+        //             if (error) {
+        //                 console.log(error)
+        //             }
+        //             connection.query(querySelectAttGroup, function (error, AttGroup) {
+        //                 if (error) {
+        //                     console.log(error)
+        //                 }
+        //                 connection.query(querySelectAllGroup, function (error, AllGroup) {
+        //                     if (error) {
+        //                         console.log(error)
+        //                     }
+        //                     res.render('module.html', {
+        //                         uname: uname,
+        //                         modules: allModule,
+        //                         module: CurMod[0],
+        //                         attStudents: AttStu,
+        //                         allStudents: AllStu,
+        //                         attGroups: AttGroup,
+        //                         allGroups: AllGroup
+        //                     })
+        //                 })
+        //             })
+        //         })
+        //     })
+        // })
+
     // connection.end()
 })
 
@@ -166,10 +208,42 @@ web.get('/group', function(req, res){
 web.get('/student', function(req, res){
     if (req.session.uname) {
         var uname = req.session.uname
+        var allModules = req.session.allModules
     } else {
         res.redirect('/login')
     }
-    res.render('student.html')
+    var reqObj = req.query
+    req.session.studentID = reqObj.studentID
+    var studentID = req.session.studentID
+    var moduleID = req.session.moduleID
+    var querySelectCurrentModule = 'SELECT * FROM `module` where `moduleID`="'+moduleID+'"'
+    var querySelectStu = 'SELECT * FROM student where `Module`="'+moduleID+'" and ID="'+studentID+'"'
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'username',
+        password: 'password',
+        database: 'traffic_feedback_system'
+    })
+    connection.connect()
+    connection.query(querySelectCurrentModule, function (error, CurMod) {
+        if (error) {
+            console.log(error)
+        }
+        connection.query(querySelectStu, function (error, student) {
+            if (error) {
+                console.log(error)
+            }
+            // console.log("********************")
+            // console.log(student)
+            // console.log("********************")
+            res.render('student.html', {
+                uname: uname,
+                modules: allModules,
+                module: CurMod[0],
+                student: student[0],
+            })
+        })
+    })
 })
 
 web.post('/addModule', function(req, res){
@@ -179,54 +253,77 @@ web.post('/addModule', function(req, res){
         res.redirect('/login')
     }
     var add = req.body
-    var stuPath = "./table/"+add.stuTable
-    var groupPath = "./table/"+add.groupTable
 
-    var stuSheetList = xlsx.parse(stuPath)
-    var stuData = stuSheetList[0].data
-    var groupSheetList = xlsx.parse(groupPath)
-    var groupData = groupSheetList[0].data
+    var groupPath = "./table/"+add.groupingTable
+    var groupingSheetList = xlsx.parse(groupPath)
+    var groupingData = groupingSheetList[0].data
+
+    //calculate how many members in one team and the members' columns in the table
+    var groupingHeader = groupingData[0]
+    var membersInTeam = 0
+    var indexArray = []
+    for (var n = 0; n < groupingHeader.length; n++) {
+        if (groupingHeader[n].indexOf("member") != -1) {
+            indexArray[membersInTeam] = n
+            membersInTeam += 1
+        }
+    }
+    console.log(groupingData.length)
+    console.log(groupingData)
+
 
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'username',
         password: 'password',
-        database: 'traffic_feedback_system'
+        database: 'feedbackSystem'
     })
     connection.connect()
 
-    for (var i = 1; i < stuData.length; i++) {
-        var queryInsertStu = 'INSERT INTO `student`(`ID`, `Name`, `Role`, `Department`, `Email`, `Phone`, `Module`, `Group`, ' +
-            '`Project`, `Feedback1`, `Feedback2`, `Feedback3`, `Feedback4`, `Feedback5`) VALUES ("'+stuData[i][0]+'", "' +
-            stuData[i][1]+'", "'+ stuData[i][2]+'", "'+stuData[i][3]+'", "'+stuData[i][4]+'", "'+stuData[i][5]+'", "'+add.modID+'", "'+
-            stuData[i][7]+'", "'+stuData[i][8]+'", "'+stuData[i][9]+'", "'+stuData[i][10]+'", "'+
-            stuData[i][11]+'", "'+stuData[i][12]+'", "'+stuData[i][13]+'")'
-        connection.query(queryInsertStu, function (error, results) {
+    // Insert into ModStuTe table
+    for (var i = 1; i < groupingData.length; i++) {
+        for (var j = 0; j < membersInTeam; j++) {
+            var queryInsertModStuTe = 'INSERT INTO `ModStuTe`(`studentSPR`, `moduleCode`, `teamNumber`, `memberIndex`) ' +
+                'VALUES ("'+groupingData[i][indexArray[j]]+'", "'+add.modID+'", "'+groupingData[i][0]+'", "'+(j+1)+'")'
+            connection.query(queryInsertModStuTe, function (error, results) {
+                if (error) {
+                    console.log(error)
+                }
+            })
+        }
+    }
+
+    // Insert into ModTeTA table
+    for (i = 1; i < groupingData.length; i++) {
+        var queryInsertModTeTA = 'INSERT INTO `ModTeTA`(`moduleCode`, `teamNumber`, `taStudentSPR`) ' +
+            'VALUES ("'+add.modID+'", "'+groupingData[i][0]+'", "'+groupingData[i][3]+'")'
+        connection.query(queryInsertModTeTA, function (error, results) {
             if (error) {
                 console.log(error)
             }
         })
     }
 
-    for (var j = 1; j < groupData.length; j++) {
-        var queryInsertGroup = 'INSERT INTO `grouping`(`module`, `teamNumber`, `Project`, `tm1`, `tm2`, `tm3`, `Feedback1`, ' +
-            '`Feedback2`, `Feedback3`, `Feedback4`, `Feedback5`) VALUES ("'+add.modID+'", "' + groupData[j][1]+'", "'+
-            groupData[j][2]+'", "'+groupData[j][3]+'", "'+groupData[j][4]+'", "'+groupData[j][5]+'", "'+groupData[j][6]+'", "'+
-            groupData[j][7]+'", "'+groupData[j][8]+'", "'+groupData[j][9]+'", "'+groupData[j][10]+'")'
-        connection.query(queryInsertGroup, function (error, results) {
+    // Insert into ProjectInfo table
+    for (i = 1; i < groupingData.length; i++) {
+        var queryInsertProjectInfo = 'INSERT INTO `ProjectInfo`(`moduleCode`, `teamNumber`, `labCode`, `projectTitle`, `projectBrief`) ' +
+            'VALUES ("'+add.modID+'", "'+groupingData[i][0]+'","" , "'+groupingData[i][1]+'", "'+groupingData[i][2]+'")'
+        connection.query(queryInsertProjectInfo, function (error, results) {
             if (error) {
                 console.log(error)
             }
         })
     }
 
-    var queryInsert = 'INSERT INTO `module`(`moduleID`, `moduleName`, `lecturerID`, `description`, plan) VALUES ("'+add.modID+'", "'+add.modName+'", "'+uname+'", "'+add.modDes+'", "'+add.modPlan+'")'
-    connection.query(queryInsert, function (error, results) {
+    // Insert into Module table
+    var queryInsertModule = 'INSERT INTO `Module`(`moduleCode`, `moduleName`, `moduleDescription`, `modulePlan`, `employeeID`) ' +
+        'VALUES ("'+add.modID+'", "'+add.modName+'", "'+add.modDes+'", "'+add.modPlan+'", "'+uname+'")'
+    connection.query(queryInsertModule, function (error, results) {
         if (error) {
             console.log(error)
         }
     })
-    connection.end()
+    // connection.end()
     res.redirect('/')
 })
 
@@ -291,7 +388,7 @@ web.post('/modifyModule', function(req, res){
 web.get('/admin', function(req, res){
     if (req.session.uname) {
         var uname = req.session.uname
-
+        var allModules = req.session.allModules
     } else {
         res.redirect('/login')
     }
@@ -302,15 +399,9 @@ web.get('/admin', function(req, res){
         database: 'traffic_feedback_system'
     })
     connection.connect()
-    var queryAdd = 'SELECT * FROM module'
-    connection.query(queryAdd, function (error, results) {
-        if (error) {
-            console.log(error)
-        }
-        res.render('admin.html', {
-            module: results,
-            uname: uname
-        })
+    res.render('admin.html', {
+        modules: allModules,
+        uname: uname
     })
     connection.end()
 })

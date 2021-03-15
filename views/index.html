@@ -42,8 +42,8 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            {{each module}}
-                            <li><a href="module?moduleID={{$value.moduleID}}">{{$value.moduleName}}</a></li>
+                            {{each modules}}
+                            <li><a href="module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
                             {{/each}}
                         </ul>
                     </li>
@@ -71,21 +71,26 @@
         </ol>
     </nav>
 
+    <div class="container">
+        <h2 style="color:#FF0000">{{html[0]}}</h2>
+        <h3 style="color:#0000FF">{{html[1]}}<a href="admin">{{html[2]}}</a>{{html[3]}}</h3>
+    </div>
+
     <div class="module_review container">
         <div class="accordion" id="accordion">
-            {{each module}}
+            {{each modules}}
             <div class="accordion-group">
                 <div class="accordion-heading list-group-item list-group-item-info">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=#{{$value.moduleID}}>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href=#{{$value.moduleCode}}>
                         <h4 class="accordion-heading">{{$value.moduleName}}<span class="caret"></span>
                             <small>(Click the bar to expand more information about this module!!!)</small>
                         </h4>
                     </a>
                 </div>
             </div>
-            <div id={{$value.moduleID}} class="accordion-body collapse">
+            <div id={{$value.moduleCode}} class="accordion-body collapse">
                 <div class="accordion-inner list-group-item list-group-item-text">
-                    <p>{{$value.description}}</p>
+                    <p>{{$value.moduleDescription}}</p>
                 </div>
             </div>
             {{/each}}

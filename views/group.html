@@ -43,17 +43,18 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav" id="mainNav">
-                    <li><a href="/">Home</a></li>
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-
+                            {{each modules}}
+                            <li><a href="module?moduleID={{$value.moduleID}}">{{$value.moduleName}}</a></li>
+                            {{/each}}
                         </ul>
                     </li>
                     <li><a href="admin">Admin</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="myAccount">
-                    <li><a href="#">Hi, lecture</a></li>
+                    <li><a href="#">Hi, {{uname}}</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
                 </ul>
             </div>

@@ -47,13 +47,15 @@
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-
+                            {{each modules}}
+                            <li><a href="module?moduleID={{$value.moduleID}}">{{$value.moduleName}}</a></li>
+                            {{/each}}
                         </ul>
                     </li>
                     <li><a href="admin">Admin</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="myAccount">
-                    <li><a href="#">Hi, lecture</a></li>
+                    <li><a href="#">Hi, {{uname}}</a></li>
                     <li><a href="#" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
                 </ul>
             </div>
@@ -62,16 +64,15 @@
 
     <div class="jumbotron">
         <div class="container">
-            <h1> App Engineering </h1>
+            <h1> {{module.moduleName}} </h1>
             <p> This is <strong>student feedback page</strong> to review the performance of a selected student. </p>
-            <!--            <p><a class="btn bg-info btn-lg" href="#" role="button">2131</a></p>-->
         </div>
     </div>
 
     <nav class="navbar" role="navigation">
         <ol class="breadcrumb">
             <li class="li"><a href="/">Home</a></li>
-            <li class="li"><a href="module">App engineering</a></li>
+            <li class="li"><a href="module?moduleID={{module.moduleID}}">{{module.moduleName}}</a></li>
             <li class="active">Student feedback</li>
         </ol>
     </nav>
@@ -81,22 +82,22 @@
             <div class="col-md-3"><img src="/public/img/doctor_1.jpeg" width="180" height="200"></div>
             <div class="col-md-2">
                 <div class="row">
-                    <h5>Name: Tom</h5>
+                    <h5>Name: {{student.Name}}</h5>
                 </div>
                 <div class="row">
-                    <h5>Group: group1</h5>
+                    <h5>Group: {{student.Group}}</h5>
                 </div>
                 <div class="row">
-                    <h5>Project: project 1</h5>
+                    <h5>Project: {{student.Project}}</h5>
                 </div>
                 <div class="row">
                     <h5>Average score: 4.5</h5>
                 </div>
                 <div class="row">
-                    <h5>Email: 222@gmail.com</h5>
+                    <h5>Email: {{student.Email}}</h5>
                 </div>
                 <div class="row">
-                    <h5>Phone: 1231412312</h5>
+                    <h5>Phone: {{student.Phone}}</h5>
                 </div>
             </div>
         </div>
@@ -123,30 +124,6 @@
                 <td>Good!</td>
                 <td>1/2/2020</td>
             </tr>
-            <tr>
-                <td>week2</td>
-                <td>5</td>
-                <td>1</td>
-                <td>33%</td>
-                <td>Excellent!</td>
-                <td>1/9/2020</td>
-            </tr>
-                <tr>
-                    <td>week3</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>33%</td>
-                    <td>Good!</td>
-                    <td>1/16/2020</td>
-                </tr>
-                <tr>
-                    <td>week4</td>
-                    <td>5</td>
-                    <td>1</td>
-                    <td>33%</td>
-                    <td>Excellent!</td>
-                    <td>1/23/2020</td>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -172,19 +149,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-<script>
-    var module = ["App engineering", "Software engineering", "Artificial intelligence", "Machine learning", "Algorithm"]
-    $("#myTab a").click(function(e){
-        e.preventDefault();
-        $(this).tab("show");
-    })
-    function setModule() {
-        for (var i = 0; i < module.length; i++) {
-            $(".dropdown-menu").append('<li><a href="module">' + module[i] + '</a></li>')
-        }
-    }
-    setModule()
-</script>
 
 </body>
 </html>

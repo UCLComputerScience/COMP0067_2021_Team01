@@ -47,8 +47,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        {{each module}}
-                        <li><a href="module?moduleID={{$value.moduleID}}">{{$value.moduleName}}</a></li>
+                        {{each modules}}
+                        <li><a href="module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
                         {{/each}}
                     </ul>
                 </li>
@@ -103,19 +103,19 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label>Add students</label>
-                            <input name="stuTable" type="file" required >
-                            <p class="help-block">Select student csv file</p>
+                            <input name="groupingTable" type="file" required >
+                            <p class="help-block">Select grouping csv file</p>
                         </div>
 <!--                        <div class="form-group  col-md-4">-->
 <!--                            <label>Add TA</label>-->
 <!--                            <input name="taTable" type="file" required >-->
 <!--                            <p class="help-block">Select TA csv file</p>-->
 <!--                        </div>-->
-                        <div class="form-group  col-md-4">
-                            <label>Grouping</label>
-                            <input name="groupTable" type="file" required >
-                            <p class="help-block">Select grouping csv file</p>
-                        </div>
+<!--                        <div class="form-group  col-md-4">-->
+<!--                            <label>Grouping</label>-->
+<!--                            <input name="groupTable" type="file" required >-->
+<!--                            <p class="help-block">Select grouping csv file</p>-->
+<!--                        </div>-->
                     </div>
                     <div class="row">
                         <div class=form-group">
@@ -151,23 +151,22 @@
                                 <label>Module plan</label>
                                 <textarea class="form-control" name='modPlan' rows="5" placeholder="Enter module plan">{{$value.plan}}</textarea>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <label>Add students</label>
-                                    <input name="stuTable" type="file">
-                                    <p class="help-block">Select student csv file</p>
-                                </div>
+<!--                            <div class="row">-->
+<!--                                <div class="form-group col-md-4">-->
+<!--                                    <label>Add students</label>-->
+<!--                                    <input name="stuTable" type="file">-->
+<!--                                    <p class="help-block">Select student csv file</p>-->
+<!--                                </div>-->
 <!--                                <div class="form-group  col-md-4">-->
 <!--                                    <label>Add TA</label>-->
 <!--                                    <input type="file">-->
 <!--                                    <p class="help-block">Select TA csv file</p>-->
 <!--                                </div>-->
-                                <div class="form-group  col-md-4">
-                                    <label>Grouping</label>
-                                    <input name="groupTable" type="file">
-                                    <p class="help-block">Select grouping csv file</p>
-                                </div>
-                            </div>
+<!--                                <div class="form-group  col-md-4">-->
+<!--                                    <label>Grouping</label>-->
+<!--                                    <input name="groupTable" type="file">-->
+<!--                                    <p class="help-block">Select grouping csv file</p>-->
+<!--                                </div>-->
                             <div class="row">
                                 <div class=form-group">
                                     <div class="col-md-1 col-md-offset-9">
@@ -199,7 +198,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/">Logout</a>
+                    <a class="btn btn-primary" href="login">Logout</a>
                 </div>
             </div>
         </div>
