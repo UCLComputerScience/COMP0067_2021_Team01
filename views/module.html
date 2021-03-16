@@ -93,19 +93,23 @@
                             <th>Name</th>
                             <th>Group Number</th>
                             <th>Project</th>
+                            <th>Last Score</th>
                             <th>Average Score</th>
-                            <th>Week5 Feedback</th>
+                            <th>Message from TA</th>
                         </tr>
+                    </thead>
                     </thead>
                     <tbody class="stu_at ">
                     {{each attStudents}}
                         <tr>
-                            <td><a href="student?moduleID={{module.moduleID}}&studentID={{$value.ID}}">{{$value.Name}}</a></td>
-                            <td>{{$value.Feedback1}}</td>
-                            <td>{{$value.Feedback2}}</td>
-                            <td>{{$value.Feedback3}}</td>
-                            <td>{{$value.Feedback4}}</td>
-                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>
+                            <td><a href="student?moduleID={{module.moduleCode}}&studentID={{$value.studentSPR}}">{{$value.studentSPR}}</a></td>
+                            <td>{{$value.forename}} {{$value.surname}}</td>
+                            <td>{{$value.teamNumber}}</td>
+                            <td>{{$value.projectTitle}}</td>
+                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.avgScore}}</td>
+                            <td>{{$value.messageLecturer}}</td>
+                            <!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
                         </tr>
                     {{/each}}
                     </tbody>
@@ -117,21 +121,23 @@
                     <tr>
                         <th>Group number</th>
                         <th>Project</th>
-                        <th>Team leader</th>
-                        <th>2nd member</th>
-                        <th>3rd member</th>
-                        <th>Average Performance</th>
+                        <th>TA</th>
+                        <th>Members</th>
+                        <th>Last score</th>
+                        <th>Average score</th>
+                        <th>Message from TA</th>
                     </tr>
                     </thead>
                     <tbody class="gro_at">
                         {{each attGroups}}
                         <tr>
-                            <td><a href="group">{{$value.teamNumber}}</a></td>
-                            <td>{{$value.project}}</td>
-                            <th>{{$value.tm1}}</th>
-                            <th>{{$value.tm2}}</th>
-                            <th>{{$value.tm3}}</th>
-                            <th></th>
+                            <td><a href="group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">{{$value.teamNumber}}</a></td>
+                            <td>{{$value.projectTitle}}</td>
+                            <td>{{$value.forename}} {{$value.surname}}</td>
+                            <th>{{$value.studentName}}</th>
+                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.avgScore}}</td>
+                            <td>{{$value.messageLecturer}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
@@ -161,7 +167,8 @@
                             <td>{{$value.forename}} {{$value.surname}}</td>
                             <td>{{$value.teamNumber}}</td>
                             <td>{{$value.projectTitle}}</td>
-                            <td>{{$value.Feedback4}}</td>
+                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.avgScore}}</td>
 <!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
                         </tr>
                         {{/each}}
@@ -179,20 +186,21 @@
                         <tr>
                             <th>Group number</th>
                             <th>Project</th>
-                            <th>Team leader</th>
-                            <th>2nd member</th>
-                            <th>3rd member</th>
+                            <th>TA</th>
+                            <th>Members</th>
+                            <th>Last score</th>
                             <th>Average score</th>
                         </tr>
                     </thead>
                     <tbody class="gro_li">
                         {{each allGroups}}
                         <tr>
-                            <td><a href="group">{{$value.teamNumber}}</a></td>
-                            <td>{{$value.project}}</td>
-                            <th>{{$value.tm1}}</th>
-                            <th>{{$value.tm2}}</th>
-                            <th>{{$value.tm3}}</th>
+                            <td><a href="group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">{{$value.teamNumber}}</a></td>
+                            <td>{{$value.projectTitle}}</td>
+                            <td>{{$value.forename}} {{$value.surname}}</td>
+                            <th>{{$value.studentName}}</th>
+                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.avgScore}}</td>
                         </tr>
                         {{/each}}
                     </tbody>
