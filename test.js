@@ -67,7 +67,7 @@ web.get('/', function(req, res){
     } else {
         res.redirect('/expire')
     }
-    var querySelect = 'SELECT * FROM Module'
+    var querySelect = 'SELECT * FROM Module WHERE employeeID = "' + uname + '"'
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'username',
@@ -133,7 +133,8 @@ web.get('/module', function(req, res){
 
     // query the data used in group table
     var queryTeamMembers = 'SELECT ModStuTe.teamNumber, group_concat(Student.surname, " ", Student.forename Separator ", ") studentName ' +
-        'FROM `ModStuTe` JOIN `Student` ON ModStuTe.studentSPR=Student.studentSPR GROUP BY ModStuTe.teamNumber '
+        'FROM `ModStuTe` JOIN `Student` ON ModStuTe.studentSPR=Student.studentSPR ' +
+        'WHERE `moduleCode`="'+selectedModuleID+'" GROUP BY ModStuTe.teamNumber '
     var queryGroupAverageScore = 'SELECT teamNumber, AVG(score) avgScore FROM `TeamFeedback` ' +
         'WHERE moduleCode = "'+selectedModuleID+'" GROUP BY teamNumber '
     var queryGroupLastScore = 'SELECT teamNumber, score lastScore FROM TeamFeedback ' +
@@ -185,9 +186,15 @@ web.get('/module', function(req, res){
                     if (error) {
                         console.log(error)
                     }
+                    for (var i = 0; i < attStuInfo.length; i++) {
+                        attStuInfo[i].index = i + 1
+                    }
                     connection.query(queryAttGroupTable, function (error, attGroupInfo) {
                         if (error) {
                             console.log(error)
+                        }
+                        for (i = 0; i < attGroupInfo.length; i++) {
+                            attGroupInfo[i].index = i + 1
                         }
                         // console.log(attGroupInfo)
                         res.render('module.html', {
@@ -224,25 +231,16 @@ web.get('/group', function(req, res){
     var querySelectCurrentModule = 'SELECT * FROM Module WHERE `moduleCode`="'+selectedModuleID+'"'
 
     // query team members
-    var queryTeamSepMembers = 'SELECT Student.surname, Student.forename, ModStuTe.memberIndex FROM `Student` JOIN `ModStuTe` ' +
+    var queryTeamSMembers = 'SELECT Student.surname, Student.forename, ModStuTe.memberIndex FROM `Student` JOIN `ModStuTe` ' +
         'ON ModStuTe.studentSPR=Student.studentSPR ' +
         'WHERE ModStuTe.teamNumber="' + teamNumber + '" AND `moduleCode`="'+selectedModuleID+'" '
 
-    var queryTeamMembers = 'SELECT ModStuTe.teamNumber, group_concat(Student.surname, " ", Student.forename Separator ", ") studentName ' +
-        'FROM `ModStuTe` JOIN `Student` ON ModStuTe.studentSPR=Student.studentSPR GROUP BY ModStuTe.teamNumber '
-    var queryGroupAverageScore = 'SELECT teamNumber, AVG(score) avgScore FROM `TeamFeedback` ' +
-        'WHERE moduleCode = "'+selectedModuleID+'" GROUP BY teamNumber '
-    var queryGroupLastScore = 'SELECT teamNumber, score lastScore FROM TeamFeedback ' +
-        'WHERE `moduleCode`="'+selectedModuleID+'" and (teamNumber, weekNumber) IN ' +
-        '(SELECT teamNumber, MAX(weekNumber) FROM TeamFeedback WHERE `moduleCode`="'+selectedModuleID+'" GROUP BY teamNumber) '
-    var queryGroupProjectTA='SELECT * FROM `ModTeTA` ' +
-        'JOIN `ProjectInfo` ON (ModTeTA.teamNumber=ProjectInfo.teamNumber and ModTeTA.moduleCode=ProjectInfo.moduleCode) ' +
-        'JOIN `TA` ON (ModTeTA.taStudentSPR=TA.taStudentSPR) '
-    var queryAllGroupTable = queryGroupProjectTA +
-        ' JOIN (' + queryTeamMembers + ') AS TeamMembers ON (ModTeTA.teamNumber=TeamMembers.teamNumber) '+
-        'JOIN ('+queryGroupAverageScore+') AS gAvgScore ON (ModTeTA.teamNumber=gAvgScore.teamNumber) ' +
-        'JOIN ('+queryGroupLastScore+') AS gLastScore ON (ModTeTA.teamNumber=gLastScore.teamNumber) ' +
-        'WHERE ModTeTA.moduleCode="'+selectedModuleID+'" '
+    // query team feedback and personal contributions
+    var queryContribution = 'SELECT weekNumber WN, group_concat(contribution Separator ", ") contributions FROM `StudentFeedback` ' +
+        'JOIN `ModStuTe` ON (ModStuTe.studentSPR=StudentFeedback.studentSPR AND ModStuTe.moduleCode=StudentFeedback.moduleCode) ' +
+        'WHERE ModStuTe.moduleCode="'+selectedModuleID+'" AND teamNumber="'+teamNumber+'" GROUP BY weekNumber'
+    var queryTeamFeedback = 'SELECT * FROM `TeamFeedback` JOIN ('+ queryContribution+') AS Con ON TeamFeedback.weekNumber=WN ' +
+        'WHERE teamNumber="' + teamNumber + '" AND `moduleCode`="'+selectedModuleID+'"'
 
     var connection = mysql.createConnection({
         host: 'localhost',
@@ -255,19 +253,25 @@ web.get('/group', function(req, res){
         if (error) {
             console.log(error)
         }
-        connection.query(queryTeamSepMembers, function (error, teamMembers) {
+        connection.query(queryTeamSMembers, function (error, teamMembers) {
             if (error) {
                 console.log(error)
             }
-            console.log(teamMembers)
-            res.render('group.html', {
-                uname: uname,
-                modules: allModules,
-                module: currentModule[0],
-                member: teamMembers,
-
-                // group: group[0],
-                // feedback: feedback
+            connection.query(queryTeamFeedback, function (error, teamFeedback) {
+                if (error) {
+                    console.log(error)
+                }
+                console.log(teamFeedback)
+                res.render('group.html', {
+                    uname: uname,
+                    teamNumber: teamNumber,
+                    modules: allModules,
+                    module: currentModule[0],
+                    member: teamMembers,
+                    feedback: teamFeedback
+                    // group: group[0],
+                    // feedback: feedback
+                })
             })
         })
     })
@@ -409,8 +413,8 @@ web.post('/addModule', function(req, res){
     }
 
     // Insert into Module table
-    var queryInsertModule = 'INSERT INTO `Module`(`moduleCode`, `moduleName`, `moduleDescription`, `modulePlan`, `employeeID`) ' +
-        'VALUES ("'+add.modID+'", "'+add.modName+'", "'+add.modDes+'", "'+add.modPlan+'", "'+uname+'")'
+    var queryInsertModule = 'INSERT INTO `Module`(`moduleCode`, `moduleName`, `moduleDescription`, `modulePlan`, `employeeID`, `csvPath`) ' +
+        'VALUES ("'+add.modID+'", "'+add.modName+'", "'+add.modDes+'", "'+add.modPlan+'", "'+uname+'", "'+add.groupingTable+'")'
     connection.query(queryInsertModule, function (error, results) {
         if (error) {
             console.log(error)
@@ -485,16 +489,26 @@ web.get('/admin', function(req, res){
     } else {
         res.redirect('/login')
     }
+
+    var querySelectAllModules = 'SELECT * FROM Module WHERE employeeID = "' + uname + '"'
+
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'username',
         password: 'password',
-        database: 'traffic_feedback_system'
+        database: 'feedbackSystem'
     })
     connection.connect()
-    res.render('admin.html', {
-        modules: allModules,
-        uname: uname
+    connection.query(querySelectAllModules, function (error, moduleInfo) {
+        if (error) {
+            console.log(error)
+        }
+        console.log(moduleInfo)
+        res.render('admin.html', {
+            modules: allModules,
+            moduleInfo: moduleInfo,
+            uname: uname
+        })
     })
     connection.end()
 })

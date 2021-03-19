@@ -79,6 +79,7 @@
     </nav>
 
     <div class="container">
+        <h4>TEAM {{teamNumber}}</h4>
         <div class="row">
             {{each member}}
             <div class="col-md-2">
@@ -103,18 +104,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>week1</td>
-                    <td>4</td>
-                    <td>33%</td>
-                    <td>Good!</td>
-                    <td>1/2/2020</td>
-                </tr>
                 {{each feedback}}
                 <tr>
                     <td>{{$value.weekNumber}}</td>
                     <td>{{$value.score}}</td>
-                    <td>{{$value.contribution}}</td>
+                    <td>{{$value.contributions}}</td>
                     <td>{{$value.writtenFeedback}}</td>
                     <td>{{$value.date}}</td>
                 </tr>

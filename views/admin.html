@@ -131,27 +131,27 @@
             </div>
             <div class="tab-pane fade" id="modify_module"><br>
                 <ul id="myModule" class="nav nav-pills nav-justified" role="tablist">
-                    {{each module}}
-                    <li role="presentation"><a href=#{{$value.moduleID}} data-toggle="tab" class="t1">{{$value.moduleName}}</a></li>
+                    {{each moduleInfo}}
+                    <li role="presentation"><a href=#{{$value.moduleCode}} data-toggle="tab" class="t1">{{$value.moduleName}}</a></li>
                     {{/each}}
                 </ul>
                 <div id="myModule-content" class="tab-content">
-                    {{each module}}
-                    <div class="tab-pane fade" id={{$value.moduleID}}>
+                    {{each moduleInfo}}
+                    <div class="tab-pane fade" id={{$value.moduleCode}}>
                         <form role="form" action="/modifyModule" id=addMod" method="post">
                             <div class="form-group"><br>
                                 <label>Module ID</label>
-                                <textarea id="ID" type="text" rows="1" name="modID" readonly="readonly" class="form-control">{{$value.moduleID}}</textarea>
+                                <textarea id="ID" type="text" rows="1" name="modID" readonly="readonly" class="form-control">{{$value.moduleCode}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Module description</label>
-                                <textarea class="form-control" name='modDes' rows="5" placeholder="Enter module description">{{$value.description}}</textarea>
+                                <textarea class="form-control" name='modDes' rows="5" placeholder="Enter module description">{{$value.moduleDescription}}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Module plan</label>
-                                <textarea class="form-control" name='modPlan' rows="5" placeholder="Enter module plan">{{$value.plan}}</textarea>
+                                <textarea class="form-control" name='modPlan' rows="5" placeholder="Enter module plan">{{$value.modulePlan}}</textarea>
                             </div>
-<!--                            <div class="row">-->
+                            <div class="row">
 <!--                                <div class="form-group col-md-4">-->
 <!--                                    <label>Add students</label>-->
 <!--                                    <input name="stuTable" type="file">-->
@@ -164,9 +164,10 @@
 <!--                                </div>-->
 <!--                                <div class="form-group  col-md-4">-->
 <!--                                    <label>Grouping</label>-->
-<!--                                    <input name="groupTable" type="file">-->
+<!--                                    <input name="groupingTable" type="file" value={{$value.csvPath}}>-->
 <!--                                    <p class="help-block">Select grouping csv file</p>-->
 <!--                                </div>-->
+                            </div>
                             <div class="row">
                                 <div class=form-group">
                                     <div class="col-md-1 col-md-offset-9">

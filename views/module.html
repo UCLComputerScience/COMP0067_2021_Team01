@@ -89,6 +89,7 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
+                            <th>Index</th>
                             <th>Student SPR</th>
                             <th>Name</th>
                             <th>Group Number</th>
@@ -102,11 +103,12 @@
                     <tbody class="stu_at ">
                     {{each attStudents}}
                         <tr>
+                            <td>{{$value.index}}</td>
                             <td><a href="student?moduleID={{module.moduleCode}}&studentID={{$value.studentSPR}}">{{$value.studentSPR}}</a></td>
                             <td>{{$value.forename}} {{$value.surname}}</td>
                             <td>{{$value.teamNumber}}</td>
                             <td>{{$value.projectTitle}}</td>
-                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.lastScore}} ({{$value.date}}Time Placeholder)</td>
                             <td>{{$value.avgScore}}</td>
                             <td>{{$value.messageLecturer}}</td>
                             <!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
@@ -119,6 +121,7 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
+                        <th>Index</th>
                         <th>Group number</th>
                         <th>Project</th>
                         <th>TA</th>
@@ -131,11 +134,12 @@
                     <tbody class="gro_at">
                         {{each attGroups}}
                         <tr>
-                            <td><a href="group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">{{$value.teamNumber}}</a></td>
+                            <td>{{$value.index}}</td>
+                            <td><a href="group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">GROUP {{$value.teamNumber}}</a></td>
                             <td>{{$value.projectTitle}}</td>
                             <td>{{$value.forename}} {{$value.surname}}</td>
                             <th>{{$value.studentName}}</th>
-                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.lastScore}} ({{$value.date}}Time Placeholder)</td>
                             <td>{{$value.avgScore}}</td>
                             <td>{{$value.messageLecturer}}</td>
                         </tr>
@@ -167,7 +171,7 @@
                             <td>{{$value.forename}} {{$value.surname}}</td>
                             <td>{{$value.teamNumber}}</td>
                             <td>{{$value.projectTitle}}</td>
-                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.lastScore}} ({{$value.date}}Time Placeholder)</td>
                             <td>{{$value.avgScore}}</td>
 <!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
                         </tr>
@@ -195,11 +199,11 @@
                     <tbody class="gro_li">
                         {{each allGroups}}
                         <tr>
-                            <td><a href="group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">{{$value.teamNumber}}</a></td>
+                            <td><a href="group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">GROUP {{$value.teamNumber}}</a></td>
                             <td>{{$value.projectTitle}}</td>
                             <td>{{$value.forename}} {{$value.surname}}</td>
                             <th>{{$value.studentName}}</th>
-                            <td>{{$value.lastScore}}</td>
+                            <td>{{$value.lastScore}} ({{$value.date}}Time Placeholder)</td>
                             <td>{{$value.avgScore}}</td>
                         </tr>
                         {{/each}}
