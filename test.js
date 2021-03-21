@@ -39,7 +39,7 @@ web.post('/login', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
 
@@ -72,7 +72,7 @@ web.get('/lecturerHomepage', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
     connection.query(querySelect, function (error, allMod) {
@@ -152,7 +152,7 @@ web.get('/module', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
 
@@ -233,7 +233,7 @@ web.get('/group', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
     connection.query(querySelectCurrentModule, function (error, currentModule) {
@@ -296,7 +296,7 @@ web.get('/student', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
     connection.query(querySelectCurrentModule, function (error, currentModule) {
@@ -360,7 +360,7 @@ web.post('/addModule', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
 
@@ -439,7 +439,7 @@ web.post('/modifyModule', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
 
@@ -505,7 +505,7 @@ web.get('/admin', function(req, res){
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'feedbackSystem'
+        database: 'feedback'
     })
     connection.connect()
     connection.query(querySelectAllModules, function (error, moduleInfo) {
