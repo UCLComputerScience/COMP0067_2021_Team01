@@ -205,16 +205,6 @@ INSERT INTO Student (studentSPR, surname, forename, registrationDate, routeCode,
 -- 表的结构 StudentFeedback
 --
 
-<<<<<<< HEAD
-CREATE TABLE StudentFeedback (
-  studentSPR varchar(45) NOT NULL,
-  moduleCode varchar(45) NOT NULL,
-  weekNumber varchar(10) NOT NULL,
-  score int(11) NOT NULL,
-  contribution decimal(10,2) DEFAULT NULL,
-  writtenFeedbaack varchar(200) DEFAULT NULL,
-  messageLecturer varchar(200) DEFAULT NULL
-=======
 CREATE TABLE `StudentFeedback` (
   `studentSPR` varchar(45) NOT NULL,
   `moduleCode` varchar(45) NOT NULL,
@@ -224,34 +214,12 @@ CREATE TABLE `StudentFeedback` (
   `writtenFeedback` varchar(200) DEFAULT NULL,
   `messageLecturer` varchar(200) DEFAULT NULL,
   `date` timestamp NULL DEFAULT NULL
->>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 StudentFeedback
 --
 
-<<<<<<< HEAD
-INSERT INTO StudentFeedback (studentSPR, moduleCode, weekNumber, score, contribution, writtenFeedbaack, messageLecturer) VALUES
-('stu1', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu1', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu2', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu2', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu3', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu3', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu4', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu4', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu5', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu5', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu6', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu6', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu7', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu7', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu8', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu8', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
-('stu9', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
-('stu9', 'COMP0067', '2', 4, '0.33', 'Good job', '');
-=======
 INSERT INTO `StudentFeedback` (`studentSPR`, `moduleCode`, `weekNumber`, `score`, `contribution`, `writtenFeedback`, `messageLecturer`, `date`) VALUES
 ('stu1', 'COMP0067', '1', 2, '0.33', 'Good job', '', NULL),
 ('stu1', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
@@ -271,7 +239,6 @@ INSERT INTO `StudentFeedback` (`studentSPR`, `moduleCode`, `weekNumber`, `score`
 ('stu8', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
 ('stu9', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
 ('stu9', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL);
->>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 
 -- --------------------------------------------------------
 
@@ -291,12 +258,8 @@ CREATE TABLE TA (
 -- 转存表中的数据 TA
 --
 
-<<<<<<< HEAD
-INSERT INTO TA (taStudentSPR, surname, forename, email, degree) VALUES
-=======
 INSERT INTO `TA` (`taStudentSPR`, `surname`, `forename`, `email`, `degree`) VALUES
 ('TA1', 'TA1', 'TA1', 'TA1@gamil.com', 'Doctor'),
->>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 ('TA2', 'TA2', 'TA2', 'TA2@gamil.com', 'Doctor'),
 ('TA3', 'TA3', 'TA3', 'TA3@gamil.com', 'Doctor');
 
@@ -306,15 +269,6 @@ INSERT INTO `TA` (`taStudentSPR`, `surname`, `forename`, `email`, `degree`) VALU
 -- 表的结构 TeamFeedback
 --
 
-<<<<<<< HEAD
-CREATE TABLE TeamFeedback (
-  moduleCode varchar(45) NOT NULL,
-  teamNumber varchar(10) NOT NULL,
-  weekNumber varchar(10) NOT NULL,
-  score int(11) NOT NULL,
-  writtenFeedback varchar(200) DEFAULT NULL,
-  messageLecturer varchar(200) DEFAULT NULL
-=======
 CREATE TABLE `TeamFeedback` (
   `moduleCode` varchar(45) NOT NULL,
   `teamNumber` varchar(10) NOT NULL,
@@ -323,7 +277,6 @@ CREATE TABLE `TeamFeedback` (
   `writtenFeedback` varchar(200) DEFAULT NULL,
   `messageLecturer` varchar(200) DEFAULT NULL,
   `date` timestamp NULL DEFAULT NULL
->>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
