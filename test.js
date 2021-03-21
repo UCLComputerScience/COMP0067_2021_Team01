@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 var xlsx = require('node-xlsx')
 var fs = require('fs')
 var web = express()
+var databaseName = "feedback"
 
 web.engine('html', require('express-art-template'))
 web.use(bodyParser.urlencoded({extended: false}))
@@ -37,9 +38,9 @@ web.post('/login', function(req, res){
     var queryLogin = 'SELECT `password`, `userType` FROM `LoginInfo` WHERE `username`="'+user.uname+'"'
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
 
@@ -70,9 +71,9 @@ web.get('/lecturerHomepage', function(req, res){
     var querySelect = 'SELECT * FROM Module WHERE employeeID = "' + uname + '"'
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
     connection.query(querySelect, function (error, allMod) {
@@ -150,9 +151,9 @@ web.get('/module', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
 
@@ -231,9 +232,9 @@ web.get('/group', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
     connection.query(querySelectCurrentModule, function (error, currentModule) {
@@ -294,9 +295,9 @@ web.get('/student', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
     connection.query(querySelectCurrentModule, function (error, currentModule) {
@@ -358,9 +359,9 @@ web.post('/addModule', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
 
@@ -437,9 +438,9 @@ web.post('/modifyModule', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
 
@@ -503,9 +504,9 @@ web.get('/admin', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'feedback'
+        user: 'username',
+        password: 'password',
+        database: databaseName
     })
     connection.connect()
     connection.query(querySelectAllModules, function (error, moduleInfo) {
