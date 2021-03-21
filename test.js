@@ -231,8 +231,8 @@ web.get('/group', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'username',
-        password: 'password',
+        user: 'root',
+        password: '',
         database: 'feedbackSystem'
     })
     connection.connect()
@@ -294,8 +294,8 @@ web.get('/student', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'username',
-        password: 'password',
+        user: 'root',
+        password: '',
         database: 'feedbackSystem'
     })
     connection.connect()
@@ -437,8 +437,8 @@ web.post('/modifyModule', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'username',
-        password: 'password',
+        user: 'root',
+        password: '',
         database: 'feedbackSystem'
     })
     connection.connect()
@@ -503,8 +503,8 @@ web.get('/admin', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-        user: 'username',
-        password: 'password',
+        user: 'root',
+        password: '',
         database: 'feedbackSystem'
     })
     connection.connect()
