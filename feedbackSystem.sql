@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主机： localhost
--- 生成日期： 2021-03-15 23:08:16
+-- 生成日期： 2021-03-16 16:52:22
 -- 服务器版本： 5.7.26
 -- PHP 版本： 7.4.2
 
@@ -20,7 +20,10 @@ SET time_zone = "+00:00";
 --
 -- 数据库： feedbackSystem
 --
-
+DROP DATABASE IF EXISTS feedbackSystem;
+CREATE DATABASE IF NOT EXISTS feedbackSystem;
+CREATE SCHEMA IF NOT EXISTS feedbackSystem;
+USE feedbackSystem;
 -- --------------------------------------------------------
 
 --
@@ -202,6 +205,7 @@ INSERT INTO Student (studentSPR, surname, forename, registrationDate, routeCode,
 -- 表的结构 StudentFeedback
 --
 
+<<<<<<< HEAD
 CREATE TABLE StudentFeedback (
   studentSPR varchar(45) NOT NULL,
   moduleCode varchar(45) NOT NULL,
@@ -210,12 +214,24 @@ CREATE TABLE StudentFeedback (
   contribution decimal(10,2) DEFAULT NULL,
   writtenFeedbaack varchar(200) DEFAULT NULL,
   messageLecturer varchar(200) DEFAULT NULL
+=======
+CREATE TABLE `StudentFeedback` (
+  `studentSPR` varchar(45) NOT NULL,
+  `moduleCode` varchar(45) NOT NULL,
+  `weekNumber` varchar(10) NOT NULL,
+  `score` int(11) NOT NULL,
+  `contribution` decimal(10,2) DEFAULT NULL,
+  `writtenFeedback` varchar(200) DEFAULT NULL,
+  `messageLecturer` varchar(200) DEFAULT NULL,
+  `date` timestamp NULL DEFAULT NULL
+>>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 StudentFeedback
 --
 
+<<<<<<< HEAD
 INSERT INTO StudentFeedback (studentSPR, moduleCode, weekNumber, score, contribution, writtenFeedbaack, messageLecturer) VALUES
 ('stu1', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
 ('stu1', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
@@ -235,6 +251,27 @@ INSERT INTO StudentFeedback (studentSPR, moduleCode, weekNumber, score, contribu
 ('stu8', 'COMP0067', '2', 4, '0.33', 'Good job', ''),
 ('stu9', 'COMP0067', '1', 4, '0.33', 'Good job', ''),
 ('stu9', 'COMP0067', '2', 4, '0.33', 'Good job', '');
+=======
+INSERT INTO `StudentFeedback` (`studentSPR`, `moduleCode`, `weekNumber`, `score`, `contribution`, `writtenFeedback`, `messageLecturer`, `date`) VALUES
+('stu1', 'COMP0067', '1', 2, '0.33', 'Good job', '', NULL),
+('stu1', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
+('stu2', 'COMP0067', '1', 3, '0.33', 'Good job', '', NULL),
+('stu2', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
+('stu3', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
+('stu3', 'COMP0067', '2', 5, '0.33', 'Good job', '', NULL),
+('stu4', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
+('stu4', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
+('stu5', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
+('stu5', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
+('stu6', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
+('stu6', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
+('stu7', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
+('stu7', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
+('stu8', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
+('stu8', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL),
+('stu9', 'COMP0067', '1', 4, '0.33', 'Good job', '', NULL),
+('stu9', 'COMP0067', '2', 4, '0.33', 'Good job', '', NULL);
+>>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 
 -- --------------------------------------------------------
 
@@ -254,10 +291,14 @@ CREATE TABLE TA (
 -- 转存表中的数据 TA
 --
 
+<<<<<<< HEAD
 INSERT INTO TA (taStudentSPR, surname, forename, email, degree) VALUES
+=======
+INSERT INTO `TA` (`taStudentSPR`, `surname`, `forename`, `email`, `degree`) VALUES
+('TA1', 'TA1', 'TA1', 'TA1@gamil.com', 'Doctor'),
+>>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 ('TA2', 'TA2', 'TA2', 'TA2@gamil.com', 'Doctor'),
-('TA3', 'TA3', 'TA3', 'TA3@gamil.com', 'Doctor'),
-('ttt', 'TA1', 'TA1', 'TA1@gamil.com', 'Doctor');
+('TA3', 'TA3', 'TA3', 'TA3@gamil.com', 'Doctor');
 
 -- --------------------------------------------------------
 
@@ -265,6 +306,7 @@ INSERT INTO TA (taStudentSPR, surname, forename, email, degree) VALUES
 -- 表的结构 TeamFeedback
 --
 
+<<<<<<< HEAD
 CREATE TABLE TeamFeedback (
   moduleCode varchar(45) NOT NULL,
   teamNumber varchar(10) NOT NULL,
@@ -272,7 +314,29 @@ CREATE TABLE TeamFeedback (
   score int(11) NOT NULL,
   writtenFeedback varchar(200) DEFAULT NULL,
   messageLecturer varchar(200) DEFAULT NULL
+=======
+CREATE TABLE `TeamFeedback` (
+  `moduleCode` varchar(45) NOT NULL,
+  `teamNumber` varchar(10) NOT NULL,
+  `weekNumber` varchar(10) NOT NULL,
+  `score` decimal(10,2) NOT NULL,
+  `writtenFeedback` varchar(200) DEFAULT NULL,
+  `messageLecturer` varchar(200) DEFAULT NULL,
+  `date` timestamp NULL DEFAULT NULL
+>>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `TeamFeedback`
+--
+
+INSERT INTO `TeamFeedback` (`moduleCode`, `teamNumber`, `weekNumber`, `score`, `writtenFeedback`, `messageLecturer`, `date`) VALUES
+('COMP0067', '1', '1', '3.33', 'Merit', NULL, NULL),
+('COMP0067', '1', '2', '4.00', 'Good job', NULL, NULL),
+('COMP0067', '2', '1', '3.67', 'Merit', NULL, NULL),
+('COMP0067', '2', '2', '4.00', 'Good job', NULL, NULL),
+('COMP0067', '3', '1', '4.00', 'Good job', NULL, NULL),
+('COMP0067', '3', '2', '4.33', 'Perfect', NULL, NULL);
 
 --
 -- 转储表的索引
