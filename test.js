@@ -307,13 +307,8 @@ web.get('/student', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-<<<<<<< HEAD
-        user: 'root',
-        password: '',
-=======
         user: 'username',
         password: 'password',
->>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
         database: 'feedbackSystem'
     })
     connection.connect()
@@ -499,13 +494,8 @@ web.get('/admin', function(req, res){
 
     var connection = mysql.createConnection({
         host: 'localhost',
-<<<<<<< HEAD
-        user: 'root',
-        password: '',
-=======
         user: 'username',
         password: 'password',
->>>>>>> 7caa07f199418e76e431594f8acb61d23546888c
         database: 'feedbackSystem'
     })
     connection.connect()
