@@ -42,14 +42,6 @@
 			border: 1px solid #005344;
 			background:#122b40;
 		}
-		/*.js-full-height .container-fluid .card {*/
-		/*}*/
-		/*.js-full-height .container-fluid {*/
-		/*	border-radius:5px;*/
-		/*	background-color: #ffffff;*/
-		/*	border: 1px solid #c0c0c0;*/
-		/*	box-shadow: #6c757d;*/
-		/*}*/
 	</style>
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -90,7 +82,7 @@
 	<body>
 <!--Navigation bar-->
 	<div id="fh5co-page">
-		<nav class="fh5co-nav-style-1" role="navigation" data-offcanvass-position="fh5co-offcanvass-left">
+		<nav class="fh5co-nav-style-1" role="navigation" data-offcanvass-position="fh5co-offcanvass-left" style="background-image: url(/public/images/moodle.jpg)">
 			<div class="container">
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 fh5co-logo">
 					<a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
@@ -98,20 +90,20 @@
 				</div>
 				<div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
 					<ul data-offcanvass="yes">
-						<li><a href="lecturerHomepage">Home</a></li>
-						<li class="dropdown active">
+						<li class="active"><a href="lecturer_homepage">Home</a></li>
+						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
 									{{each modules}}
-									<li><a href="module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
 									{{/each}}
 								</div>
 							</ul>
 						</li>
-						<li><a href="admin">Admin</a></li>
+						<li><a href="lecturer_admin">Admin</a></li>
 					</ul>
-				</div>
+				</div> 
 				<div class="col-lg-3 col-md-4 col-sm-4 text-right fh5co-link-wrap">
 					<ul class="fh5co-special" data-offcanvass="yes">
 						<li><a href="#">Hi, {{uname}}</a></li>
@@ -121,119 +113,58 @@
 			</div>
 		</nav>
 
-		<div class="fh5co-cover fh5co-cover-style-2 js-full-height" data-stellar-background-ratio="0.5" data-next="yes"  style="background-image: url(/public/images/2.jpeg);">
-		  	<span class="scroll-btn wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
-				<a href="#">
-					<span class="mouse"><span></span></span>
-				</a>
-			</span>
-			<div class="fh5co-overlay"></div>
+<!--Big picture-->
+		<div class="fh5co-cover fh5co-cover-style-2" data-stellar-background-ratio="0" data-next="yes" style="background-image: url(/public/images/img_same_dimension_3.jpg);">
 			<div class="fh5co-cover-text">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-push-6 col-md-6 full-height js-full-height">
-							<div class="fh5co-cover-intro">
-								<h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Student Feedback</h1>
-<!--								<h2 class="cover-text-sublead wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">This is {{module.moduleCode}}.<br>{{module.moduleDescription}}<br>{{module.modulePlan}}.</h2>-->
-								<p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s"><a href="#layoutSidenav_content" class="btn btn-primary btn-outline btn-lg">See the Student Feedback</a></p>
-							</div>
+				<div class="fh5co-project-style-2"><br><br><br>
+					<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" style="background-color: #f9f6f0; border: 1px solid #999999">
+						<div id="layoutSidenav_content" >
+							<main>
+								<div class="container-fluid">
+									<div class="card mb-4">
+										<div class="card-header">
+											<div class="row">
+												<div class="text-center">
+													<div class="fh5co-cover-intro"><br><br>
+														<h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s" style="color: #000000">Your Modules</h1>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="card-body">
+											<div class="fade in active">
+												<div class="fh5co-projects">
+													<ul>
+														{{each modules}}
+														<li class="wow fadeInUp" style="background-image: url(/public/images/{{$value.index}}.jpeg);" data-wow-duration="1s" data-wow-delay="1.4s" data-stellar-background-ratio="0.5">
+															<a href="lecturer_module?moduleID={{$value.moduleCode}}">
+																<div class="fh5co-overlay"></div>
+																<div class="container">
+																	<div class="fh5co-text">
+																		<div class="fh5co-text-inner">
+																			<div class="row">
+																				<div class="col-md-6"><h3>{{$value.moduleName}}</h3></div>
+																				<div class="col-md-6"><p>{{$value.moduleDescription}}</p></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</a>
+														</li>
+														{{/each}}
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</main>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<!-- END footer -->
-		<div class="js-full-height">
-			<nav id="div1" class="navbar" role="navigation">
-				<ol class="breadcrumb">
-					<li class="li"><a href="lecturerHomepage">Home</a></li>
-					<li class="li"><a href="module?moduleID={{module.moduleCode}}">{{module.moduleName}}</a></li>
-					<li class="active">Student feedback</li>
-				</ol>
-			</nav>
-			<div class="container">
-<!--				<div class="fh5co-project-style-2">-->
-				<div class="container">
-					<div class="row p-b">
-						<div class="col-md-8 col-md-offset-2 text-center">
-							<h2 class="fh5co-headin wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Student Performance</h2>
-							<p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">
-								You are shown the student's feedback tables below.<br></p>
-						</div>
-					</div>
-				</div>
-				<div id="layoutSidenav_content" class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s">
-					<main>
-						<div class="container-fluid">
-							<div class="card mb-4">
-								<div class="card-header">
-								</div>
-								<div class="row">
-									<div class="img col-md-3" align="center">
-										<img src="/public/images/person_1.jpg" width="180" height="200">
-									</div>
-									<div class="col-md-3" align="left">
-										<div class="row">
-											<h5><font color="#a0a0a0">Name:</font> {{student.forename}} {{student.surname}}</h5>
-										</div>
-										<div class="row">
-											<h5><font color="#a0a0a0">Group:</font> {{student.teamNumber}}</h5>
-										</div>
-										<div class="row">
-											<h5><font color="#a0a0a0">Project:</font> {{student.projectTitle}}</h5>
-										</div>
-										<div class="row">
-											<h5><font color="#a0a0a0">Average score:</font> {{student.avgScore}}</h5>
-										</div>
-										<div class="row">
-											<h5><font color="#a0a0a0">Email:</font> {{student.email}}</h5>
-										</div>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="fade in active">
-										<div class="table-responsive">
-											<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
-												<thead>
-													<tr>
-														<th>Week</th>
-														<th>Score</th>
-														<th>Contribution</th>
-														<th>Feedback</th>
-														<th>Date</th>
-													</tr>
-												</thead>
-												<tfoot>
-													<tr>
-														<th>Week</th>
-														<th>Score</th>
-														<th>Contribution</th>
-														<th>Feedback</th>
-														<th>Date</th>
-													</tr>
-												</tfoot>
-												<tbody>
-													{{each feedback}}
-													<tr>
-														<td>{{$value.weekNumber}}</td>
-														<td>{{$value.score}}</td>
-														<td>{{$value.contribution}}</td>
-														<td>{{$value.writtenFeedback}}</td>
-														<td>{{$value.date}}</td>
-													</tr>
-													{{/each}}
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</main>
-				</div>
-			</div>
-		</div>
 	</div>
 	<!-- END page-->
 
@@ -279,11 +210,11 @@
 	<script>
 		new WOW().init();
 	</script>
-	<!--table-->
-	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-	<script src="/public/js/datatables-demo.js"></script>
-	<!-- Main -->
+<!--	&lt;!&ndash;table&ndash;&gt;-->
+<!--	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>-->
+<!--	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>-->
+<!--	<script src="/public/js/datatables-demo.js"></script>-->
+<!--	&lt;!&ndash; Main &ndash;&gt;-->
 	<script src="/public/js/main.js"></script>
 
 

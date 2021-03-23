@@ -614,7 +614,8 @@ a:hover .lnk-icon-right {
   position: absolute;
   z-index: 8;
   width: 100%;
-  margin-top: 40px;
+  padding: 10px;
+  /*margin-top: 40px;*/
 }
 @media screen and (max-width: 768px) {
   .fh5co-nav-style-1, .fh5co-nav-style-2 {
@@ -659,7 +660,7 @@ a:hover .lnk-icon-right {
   }
 }
 .fh5co-nav-style-1 .fh5co-link-wrap ul, .fh5co-nav-style-2 .fh5co-link-wrap ul {
-  padding: 0;
+  padding: 9px;
   margin: 0;
   width: 100%;
 }

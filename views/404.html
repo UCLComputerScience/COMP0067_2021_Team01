@@ -45,7 +45,7 @@
 
                         </ul>
                     </li>
-                    <li><a href="/views/admin.html">Admin</a></li>
+                    <li><a href="/views/lecturer_admin.html">Admin</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right" id="myAccount">
                     <li><a href="#">Hi, lecture</a></li>
@@ -63,7 +63,7 @@
 
     <nav class="navbar" role="navigation">
         <ol class="breadcrumb">
-            <li class="li"><a href="/views/lecturerHomepage.html">Home</a></li>
+            <li class="li"><a href="/views/lecturer_homepage.html">Home</a></li>
             <li class="active">404 page</li>
         </ol>
     </nav>
@@ -82,7 +82,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="lecturerHomepage.html">Logout</a>
+                    <a class="btn btn-primary" href="lecturer_homepage.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -97,7 +97,7 @@
     var module=["App engineering", "Software engineering", "Artificial intelligence", "Machine learning", "Algorithm"]
     function setModule() {
         for (var i = 0; i < module.length; i++){
-            $(".dropdown-menu").append('<li><a href="/views/module.html">'+module[i]+'</a></li>')
+            $(".dropdown-menu").append('<li><a href="/views/lecturer_module.html">'+module[i]+'</a></li>')
             // console.log(module[i])
         }
     }
