@@ -50,6 +50,16 @@
 			font-weight: normal;
 			color: #495057;
 		}
+		.date {
+			width: 9rem;
+		}
+		#student_score_plot {
+			border: 1px solid #c0a16b;
+			width: 90%;
+			height: 200px;
+			margin-left: auto;
+			margin-right: auto;
+		}
 	</style>
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -104,7 +114,7 @@
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
 									{{each modules}}
-									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
 									{{/each}}
 								</div>
 							</ul>
@@ -133,7 +143,7 @@
 						</ol>
 					</nav>
 				</div>
-				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999">
+				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
 					<div id="layoutSidenav_content">
 						<br>
 						<main>
@@ -152,7 +162,7 @@
 										<div class="fade in active wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
 											<div class="row">
 												<div class="img col-md-3" align="center">
-													<img src="/public/images/person_1.jpg" width="180" height="200">
+													<img src="{{student.fileLocation}}" width="180" height="200">
 												</div>
 												<div class="col-md-3" align="left">
 													<div class="row">
@@ -171,30 +181,39 @@
 														<h5><font class="font1">Email:</font><font class="font2"> {{student.email}}</font></h5>
 													</div>
 												</div>
+												<div class="col-md-6" style="text-align: center;">
+													<figure class="highcharts-figure">
+<!--														<p class="highcharts-description">Student Weekly Score</p>-->
+														<div id="student_score_plot"></div>
+													</figure>
+												</div><br>
 											</div>
-											<div class="table-responsive">
-												<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
-													<thead>
-													<tr>
-														<th>Week</th>
-														<th>Score</th>
-														<th>Contribution</th>
-														<th>Feedback</th>
-														<th>Date</th>
-													</tr>
-													</thead>
-													<tbody>
-													{{each feedback}}
-													<tr>
-														<td>{{$value.weekNumber}}</td>
-														<td>{{$value.score}}</td>
-														<td>{{$value.contribution}}</td>
-														<td>{{$value.writtenFeedback}}</td>
-														<td>{{$value.date}}</td>
-													</tr>
-													{{/each}}
-													</tbody>
-												</table>
+											<div style="background-color: #ffffff; display: block; position: relative; margin:25px auto 25px auto">
+												<br>
+												<div class="table-responsive" style="margin:auto 25px auto 25px">
+													<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+														<thead>
+														<tr>
+															<th>Week</th>
+															<th>Score</th>
+															<th>Contribution</th>
+															<th>Feedback</th>
+															<th>Date</th>
+														</tr>
+														</thead>
+														<tbody>
+														{{each feedback}}
+														<tr>
+															<td>{{$value.weekNumber}}</td>
+															<td id="{{$value.weekNumber}}">{{$value.score}}</td>
+															<td>{{$value.contribution}}</td>
+															<td>{{$value.writtenFeedback}}</td>
+															<td class="date">{{$value.date}}</td>
+														</tr>
+														{{/each}}
+														</tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -204,9 +223,16 @@
 					</div>
 				</div>
 			</div>
+			<!--footer-->
+			<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+				<br>
+				<div style="text-align: center;">
+					<h4>UCL COM0067 team1 </h4>
+				</div>
+				<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+			</div>
+			<!-- END footer -->
 		</div>
-
-		<!-- END footer -->
 	</div>
 	<!-- END page-->
 
@@ -258,7 +284,79 @@
 	<script src="/public/js/datatables-demo.js"></script>
 	<!-- Main -->
 	<script src="/public/js/main.js"></script>
+	<!--plot-->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+	<script>
+		var i = 1;
+		var student_score =[]
+		while (1) {
+			score = document.getElementById(i)
+			if (score === null) {
+				break;
+			}
+			student_score.push(parseInt(score.innerText));
+			i++;
+		}
+		Highcharts.chart('student_score_plot', {
+			title: {
+				text: 'Student Weekly Score'
+			},
+			yAxis: {
+				title: {
+					text: 'Weekly Score '
+				},
+				min:0,
+				tickInterval:1,
+				max:5
+			},
+			xAxis: {
+				accessibility: {
+					rangeDescription: 'Week'
+				},
+				min:1,
+				tickInterval:1,
+			},
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle'
+			},
+			plotOptions: {
+				series: {
+					label: {
+						connectorAllowed: false
+					},
+					pointStart: 1
+				}
+			},
+			series: [{
+				name: '',
+				data: student_score
+			}],
+			legend: {
+				enabled: false
+			},
+			responsive: {
+				rules: [{
+					condition: {
+						maxWidth: 500
+					},
+					chartOptions: {
+						legend: {
+							layout: 'horizontal',
+							align: 'center',
+							verticalAlign: 'bottom'
+						}
+					}
+				}]
+			}
+		});
+	</script>
 
 	</body>
 </html>

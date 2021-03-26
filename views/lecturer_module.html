@@ -48,17 +48,60 @@
 			background-color: #ffffff;
 		}
 		.table {
-			table-layout:auto;
-			text-overflow:ellipsis;
-			overflow:hidden;
-			white-space:nowrap;
-			font-size: 14px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
 		}
-		td {
-			text-overflow:ellipsis;
-			overflow:hidden;
-			white-space:nowrap;
-			font-size: 14px;
+		.members_unit {
+			width: 15rem;
+		}
+		.members {
+			width: 15rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.members_group_unit {
+			width: 35rem;
+		}
+		.members_group {
+			width: 35rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.name_unit {
+			width: 15rem;
+		}
+		.name {
+			width: 15rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.project_unit {
+			width: 22rem;
+		}
+		.project {
+			width: 22rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.msg_unit {
+			width: 25rem;
+		}
+		.msg {
+			width: 25rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
 		}
 	</style>
 
@@ -144,7 +187,7 @@
 						</ol>
 					</nav>
 				</div>
-				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999">
+				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
 					<div id="layoutSidenav_content">
 						<br>
 						<main>
@@ -173,13 +216,13 @@
 													<table class="table table-bordered" id="dataTable1" cellspacing="0">
 														<thead class="thead">
 														<tr>
-															<th>Index</th>
-															<th>Student SPR</th>
+															<th></th>
+															<th>SPR</th>
 															<th>Name</th>
 															<th>Group</th>
 															<th>Project</th>
 															<th>Last Score</th>
-															<th>Avg Score</th>
+<!--															<th>Avg Score</th>-->
 															<th>Message from TA</th>
 														</tr>
 														</thead>
@@ -188,12 +231,12 @@
 														<tr>
 															<td>{{$value.index}}</td>
 															<td><a href="lecturer_student?moduleID={{module.moduleCode}}&studentID={{$value.studentSPR}}">{{$value.studentSPR}}</a></td>
-															<td>{{$value.forename}} {{$value.surname}}</td>
+															<td class="name_unit"><div class="name" title="{{$value.forename}} {{$value.surname}}">{{$value.forename}} {{$value.surname}}</div></td>
 															<td>{{$value.teamNumber}}</td>
-															<td>{{$value.projectTitle}}</td>
+															<td class="project_unit"><div class="project" title="{{$value.projectTitle}}">{{$value.projectTitle}}</div></td>
 															<td>{{$value.lastScore}} ({{$value.date}})</td>
-															<td>{{$value.avgScore}}</td>
-															<td>{{$value.messageLecturer}}</td>
+<!--															<td>{{$value.avgScore}}</td>-->
+															<td class="msg_unit"><div class="msg" title="{{$value.messageLecturer}}">{{$value.messageLecturer}}</div></td>
 														</tr>
 														{{/each}}
 														</tbody>
@@ -205,13 +248,13 @@
 													<table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
 														<thead class="thead">
 														<tr>
-															<th>Index</th>
+															<th></th>
 															<th>Group</th>
 															<th>Project</th>
 															<th>TA</th>
 															<th>Members</th>
 															<th>Last score</th>
-															<th>Avg score</th>
+<!--															<th>Avg score</th>-->
 															<th>Message from TA</th>
 														</tr>
 														</thead>
@@ -220,12 +263,12 @@
 														<tr>
 															<td>{{$value.index}}</td>
 															<td><a href="lecturer_group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">GROUP {{$value.teamNumber}}</a></td>
-															<td>{{$value.projectTitle}}</td>
-															<td>{{$value.forename}} {{$value.surname}}</td>
-															<th>{{$value.studentName}}</th>
+															<td class="project_unit"><div class="project" title="{{$value.projectTitle}}">{{$value.projectTitle}}</div></td>
+															<td class="name_unit"><div class="name" title="{{$value.forename}} {{$value.surname}}">{{$value.forename}} {{$value.surname}}</div></td>
+															<td class="members_unit"><div class="members" title="{{$value.studentName}}">{{$value.studentName}}</div></td>
 															<td>{{$value.lastScore}} ({{$value.date}})</td>
-															<td>{{$value.avgScore}}</td>
-															<td>{{$value.messageLecturer}}</td>
+<!--															<td>{{$value.avgScore}}</td>-->
+															<td class="msg_unit"><div class="msg" title="{{$value.messageLecturer}}">{{$value.messageLecturer}}</div></td>
 														</tr>
 														{{/each}}
 														</tbody>
@@ -242,7 +285,7 @@
 															<th>Group</th>
 															<th>Project</th>
 															<th>Last Score</th>
-															<th>Avg Score</th>
+<!--															<th>Avg Score</th>-->
 														</tr>
 														</thead>
 														<tbody class="stu_li">
@@ -253,7 +296,7 @@
 															<td>{{$value.teamNumber}}</td>
 															<td>{{$value.projectTitle}}</td>
 															<td>{{$value.lastScore}} ({{$value.date}})</td>
-															<td>{{$value.avgScore}}</td>
+<!--															<td>{{$value.avgScore}}</td>-->
 														</tr>
 														{{/each}}
 														</tbody>
@@ -270,7 +313,7 @@
 															<th>TA</th>
 															<th>Members</th>
 															<th>Last score</th>
-															<th>Avg score</th>
+<!--															<th>Avg score</th>-->
 														</tr>
 														</thead>
 														<tbody class="gro_li">
@@ -279,9 +322,9 @@
 															<td><a href="lecturer_group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">GROUP {{$value.teamNumber}}</a></td>
 															<td>{{$value.projectTitle}}</td>
 															<td>{{$value.forename}} {{$value.surname}}</td>
-															<th>{{$value.studentName}}</th>
+															<td class="members_group_unit"><div class="members_group" title="{{$value.studentName}}">{{$value.studentName}}</div></td>
 															<td>{{$value.lastScore}} ({{$value.date}})</td>
-															<td>{{$value.avgScore}}</td>
+<!--															<td>{{$value.avgScore}}</td>-->
 														</tr>
 														{{/each}}
 														</tbody>
@@ -297,9 +340,16 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
+		<!--footer-->
+		<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+			<br>
+			<div style="text-align: center;">
+				<h4>UCL COM0067 team1 </h4>
+			</div>
+			<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+		</div>
 		<!-- END footer -->
+	</div>
 
 	<!-- END page-->
 

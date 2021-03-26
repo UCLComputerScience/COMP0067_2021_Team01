@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Voltage &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+
+	<!-- 
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FREEHTML5.CO
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	-->
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+	<style>
+		.fh5co-nav-style-1 .dropdown .dropdown-menu {
+			border: 1px solid #0b2e13;
+			background:#0f6674;
+		}
+
+		.container-fluid .tab {
+			border-radius: 5px;
+			border: 1px solid #c0c0c0;
+			background-color: #ffffff;
+		}
+
+		.table {
+			width: 50px;
+			table-layout: auto;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			font-size: 14px;
+		}
+
+		td.test1 {
+			width: 50px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+			font-size: 14px;
+		}
+
+
+		.highcharts-figure,
+		.highcharts-data-table table {
+
+			min-width: 400px;
+			max-width: 500px;
+			margin: 1em auto;
+			width: 500px;
+			height: 300px;
+
+		}
+
+		.highcharts-data-table table {
+			font-family: Verdana, sans-serif;
+			border-collapse: collapse;
+			border: 1px solid #EBEBEB;
+			margin: 10px auto;
+			text-align: center;
+			width: 100%;
+			max-width: 500px;
+		}
+
+		.highcharts-data-table caption {
+			padding: 1em 0;
+			font-size: 1.2em;
+			color: #555;
+		}
+
+		.highcharts-data-table th {
+			font-weight: 600;
+			padding: 0.5em;
+		}
+
+		.highcharts-data-table td,
+		.highcharts-data-table th,
+		.highcharts-data-table caption {
+			padding: 0.5em;
+		}
+
+		.highcharts-data-table thead tr,
+		.highcharts-data-table tr:nth-child(even) {
+			background: #f8f8f8;
+		}
+
+		.highcharts-data-table tr:hover {
+			background: #f1f7ff;
+		}
+
+		/* .f-els1 {
+			width: 40rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: left;
+		} */
+
+		.f-els1_1 {
+			width: 40rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+
+		/* .f-els2 {
+			width: 10rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: left;
+		} */
+
+		.f-els2_2 {
+			width: 5rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+	</style>
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="/public/favicon.ico">
+
+	<!-- Google Fonts -->
+	<link
+		href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700'
+		rel='stylesheet' type='text/css'>
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/public/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/public/css/icomoon.css">
+	<!-- Magnific Popup-->
+	<link rel="stylesheet" href="/public/css/magnific-popup.css">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="/public/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/public/css/bootstrap.css">
+
+	<!-- Cards -->
+	<link rel="stylesheet" href="/public/css/cards.css">
+
+	<!-- Modernizr JS -->
+	<script src="/public/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="/public/js/respond.min.js"></script>
+	<![endif]-->
+
+	<!--table-->
+	<!--	<link href="/public/css/styles.css" rel="stylesheet" />-->
+	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+		crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+		crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+	<!--Navigation bar-->
+	<div id="fh5co-page">
+		<nav class="fh5co-nav-style-1 " role="navigation" data-offcanvass-position="fh5co-offcanvass-left"
+			style="background-image: url(/public/images/moodle.jpg);">
+			<div class="container">
+				<div class="fh5co-overlay"></div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 fh5co-logo">
+					<a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
+					<a href="#">Traffic Light Feedback System</a>
+				</div>
+				<div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
+					<ul data-offcanvass="yes">
+						<li><a href="student_homepage">Home</a></li>
+						<li class="dropdown active">
+							<a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<div class="fh5co-link-wrap">
+									{{each modules}}
+									<li><a
+											href="student_feedback?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a>
+									</li>
+									{{/each}}
+								</div>
+							</ul>
+						</li>
+
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-4 text-right fh5co-link-wrap">
+					<ul class="fh5co-special" data-offcanvass="yes">
+						<li><a href="#">Hi, {{uname}}</a></li>
+						<li><a href="#" class="call-to-action" data-toggle="modal" data-target="#logoutModal">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="fh5co-cover fh5co-cover-style-2" data-stellar-background-ratio="0" data-next="yes"
+			style="background-image: url(/public/images/img_same_dimension_3.jpg);">
+			<!--			<div class="fh5co-overlay"></div>-->
+			<div class="fh5co-cover-text">
+				<div class="fh5co-overlay"></div>
+				<div class="fh5co-cover-text">
+
+					<div>
+						<div class="container">
+							<br><br><br><br><br>
+							<nav class="navbar" role="navigation">
+								<ol class="breadcrumb">
+									<li class="li"><a href="student_homepage">Home</a></li>
+									<li class="active">{{module.moduleName}}</li>
+								</ol>
+							</nav>
+
+						</div>
+
+						<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"
+							style="background-color: #f9f6f0; border: 1px solid #999999">
+							<div>
+								<input type="hidden" value="{{studata}}" id="student">
+								<input type="hidden" value="{{teamdata}}" id="team">
+								<div class="row" style="position:relative;
+								top:0px; left:100px;width:500px;margin-right:0px;display: inline-block;text-align: center;">
+
+									<figure class=" highcharts-figure">
+										<div id="aaa"></div>
+										<p class="highcharts-description">
+											Basic line chart showing trends of scores
+										</p>
+									</figure>
+								</div>
+								<div style="position:relative;
+								top:0px; left:250px;width:300px;display: inline-block;">
+
+									<div class="col-md-3" style="position:relative;
+									top:0px;width:300px;">
+
+
+
+										<div class="row" style="text-align: center">
+											<div class="row"><img src="{{student.fileLocation}}" width="120"
+													height="160">
+											</div>
+											<br>
+											<p><b>Name:</b> {{student.forename}} {{student.surname}} </p>
+											<p><b>Group:</b> {{team.teamNumber}} &nbsp;&nbsp;&nbsp;&nbsp;
+												<b>Project:</b>
+												{{project.projectTitle}}
+											</p>
+											<p><b>Average score:</b> {{Score.score_avg}} </p>
+											<p><b>Email:</b> {{student.email}}</p>
+
+
+										</div>
+
+
+
+									</div>
+
+								</div>
+							</div>
+
+
+							<div id="layoutSidenav_content">
+
+
+								<br>
+								<main>
+									<div class="container-fluid" style="background-color: #ffffff;">
+										<br>
+										<div class="card mb-4">
+											<div class="card-header">
+											</div>
+											<ul id="myTab" class="nav nav-pills nav-justified" role="tablist">
+												<li role="presentation" class="tab active"><a
+														href="#Students_need_attention" data-toggle="tab"
+														class="t1">Student</a></li>
+												<li role="presentation" class="tab"><a href="#Groups_need_attention"
+														data-toggle="tab" class="t1">team</a></li>
+											</ul>
+											<br>
+											<div id="mytab-content" class="card-body tab-content">
+												<div class="tab-pane fade in active" id="Students_need_attention">
+													<div class="table-responsive">
+														<table class="table table-bordered" id="dataTable1"
+															cellspacing="0">
+															<thead class="thead">
+																<tr>
+																	<th>Week</th>
+																	<th>Score</th>
+																	<th>Contribution</th>
+																	<th>Feedback</th>
+																	<th>Message</th>
+																	<th>Date</th>
+																</tr>
+															</thead>
+															<tbody class="stu_at ">
+																{{each Selectfeedback}}
+																<tr>
+																	<td>{{$value.weekNumber}}</td>
+																	<td id="studentScore">{{$value.score}}</td>
+																	<td>{{$value.contribution}}</td>
+																	<td>
+																		<div class="f-els1_1"
+																			title='{{$value.writtenFeedback}}'>
+																			{{$value.writtenFeedback}}
+																		</div>
+																	</td>
+																	<td>
+																		<div class="f-els2_2"
+																			title='{{$value.messageLecturer}}'>
+																			{{$value.messageLecturer}}
+																		</div>
+																	</td>
+																	<td>{{$value.date}}</td>
+																</tr>
+
+																<!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
+																{{/each}}
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+												<div class="tab-pane fade" id="Groups_need_attention">
+													<div class="table-responsive">
+
+														<table class="table table-bordered" id="dataTable2" width="100%"
+															cellspacing="0">
+															<thead class="thead">
+																<tr>
+																	<th>Week</th>
+																	<th>score</th>
+																	<th>Feedback</th>
+																	<th>Message</th>
+																	<th>Date</th>
+																</tr>
+															</thead>
+															<tbody class="gro_at">
+
+																{{each Selectteamfeedback}}
+																<tr>
+																	<td>{{$value.weekNumber}}</td>
+																	<td id="teamScore">{{$value.score}}</td>
+																	<td>
+																		<div class="f-els1_1"
+																			title='{{$value.writtenFeedback}}'>
+																			{{$value.writtenFeedback}}</div>
+																	</td>
+																	<td>
+																		<div class="f-els2_2"
+																			title='{{$value.messageLecturer}}'>
+																			{{$value.messageLecturer}}
+																		</div>
+																	</td>
+																	<td>{{$value.date}}</td>
+																</tr>
+																<!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
+																{{/each}}
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<br>
+								</main>
+							</div>
+						</div>
+					</div>
+					<br>
+				</div>
+			</div>
+			<!--footer-->
+			<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+				<br>
+				<div style="text-align: center;">
+					<h4>UCL COM0067 team1 </h4>
+				</div>
+				<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+			</div>
+			<!-- END footer -->
+
+			<!-- END page-->
+		</div>
+	</div>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready to end your current session.
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- jQuery -->
+	<script src="/public/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="/public/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="/public/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="/public/js/jquery.waypoints.min.js"></script>
+	<!-- Owl Carousel -->
+	<script src="/public/js/owl.carousel.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="/public/js/jquery.magnific-popup.min.js"></script>
+	<!-- Stellar -->
+	<script src="/public/js/jquery.stellar.min.js"></script>
+	<!-- countTo -->
+	<script src="/public/js/jquery.countTo.js"></script>
+	<!-- WOW -->
+	<script src="/public/js/wow.min.js"></script>
+	<script>
+		new WOW().init();
+	</script>
+	<!--table-->
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+		crossorigin="anonymous"></script>
+	<script src="/public/js/datatables-demo.js"></script>
+	<!-- Main -->
+	<script src="/public/js/main.js"></script>
+
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+	<script>
+		//var stu = new Array();
+		var stu = document.getElementById("student").value;
+		var tea = document.getElementById("team").value;
+
+		// var tea = document.getElementById("team").value;
+		console.log(typeof stu)
+
+		var arrstu = JSON.parse(stu);
+		console.log(typeof arrstu)
+		console.log(arrstu)
+
+		var arrtea = JSON.parse(tea);
+		console.log(typeof arrtea)
+		console.log(arrtea)
+
+		Highcharts.chart('aaa', {
+
+			title: {
+				text: 'score line chart'
+			},
+
+
+
+			yAxis: {
+				title: {
+					text: 'score '
+				}
+			},
+
+			xAxis: {
+				title: {
+					text: 'week number '
+				},
+				accessibility: {
+					rangeDescription: 1
+				}
+			},
+
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle'
+			},
+
+			plotOptions: {
+				series: {
+					label: {
+						connectorAllowed: false
+					},
+					pointStart: 1
+				}
+			},
+
+			series: [{
+				name: 'student score',
+				data: arrstu
+			}, {
+				name: 'team score',
+				data: arrtea
+			}],
+
+			responsive: {
+				rules: [{
+					condition: {
+						maxWidth: 500
+					},
+					chartOptions: {
+						legend: {
+							layout: 'horizontal',
+							align: 'center',
+							verticalAlign: 'bottom'
+						}
+					}
+				}]
+			}
+
+		});
+	</script>
+
+
+
+</body>
+
+</html>

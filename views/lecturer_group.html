@@ -50,6 +50,17 @@
 			font-weight: normal;
 			color: #495057;
 		}
+		.date {
+			width: 9rem;
+		}
+		#team_score_plot {
+			border: 1px solid #c0a16b;
+			width: 90%;
+			height: 300px;
+			margin-left: auto;
+			margin-right: auto;
+			float: left;
+		}
 	</style>
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -104,7 +115,7 @@
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
 									{{each modules}}
-									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
 									{{/each}}
 								</div>
 							</ul>
@@ -133,7 +144,7 @@
 						</ol>
 					</nav>
 				</div>
-				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999">
+				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
 					<div id="layoutSidenav_content">
 						<br>
 						<main>
@@ -152,39 +163,54 @@
 										<div class="fade in active wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
 											<div class="row">
 												<div class="container">
-													{{each member}}
-													<div class="col-md-2">
-														<img src="/public/images/doctor_1.jpeg" width="150" height="160">
-														<div class="row text-center">
-															<h5>Member {{$value.memberIndex}}: {{$value.forename}} {{$value.surname}}</h5>
+													<div class="col-md-6">
+														<div style="width: 100%; display: block">
+															{{each member}}
+															<div class="text-center" style="display: block; float: left; position: relative; width:160px; height:200px">
+																<img src="{{$value.fileLocation}}" width="130" height="160" >
+																<div class="row text-center">
+																	<h5><font class="font1">Member {{$value.memberIndex}}:</font><br><font class="font2">{{$value.forename}} {{$value.surname}}</font></h5>
+																</div>
+															</div>
+															{{/each}}
 														</div>
 													</div>
-													{{/each}}
+													<div class="col-md-6">
+														<div style="display: block; float: left; position: relative; width:100%; height: 100%">
+															<figure class="highcharts-figure" style="margin:0 auto;">
+																<!--															<p class="highcharts-description">Team Weekly Score</p>-->
+																<div id="team_score_plot"></div>
+															</figure>
+														</div>
+													</div>
 												</div>
 											</div>
-											<div class="table-responsive">
-												<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
-													<thead>
-													<tr>
-														<th>Week</th>
-														<th>Team Score</th>
-														<th>Contributions</th>
-														<th>Feedback</th>
-														<th>Date</th>
-													</tr>
-													</thead>
-													<tbody>
-													{{each feedback}}
-													<tr>
-														<td>{{$value.weekNumber}}</td>
-														<td>{{$value.score}}</td>
-														<td>{{$value.contributions}}</td>
-														<td>{{$value.writtenFeedback}}</td>
-														<td>{{$value.date}}</td>
-													</tr>
-													{{/each}}
-													</tbody>
-												</table>
+											<div class="row" style="background-color: #ffffff; display: block; position: relative; margin:25px auto 25px auto">
+												<br>
+												<div class="table-responsive" style="margin:auto 25px auto 25px">
+													<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+														<thead>
+														<tr>
+															<th>Week</th>
+															<th>Team Score</th>
+															<th>Individual Contributions</th>
+															<th>Team Feedback</th>
+															<th>Date</th>
+														</tr>
+														</thead>
+														<tbody>
+														{{each feedback}}
+														<tr>
+															<td>{{$value.weekNumber}}</td>
+															<td id="{{$value.weekNumber}}">{{$value.score}}</td>
+															<td>{{$value.contributions}}</td>
+															<td>{{$value.writtenFeedback}}</td>
+															<td class="date">{{$value.date}}</td>
+														</tr>
+														{{/each}}
+														</tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -194,9 +220,16 @@
 					</div>
 				</div>
 			</div>
+			<!--footer-->
+			<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+				<br>
+				<div style="text-align: center;">
+					<h4>UCL COM0067 team1 </h4>
+				</div>
+				<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+			</div>
+			<!-- END footer -->
 		</div>
-
-		<!-- END footer -->
 	</div>
 	<!-- END page-->
 
@@ -248,7 +281,86 @@
 	<script src="/public/js/datatables-demo.js"></script>
 	<!-- Main -->
 	<script src="/public/js/main.js"></script>
+	<!--plot-->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/series-label.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+	<script>
+		var i = 1;
+		var team_score =[]
+		while (1) {
+			score = document.getElementById(i)
+			if (score === null) {
+				break;
+			}
+			team_score.push(parseInt(score.innerText));
+			i++;
+		}
+		Highcharts.chart('team_score_plot', {
+			title: {
+				text: 'Team Weekly Score'
+			},
+			yAxis: {
+				title: {
+					text: 'Weekly Score '
+				},
+				min:0,
+				tickInterval:1,
+				max:5
+			},
+
+			xAxis: {
+				accessibility: {
+					rangeDescription: 'Week'
+				},
+				min:1,
+				tickInterval:1,
+			},
+
+			legend: {
+				layout: 'vertical',
+				align: 'right',
+				verticalAlign: 'middle'
+			},
+
+			plotOptions: {
+				series: {
+					label: {
+						connectorAllowed: false
+					},
+					pointStart: 1
+				}
+			},
+
+			series: [{
+				name: '',
+				data: team_score
+			}],
+
+			legend: {
+				enabled: false
+			},
+
+			responsive: {
+				rules: [{
+					condition: {
+						maxWidth: 500
+					},
+					chartOptions: {
+						legend: {
+							layout: 'horizontal',
+							align: 'center',
+							verticalAlign: 'bottom'
+						}
+					}
+				}]
+			}
+
+		});
+	</script>
 
 	</body>
 </html>
