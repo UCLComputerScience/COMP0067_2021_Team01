@@ -192,7 +192,7 @@
                                                         <th>{{$value.studentName}}</th>
                                                         <td>{{$value.lastScore}} ({{$value.date}})</td>
                                                         <td>
-                                                            <button href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.teamNumber}}">View</button>
+                                                            <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}">View</a>
                                                             <button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
                                                         </td>
                                                     </tr>

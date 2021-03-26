@@ -754,7 +754,6 @@ web.get('/TA_module', function(req,res){
         'JOIN ('+queryGroupAveScore+') AS gAvgScore ON (ProjectInfo.teamNumber=gAvgScore.teamNumber) ' +
         'JOIN ('+queryGroupLatestScore+') AS gLastScore ON (ProjectInfo.teamNumber=gLastScore.teamNumber) ' +
         'WHERE ProjectInfo.moduleCode="'+selectedModID+'" AND ProjectInfo.taStudentSPR="'+uname+'" '
-    var query
     var connection = mysql.createConnection({
         host: host,
         user: username,
@@ -787,7 +786,7 @@ web.get('/TA_module', function(req,res){
     })
 })
 
-web.get('/feedbackErin', function(req,res){
+web.get('/TA_group', function(req,res){
     if(req.session.uname){
         var uname = req.session.uname
     } else{
@@ -795,10 +794,23 @@ web.get('/feedbackErin', function(req,res){
     }
     var reqObj = req.query
     req.session.modID = reqObj.moduleID
+    req.session.teamNumber = reqObj.teamNumber
+    var teamNumber = req.session.teamNumber
     var selectedModID = req.session.modID
-    var allModTA = req.session.allMods
 
+    // This query selects the module names and module codes to display
     var querySelectCurrentMod = 'SELECT moduleName, moduleCode FROM Module WHERE `moduleCode`="'+selectedModID+'"'
+
+    // This query shows all the group members in a module
+    var queryTeamMembers = 'SELECT Student.surname, Student.forename, ModStuTe.memberIndex FROM `Student` JOIN `ModStuTe` ' +
+        'ON ModStuTe.studentSPR=Student.studentSPR ' +
+        'WHERE ModStuTe.teamNumber="' + teamNumber + '" AND `moduleCode`="'+selectedModID+'" '
+
+    // query team feedback
+    var queryTeamFeedback = 'SELECT weekNumber, score, writtenFeedback, messageLecturer, DATE_FORMAT(date,"%Y-%m-%d") date ' +
+        'FROM `TeamFeedback`' +
+        'WHERE teamNumber="' + teamNumber + '" AND `moduleCode`="'+selectedModID+'"'
+
     var connection = mysql.createConnection({
         host: host,
         user: username,
@@ -810,13 +822,25 @@ web.get('/feedbackErin', function(req,res){
         if (error){
             console.log(error)
         }
-        res.render('feedback-Erin.html',{
-            uname: uname,
-            modules: allModTA,
-            module: ModCurrent[0],
-        })
+        connection.query(queryTeamMembers,function(error,TeamMembers){
+            if (error){
+                console.log(error)
+            }
+            connection.query(queryTeamFeedback, function(error,TeamFeedback){
+                if (error){
+                    console.log(error)
+                }
 
-    })  
+            res.render('TA_group.html',{
+                uname: uname,
+                module: ModCurrent[0],
+                teamMember: TeamMembers,
+                teamFeedback: TeamFeedback
+
+            })
+            })
+        })
+    })
 })
 
 web.post('/provideFeedback', function(req,res){
@@ -918,33 +942,33 @@ web.post('/updateFeedback', function(req,res){
     }
 )
 
-web.get('/UpdatePage',function(req, res) {
-    if (req.session.uname){
-        var uname = req.session.uname
-        var allModules = req.session.allModules
-    } else {
-        res.redirect('/login')
-    }
+// web.get('/UpdatePage',function(req, res) {
+//     if (req.session.uname){
+//         var uname = req.session.uname
+//         var allModules = req.session.allModules
+//     } else {
+//         res.redirect('/login')
+//     }
 
-    var querySelectFeedbackTeam = 'SELECT * FROM teamfeedback  WHERE `moduleCode`="COMP0067" AND `weekNumber`="'+feedback.weekNumber+'"  AND `teamNumber`="1"'
-    var querySelectFeedbackStudent = 'SELECT * FROM studentfeedback WHERE `studentSPR`="'+studentSPR[i]+'" AND `moduleCode`="COMP0067" AND `weekNumber`= "'+feedback.weekNumber+'"'
+//     var querySelectFeedbackTeam = 'SELECT * FROM teamfeedback  WHERE `moduleCode`="COMP0067" AND `weekNumber`="'+feedback.weekNumber+'"  AND `teamNumber`="1"'
+//     var querySelectFeedbackStudent = 'SELECT * FROM studentfeedback WHERE `studentSPR`="'+studentSPR[i]+'" AND `moduleCode`="COMP0067" AND `weekNumber`= "'+feedback.weekNumber+'"'
 
-    var connection = mysql.createConnection({
-        host: host,
-        user: username,
-        password: password,
-        database: databaseName
-    })
-    connection.connect()
-    connection.query(querySelectFeedbackTeam, function(error,updateInfo){
-        if (error){
-            console.log(error)
-        }
-        res.render('UpdatePage-Erin.html',{
+//     var connection = mysql.createConnection({
+//         host: host,
+//         user: username,
+//         password: password,
+//         database: databaseName
+//     })
+//     connection.connect()
+//     connection.query(querySelectFeedbackTeam, function(error,updateInfo){
+//         if (error){
+//             console.log(error)
+//         }
+//         res.render('UpdatePage-Erin.html',{
 
-        })
-    })
-})
+//         })
+//     })
+// })
 
 web.listen(3000, function () {
     console.log('server starts successfully.')
