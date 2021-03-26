@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Voltage &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+
+  	<!-- 
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FREEHTML5.CO
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	-->
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+	<style>
+		.fh5co-nav-style-1 .dropdown .dropdown-menu {
+			border: 1px solid #0b2e13;
+			background:#0f6674;
+		}
+		.container-fluid .tab {
+			border-radius:5px;
+			border: 1px solid #c0c0c0;
+			background-color: #ffffff;
+		}
+		.table {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.members_unit {
+			width: 15rem;
+		}
+		.members {
+			width: 15rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.members_group_unit {
+			width: 35rem;
+		}
+		.members_group {
+			width: 35rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.name_unit {
+			width: 15rem;
+		}
+		.name {
+			width: 15rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.project_unit {
+			width: 22rem;
+		}
+		.project {
+			width: 22rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+		.msg_unit {
+			width: 25rem;
+		}
+		.msg {
+			width: 25rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+	</style>
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="/public/favicon.ico">
+	
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700' rel='stylesheet' type='text/css'>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="/public/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="/public/css/icomoon.css">
+	<!-- Magnific Popup-->
+	<link rel="stylesheet" href="/public/css/magnific-popup.css">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="/public/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="/public/css/bootstrap.css">
+	
+	<!-- Cards -->
+	<link rel="stylesheet" href="/public/css/cards.css">
+
+	<!-- Modernizr JS -->
+	<script src="/public/js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="/public/js/respond.min.js"></script>
+	<![endif]-->
+
+<!--table-->
+<!--	<link href="/public/css/styles.css" rel="stylesheet" />-->
+	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+
+
+	</head>
+	<body>
+<!--Navigation bar-->
+	<div id="fh5co-page">
+		<nav class="fh5co-nav-style-1 " role="navigation" data-offcanvass-position="fh5co-offcanvass-left" style="background-image: url(/public/images/moodle.jpg);">
+			<div class="container">
+				<div class="fh5co-overlay"></div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 fh5co-logo">
+					<a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
+					<a href="#">Traffic Light Feedback System</a>
+				</div>
+				<div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
+					<ul data-offcanvass="yes">
+						<li><a href="lecturer_homepage">Home</a></li>
+						<li class="dropdown active">
+							<a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu" >
+								<div class="fh5co-link-wrap">
+									{{each modules}}
+									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
+									{{/each}}
+								</div>
+							</ul>
+						</li>
+						<li><a href="lecturer_admin">Admin</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-4 text-right fh5co-link-wrap">
+					<ul class="fh5co-special" data-offcanvass="yes">
+						<li><a href="#">Hi, {{uname}}</a></li>
+						<li><a href="#" class="call-to-action" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="fh5co-cover fh5co-cover-style-2" data-stellar-background-ratio="0" data-next="yes" style="background-image: url(/public/images/img_same_dimension_3.jpg);">
+<!--			<div class="fh5co-overlay"></div>-->
+			<div class="fh5co-cover-text">
+				<div class="container">
+					<br><br><br><br><br>
+					<nav class="navbar" role="navigation" >
+						<ol class="breadcrumb">
+							<li class="li"><a href="lecturer_homepage">Home</a></li>
+							<li class="active">{{module.moduleName}}</li>
+						</ol>
+					</nav>
+				</div>
+				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
+					<div id="layoutSidenav_content">
+						<br>
+						<main>
+							<div class="container-fluid">
+								<div class="card mb-4">
+									<div class="card-header">
+										<div class="row">
+											<div class="text-center">
+												<div class="fh5co-cover-intro">
+													<h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s" style="color: #000000">{{module.moduleName}}</h1>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+										<ul id="myTab" class="nav nav-pills nav-justified" role="tablist">
+											<li role="presentation" class="tab active"><a href="#Students_need_attention" data-toggle="tab" class="t1">Students need attention</a></li>
+											<li role="presentation" class="tab"><a href="#Groups_need_attention" data-toggle="tab" class="t1">Groups need attention</a></li>
+											<li role="presentation" class="tab"><a href="#Student_list" data-toggle="tab" class="t1">Student list</a></li>
+											<li role="presentation" class="tab"><a href="#Group_list" data-toggle="tab" class="t1">Group list</a></li>
+										</ul>
+										<br>
+										<div id="mytab-content" class="card-body tab-content">
+											<div class="tab-pane fade in active" id="Students_need_attention">
+												<div class="table-responsive">
+													<table class="table table-bordered" id="dataTable1" cellspacing="0">
+														<thead class="thead">
+														<tr>
+															<th></th>
+															<th>SPR</th>
+															<th>Name</th>
+															<th>Group</th>
+															<th>Project</th>
+															<th>Last Score</th>
+<!--															<th>Avg Score</th>-->
+															<th>Message from TA</th>
+														</tr>
+														</thead>
+														<tbody class="stu_at ">
+														{{each attStudents}}
+														<tr>
+															<td>{{$value.index}}</td>
+															<td><a href="lecturer_student?moduleID={{module.moduleCode}}&studentID={{$value.studentSPR}}">{{$value.studentSPR}}</a></td>
+															<td class="name_unit"><div class="name" title="{{$value.forename}} {{$value.surname}}">{{$value.forename}} {{$value.surname}}</div></td>
+															<td>{{$value.teamNumber}}</td>
+															<td class="project_unit"><div class="project" title="{{$value.projectTitle}}">{{$value.projectTitle}}</div></td>
+															<td>{{$value.lastScore}} ({{$value.date}})</td>
+<!--															<td>{{$value.avgScore}}</td>-->
+															<td class="msg_unit"><div class="msg" title="{{$value.messageLecturer}}">{{$value.messageLecturer}}</div></td>
+														</tr>
+														{{/each}}
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="Groups_need_attention">
+												<div class="table-responsive">
+													<table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+														<thead class="thead">
+														<tr>
+															<th></th>
+															<th>Group</th>
+															<th>Project</th>
+															<th>TA</th>
+															<th>Members</th>
+															<th>Last score</th>
+<!--															<th>Avg score</th>-->
+															<th>Message from TA</th>
+														</tr>
+														</thead>
+														<tbody class="gro_at">
+														{{each attGroups}}
+														<tr>
+															<td>{{$value.index}}</td>
+															<td><a href="lecturer_group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">GROUP {{$value.teamNumber}}</a></td>
+															<td class="project_unit"><div class="project" title="{{$value.projectTitle}}">{{$value.projectTitle}}</div></td>
+															<td class="name_unit"><div class="name" title="{{$value.forename}} {{$value.surname}}">{{$value.forename}} {{$value.surname}}</div></td>
+															<td class="members_unit"><div class="members" title="{{$value.studentName}}">{{$value.studentName}}</div></td>
+															<td>{{$value.lastScore}} ({{$value.date}})</td>
+<!--															<td>{{$value.avgScore}}</td>-->
+															<td class="msg_unit"><div class="msg" title="{{$value.messageLecturer}}">{{$value.messageLecturer}}</div></td>
+														</tr>
+														{{/each}}
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="Student_list">
+												<div class="table-responsive">
+													<table class="table table-bordered" id="dataTable3" width="100%" cellspacing="0">
+														<thead class="thead">
+														<tr>
+															<th>Student SPR</th>
+															<th>Name</th>
+															<th>Group</th>
+															<th>Project</th>
+															<th>Last Score</th>
+<!--															<th>Avg Score</th>-->
+														</tr>
+														</thead>
+														<tbody class="stu_li">
+														{{each allStudents}}
+														<tr>
+															<td><a href="lecturer_student?moduleID={{module.moduleCode}}&studentID={{$value.studentSPR}}">{{$value.studentSPR}}</a></td>
+															<td>{{$value.forename}} {{$value.surname}}</td>
+															<td>{{$value.teamNumber}}</td>
+															<td>{{$value.projectTitle}}</td>
+															<td>{{$value.lastScore}} ({{$value.date}})</td>
+<!--															<td>{{$value.avgScore}}</td>-->
+														</tr>
+														{{/each}}
+														</tbody>
+													</table>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="Group_list">
+												<div class="table-responsive">
+													<table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
+														<thead class="thead">
+														<tr>
+															<th>Group</th>
+															<th>Project</th>
+															<th>TA</th>
+															<th>Members</th>
+															<th>Last score</th>
+<!--															<th>Avg score</th>-->
+														</tr>
+														</thead>
+														<tbody class="gro_li">
+														{{each allGroups}}
+														<tr>
+															<td><a href="lecturer_group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">GROUP {{$value.teamNumber}}</a></td>
+															<td>{{$value.projectTitle}}</td>
+															<td>{{$value.forename}} {{$value.surname}}</td>
+															<td class="members_group_unit"><div class="members_group" title="{{$value.studentName}}">{{$value.studentName}}</div></td>
+															<td>{{$value.lastScore}} ({{$value.date}})</td>
+<!--															<td>{{$value.avgScore}}</td>-->
+														</tr>
+														{{/each}}
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</main>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--footer-->
+		<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+			<br>
+			<div style="text-align: center;">
+				<h4>UCL COM0067 team1 </h4>
+			</div>
+			<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+		</div>
+		<!-- END footer -->
+	</div>
+
+	<!-- END page-->
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		 aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="login">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- jQuery -->
+	<script src="/public/js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="/public/js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="/public/js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+    <script src="/public/js/jquery.waypoints.min.js"></script>
+	<!-- Owl Carousel -->
+	<script src="/public/js/owl.carousel.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="/public/js/jquery.magnific-popup.min.js"></script>
+	<!-- Stellar -->
+	<script src="/public/js/jquery.stellar.min.js"></script>
+	<!-- countTo -->
+	<script src="/public/js/jquery.countTo.js"></script>
+	<!-- WOW -->
+	<script src="/public/js/wow.min.js"></script>
+	<script>
+		new WOW().init();
+	</script>
+	<!--table-->
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+	<script src="/public/js/datatables-demo.js"></script>
+	<!-- Main -->
+	<script src="/public/js/main.js"></script>
+	</body>
+</html>
