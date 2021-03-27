@@ -38,10 +38,10 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 	<style>
-		.fh5co-nav-style-1 .dropdown .dropdown-menu {
-			border: 1px solid #005344;
-			background:#122b40;
-		}
+        .fh5co-nav-style-1 .dropdown .dropdown-menu {
+            border: 1px solid #0b2e13;
+            background:#0f6674;
+        }
         .container-fluid .tab {
 			border-radius:5px;
 			border: 1px solid #c0c0c0;
@@ -109,7 +109,7 @@
 				<div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
 					<ul data-offcanvass="yes">
 						<li><a href="TA_homepage">Home</a></li>
-						<li class="dropdown">
+						<li class="dropdown active">
 							<a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
@@ -129,77 +129,61 @@
 				</div>
 			</div>
 		</nav>
-    </div>
-            <div class="fh5co-cover fh5co-cover-style-2" data-stellar-background-ratio="0" data-next="yes" style="background-image: url(/public/images/img_same_dimension_3.jpg);">
-                <div class="fh5co-cover-text">
-                    <div class="container">
-                        <br><br><br><br><br>
-                        <nav class="navbar" role="navigation" >
-                            <ol class="breadcrumb">
-                                <li class="li"><a href="TA_homepage">Home</a></li>
-                                <li class="active">{{module.moduleName}}</li>
-                            </ol>
-                        </nav>
-                    </div>
-                    <div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999">
-                        <div id="layoutSidenav_content">
-                            <br>
-                            <main>
-                                <div class="container-fluid">
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            <div class="row">
-                                                <div class="text-center">
-                                                    <div class="fh5co-cover-intro">
-                                                        <h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s" style="color: #000000">{{module.moduleName}}</h1>
-                                                    </div>
+        <div class="fh5co-cover fh5co-cover-style-2" data-stellar-background-ratio="0" data-next="yes" style="background-image: url(/public/images/img_same_dimension_3.jpg);">
+            <div class="fh5co-cover-text">
+                <div class="container">
+                    <br><br><br><br><br>
+                    <nav class="navbar" role="navigation" >
+                        <ol class="breadcrumb">
+                            <li class="li"><a href="TA_homepage">Home</a></li>
+                            <li class="active">{{module.moduleName}}</li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
+                    <div id="layoutSidenav_content">
+                        <br>
+                        <main>
+                            <div class="container-fluid">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="text-center">
+                                                <div class="fh5co-cover-intro">
+                                                    <h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s" style="color: #000000">{{module.moduleName}}</h1>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
-                                    <ul id="myTab" class="nav nav-pills nav-justified" role="tablist">
-                                        <li role="presentation" class="tab"><a href="#Group_list" data-toggle="tab" class="t1">Group list</a></li>
-                                    </ul>
+                                    </div>
+                                    <div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
                                     <br>
-                                    <div id="mytab-content" class="card-body tab-content">
-                                        <div class="tab-pane fade in active" id="Group_list">
-                                            <br><br>
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
-                                                    <thead class="thead">
-                                                    <tr>
-                                                        <th>Group Number</th>
-                                                        <th>Project</th>
-                                                        <th>Team Leader</th>
-                                                        <th>Last score</th>
-                                                        <th>Feedback</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tfoot class="thead">
-                                                    <tr>
-                                                        <th>Group Number</th>
-                                                        <th>Project</th>
-                                                        <th>Team Leader</th>
-                                                        <th>Last score</th>
-                                                        <th>Feedback</th>
-                                                    </tr>
-                                                    </tfoot>
-                                                    <tbody class="gro_li">
-                                                    {{each coachedGroups}}
-                                                    <tr>
-                                                        <td>{{$value.teamNumber}}</td>
-                                                        <td>{{$value.projectTitle}}</td>
-                                                        <th>{{$value.studentName}}</th>
-                                                        <td>{{$value.lastScore}} ({{$value.date}})</td>
-                                                        <td>
-                                                            <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}">View</a>
-                                                            <button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
-                                                        </td>
-                                                    </tr>
-                                                    {{/each}}
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                        <div class="table-responsive" style="margin:auto 25px auto 25px">
+<!--                                            <p class="text-center">Group Table</p>-->
+                                            <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
+                                                <thead class="thead">
+                                                <tr>
+                                                    <th>Group Number</th>
+                                                    <th>Project</th>
+                                                    <th>Team Leader</th>
+                                                    <th>Last score</th>
+                                                    <th>Feedback</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="gro_li">
+                                                {{each coachedGroups}}
+                                                <tr>
+                                                    <td>{{$value.teamNumber}}</td>
+                                                    <td>{{$value.projectTitle}}</td>
+                                                    <th>{{$value.studentName}}</th>
+                                                    <td>{{$value.lastScore}} ({{$value.date}})</td>
+                                                    <td>
+                                                        <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}">View</a>
+                                                        <button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
+                                                    </td>
+                                                </tr>
+                                                {{/each}}
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -208,6 +192,17 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <!--footer-->
+        <div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+            <br>
+            <div style="text-align: center;">
+                <h4>UCL COM0067 team1 </h4>
+            </div>
+            <h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+        </div>
+        <!-- END footer -->
+    </div>
         
         <!-- END page-->
     <!-- </div> -->

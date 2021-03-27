@@ -7,7 +7,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Voltage &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+	<title>Traffic Light Feedback System</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -39,8 +39,8 @@
 	<meta name="twitter:card" content="" />
 	<style>
 		.fh5co-nav-style-1 .dropdown .dropdown-menu {
-			border: 1px solid #005344;
-			background:#122b40;
+			border: 1px solid #0b2e13;
+			background:#0f6674;
 		}
 	</style>
 
@@ -96,7 +96,7 @@
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
 									{{each modules}}
-									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
 									{{/each}}
 								</div>
 							</ul>
@@ -136,7 +136,7 @@
 												<div class="fh5co-projects">
 													<ul>
 														{{each modules}}
-														<li class="wow fadeInUp" style="background-image: url(/public/images/{{$value.index}}.jpeg);" data-wow-duration="1s" data-wow-delay="1.4s" data-stellar-background-ratio="0.5">
+														<li class="wow fadeInUp" style="background-image: url(/public/images/img_same_dimension_{{$value.index}}.jpg);" data-wow-duration="1s" data-wow-delay="1.4s" data-stellar-background-ratio="0.5">
 															<a href="lecturer_module?moduleID={{$value.moduleCode}}">
 																<div class="fh5co-overlay"></div>
 																<div class="container">

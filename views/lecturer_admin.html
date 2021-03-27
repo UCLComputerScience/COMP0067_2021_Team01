@@ -39,8 +39,8 @@
 	<meta name="twitter:card" content="" />
 	<style>
 		.fh5co-nav-style-1 .dropdown .dropdown-menu {
-			border: 1px solid #005344;
-			background:#122b40;
+			border: 1px solid #0b2e13;
+			background:#0f6674;
 		}
 	</style>
 
@@ -96,7 +96,7 @@
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
 									{{each modules}}
-									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
 									{{/each}}
 								</div>
 							</ul>
@@ -124,7 +124,7 @@
 						</ol>
 					</nav>
 				</div>
-				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999">
+				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
 					<div id="layoutSidenav_content">
 						<br>
 						<main>
@@ -156,33 +156,36 @@
 											<div style="float: right;">
 												<button href="#" class="call-to-action" data-toggle="modal" data-target="#create_form">Create a new module</button>
 											</div>
-											<br><br>
-											<div class="table-responsive">
-												<table class="table table-bordered" id="" width="100%" cellspacing="0">
-													<thead>
-													<tr>
-														<th>Module Code</th>
-														<th>Module Name</th>
-														<th>Number of Students</th>
-														<th>Number of Groups</th>
-														<th>Operation</th>
-													</tr>
-													</thead>
-													<tbody>
-													{{each moduleInfo}}
-													<tr>
-														<td>{{$value.moduleCode}}</td>
-														<td>{{$value.moduleName}}</td>
-														<td>{{$value.NumberOfStudent}}</td>
-														<td>{{$value.NumberOfTeam}}</td>
-														<td>
-															<button href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.moduleCode}}">View</button>
-															<button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#modify_form_{{$value.moduleCode}}">Modify</button>
-														</td>
-													</tr>
-													{{/each}}
-													</tbody>
-												</table>
+											<br>
+											<div style="background-color: #ffffff; display: block; position: relative; margin:25px auto 25px auto">
+												<br>
+												<div class="table-responsive" style="margin:auto 25px auto 25px">
+													<table class="table table-bordered" id="" width="100%" cellspacing="0">
+														<thead>
+														<tr>
+															<th>Module Code</th>
+															<th>Module Name</th>
+															<th>Number of Students</th>
+															<th>Number of Groups</th>
+															<th>Operation</th>
+														</tr>
+														</thead>
+														<tbody>
+														{{each moduleInfo}}
+														<tr>
+															<td>{{$value.moduleCode}}</td>
+															<td>{{$value.moduleName}}</td>
+															<td>{{$value.NumberOfStudent}}</td>
+															<td>{{$value.NumberOfTeam}}</td>
+															<td>
+																<button href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.moduleCode}}">View</button>
+																<button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#modify_form_{{$value.moduleCode}}">Modify</button>
+															</td>
+														</tr>
+														{{/each}}
+														</tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -193,7 +196,14 @@
 				</div>
 			</div>
 		</div>
-
+		<!--footer-->
+		<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+			<br>
+			<div style="text-align: center;">
+				<h4>UCL COM0067 team1 </h4>
+			</div>
+			<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+		</div>
 		<!-- END footer -->
 	</div>
 	<!-- END page-->
@@ -256,7 +266,7 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<form role="form" action="/lecturer_modifyModule" id="modifyMod" method="post">
+				<form role="form" action="/lecturer_modifyModule" id=modifyMod" method="post">
 					<div class="modal-body">
 						<div class="form-group">
 							<label>Module ID</label>
