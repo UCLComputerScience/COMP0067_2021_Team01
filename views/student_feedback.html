@@ -42,7 +42,7 @@
 	<style>
 		.fh5co-nav-style-1 .dropdown .dropdown-menu {
 			border: 1px solid #0b2e13;
-			background:#0f6674;
+			background: #0f6674;
 		}
 
 		.container-fluid .tab {
@@ -68,16 +68,11 @@
 			font-size: 14px;
 		}
 
-
 		.highcharts-figure,
 		.highcharts-data-table table {
-
-			min-width: 400px;
-			max-width: 500px;
+			min-width: 310px;
+			max-width: 800px;
 			margin: 1em auto;
-			width: 500px;
-			height: 300px;
-
 		}
 
 		.highcharts-data-table table {
@@ -249,26 +244,25 @@
 
 						<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"
 							style="background-color: #f9f6f0; border: 1px solid #999999">
+
 							<div>
 								<input type="hidden" value="{{studata}}" id="student">
 								<input type="hidden" value="{{teamdata}}" id="team">
 								<div class="row" style="position:relative;
-								top:0px; left:100px;width:500px;margin-right:0px;display: inline-block;text-align: center;">
+								top:-15px; left:100px;width:500px;margin-right:0px;display: inline-block;text-align: center;">
 
 									<figure class=" highcharts-figure">
 										<div id="aaa"></div>
-										<p class="highcharts-description">
-											Basic line chart showing trends of scores
-										</p>
+
 									</figure>
 								</div>
 								<div style="position:relative;
-								top:0px; left:250px;width:300px;display: inline-block;">
+								top:20px; left:250px;width:300px;display: inline-block;">
 
 									<div class="col-md-3" style="position:relative;
 									top:0px;width:300px;">
 
-
+										<br>
 
 										<div class="row" style="text-align: center">
 											<div class="row"><img src="{{student.fileLocation}}" width="120"
@@ -276,17 +270,13 @@
 											</div>
 											<br>
 											<p><b>Name:</b> {{student.forename}} {{student.surname}} </p>
-											<p><b>Group:</b> {{team.teamNumber}} &nbsp;&nbsp;&nbsp;&nbsp;
-												<b>Project:</b>
+											<p><b>Group:</b> {{team.teamNumber}} </p>
+											<p> <b>Project:</b>
 												{{project.projectTitle}}
 											</p>
 											<p><b>Average score:</b> {{Score.score_avg}} </p>
 											<p><b>Email:</b> {{student.email}}</p>
-
-
 										</div>
-
-
 
 									</div>
 
@@ -348,7 +338,6 @@
 																	<td>{{$value.date}}</td>
 																</tr>
 
-																<!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
 																{{/each}}
 															</tbody>
 														</table>
@@ -465,10 +454,8 @@
 		new WOW().init();
 	</script>
 	<!--table-->
-	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-		crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 	<script src="/public/js/datatables-demo.js"></script>
 	<!-- Main -->
 	<script src="/public/js/main.js"></script>
@@ -496,67 +483,162 @@
 		console.log(arrtea)
 
 		Highcharts.chart('aaa', {
-
+			chart: {
+				type: 'line',
+				scrollablePlotArea: {
+					minWidth: 500,
+					scrollPositionX: 1
+				}
+			},
 			title: {
-				text: 'score line chart'
+				text: 'score line chart',
+				align: 'center'
 			},
 
-
-
-			yAxis: {
-				title: {
-					text: 'score '
-				}
-			},
-
-			xAxis: {
-				title: {
-					text: 'week number '
+			yAxis:
+			{
+				title:
+				{
+					text: 'score'
 				},
-				accessibility: {
-					rangeDescription: 1
-				}
-			},
+				minorGridLineWidth: 0,
+				gridLineWidth: 0,
+				alternateGridColor: null,
 
-			legend: {
-				layout: 'vertical',
-				align: 'right',
-				verticalAlign: 'middle'
+				plotBands:
+					[
+						{ // Light breeze
+							from: 0,
+							to: 1,
+							color: '#ffb3b3',
+
+						},
+						{ // Light breeze
+							from: 1,
+							to: 2,
+							color: '#ffc5aa',
+
+						},
+						{ // Light breeze
+							from: 2,
+							to: 3,
+							color: '#ffe48b',
+
+						},
+						{ // Light breeze
+							from: 3,
+							to: 4,
+							color: '#b2f7b5',
+
+						},
+						{ // Light breeze
+							from: 4,
+							to: 5,
+							color: '#b3e7ff',
+
+						},
+						{ // Light breeze
+							from: 5,
+							to: 6,
+							color: '#b3b4ff',
+
+						}
+					]
+
 			},
 
 			plotOptions: {
-				series: {
-					label: {
-						connectorAllowed: false
+				line: {
+					lineWidth: 3,
+					color: '#606060',
+					states: {
+						hover: {
+							lineWidth: 4
+						}
 					},
+					marker: {
+						enabled: false
+					},
+					pointInterval: 1, // one hour
 					pointStart: 1
 				}
 			},
-
 			series: [{
 				name: 'student score',
 				data: arrstu
+
 			}, {
 				name: 'team score',
 				data: arrtea
 			}],
-
-			responsive: {
-				rules: [{
-					condition: {
-						maxWidth: 500
-					},
-					chartOptions: {
-						legend: {
-							layout: 'horizontal',
-							align: 'center',
-							verticalAlign: 'bottom'
-						}
-					}
-				}]
+			navigation: {
+				menuItemStyle: {
+					fontSize: '10px'
+				}
 			}
-
 		});
+		// Highcharts.chart('aaa', {
+
+		// 	title: {
+		// 		text: 'score line chart'
+		// 	},
+
+
+
+		// 	yAxis: {
+		// 		title: {
+		// 			text: 'score '
+		// 		}
+		// 	},
+
+		// 	xAxis: {
+		// 		title: {
+		// 			text: 'week number '
+		// 		},
+		// 		accessibility: {
+		// 			rangeDescription: 1
+		// 		}
+		// 	},
+
+		// 	legend: {
+		// 		layout: 'vertical',
+		// 		align: 'right',
+		// 		verticalAlign: 'middle'
+		// 	},
+
+		// 	plotOptions: {
+		// 		series: {
+		// 			label: {
+		// 				connectorAllowed: false
+		// 			},
+		// 			pointStart: 1
+		// 		}
+		// 	},
+
+		// 	series: [{
+		// 		name: 'student score',
+		// 		data: arrstu
+		// 	}, {
+		// 		name: 'team score',
+		// 		data: arrtea
+		// 	}],
+
+		// 	responsive: {
+		// 		rules: [{
+		// 			condition: {
+		// 				maxWidth: 500
+		// 			},
+		// 			chartOptions: {
+		// 				legend: {
+		// 					layout: 'horizontal',
+		// 					align: 'center',
+		// 					verticalAlign: 'bottom'
+		// 				}
+		// 			}
+		// 		}]
+		// 	}
+
+		// });
 	</script>
 
 
