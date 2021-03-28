@@ -42,6 +42,11 @@
 			border: 1px solid #0b2e13;
 			background:#0f6674;
 		}
+		.container-fluid .tab {
+			border-radius:5px;
+			border: 1px solid #c0c0c0;
+			background-color: #ffffff;
+		}
 		.font1 {
 			font-weight: bold;
 			color: #000000;
@@ -49,6 +54,12 @@
 		.font2 {
 			font-weight: normal;
 			color: #495057;
+		}
+		.team_score {
+			width: 7rem;
+		}
+		.update_feed {
+			width: 10rem;
 		}
 		.f-els1_1 {
 			width: 40rem;
@@ -117,8 +128,8 @@
 							<a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
-									{{each modules}}
-									<li><a href="TA_module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+									{{each mods}}
+									<li><a href="TA_group?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
 									{{/each}}
 								</div>
 							</ul>
@@ -166,12 +177,12 @@
 											<div class="row">
 												<div class="container">
 													{{each teamMember}}
-													<div class="col-md-2">
-														<img src="/public/images/doctor_1.jpeg" width="150" height="160">
-														<div class="row text-center">
-															<h5>Member {{$value.memberIndex}}: {{$value.forename}} {{$value.surname}}</h5> 
-														</div>
-													</div>
+															<div class="text-center" style="display: block; float: left; position: relative; width:160px; height:200px">
+																<img src="{{$value.fileLocation}}" width="130" height="160" >
+																<div class="row text-center">
+																	<h5><font class="font1">Member {{$value.memberIndex}}:</font><br><font class="font2">{{$value.forename}} {{$value.surname}}</font></h5>
+																</div>
+															</div>
 													{{/each}}
 												</div>
 											</div>
@@ -180,18 +191,18 @@
 													<thead>
 													<tr>
 														<th>Week</th>
-														<th>Team Score</th>
+														<th>Score</th>
 														<th>Feedback</th>
 														<th>Message to Lecturer</th>
 														<th>Date</th>
-														<th>Update Feedback</th>
+														<th>Feedback</th>
 													</tr>
 													</thead>
 													<tbody>
 													{{each teamFeedback}}
 													<tr>
 														<td>{{$value.weekNumber}}</td>
-														<td>{{$value.score}}</td>
+														<td class="team_score">{{$value.score}}</td>
 														<td>
 															<div class="f-els1_1" title='{{$value.writtenFeedback}}'>
 																{{$value.writtenFeedback}}
@@ -203,8 +214,8 @@
 															</div>
 														</td>
 														<td>{{$value.date}}</td>
-														<td>
-															<button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#update_form_{{$value.weekNumber}}">Update</button>
+														<td class="update_feed">
+															<button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#update_form_{{$value.weekNumber}}">Update</button>
 														</td>
 													</tr>
 													{{/each}}
@@ -220,11 +231,115 @@
 				</div>
 			</div>
 		</div>
-
+        <!--footer-->
+        <div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+            <br>
+            <div style="text-align: center;">
+                <h4>UCL COM0067 team1 </h4>
+            </div>
+            <h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
+        </div>
 		<!-- END footer -->
 	</div>
 	<!-- END page-->
-
+	<!--update_form-->
+    {{each teamFeedback}}
+    <div class="modal fade in active" id="update_form_{{$value.weekNumber}}" tabindex="-1" role="dialog" aria-labelledby="update_form_{{$value.weekNumber}}" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width: 850px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="update_form_label">Update previous feedback</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <form role="form" id="updateFeedback" action="/updateFeedback" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="teamNumber" class="col-form-label">Team Number</label>
+                            <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="weekNumber" class="col-form-label">Week Number</label>
+                            <textarea id="weekNumber" type="text" rows="1" name="weekNumber" required readonly="readonly" class="form-control">{{$value.weekNumber}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="teamScore" class="col-form-label">Team Score</label>
+                            <div class="col-sm">
+                                <select class="form-control" name="teamScore" id="teamScore">
+                                    <option value="Select">{{$value.score}}</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <small id="scoreHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="teamFeedback">Team Feedback</label>
+                            <textarea class="form-control" name="feedbackTeam" rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message to Lecturer</label>
+                            <textarea class="form-control" name="message" rows="5" placeholder="Enter message to the lecturer, if any, for the whole team for the past week">{{$value.messageLecturer}}</textarea>
+                        </div>
+						<!-- <div class="col-sm">
+							<select class="form-control" name="weekNumber" id="weekNumber">
+								<% for (const i in teamFeedback) { %>
+									<option value="<%= teamFeedback[i].weekNumber %>"> <%= teamFeedback[i].weekNumber %> </option>
+								<% } %>
+							</select>
+							<small id="weekHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
+						</div> -->
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+									<th>Week</th>
+                                    <th>Score</th>
+                                    <th>Contribution</th>
+                                    <th>Individual Feedback</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{each student}}
+                            <tr>
+                                <td>{{$value.studentName}}</td>
+								<td>{{$value.weekNumber}}</td>
+                                <td>
+                                    <select class="form-control" name="studentScore" id="studentScore">
+                                        <option value="Select">{{$value.score}}</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <textarea class="form-control" name = "studentContribution" rows="1" placeholder="Enter the contribution, 0-100.">{{$value.contribution}}</textarea>
+                                </td>
+                                <td>
+                                    <textarea class="form-control" name = "studentFeedback" rows="1" placeholder="Enter a short feedback.">{{$value.writtenFeedback}}</textarea>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer form-group">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
 	<!-- Logout Modal-->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 		 aria-hidden="true">

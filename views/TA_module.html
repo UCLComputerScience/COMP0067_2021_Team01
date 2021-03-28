@@ -54,11 +54,30 @@
 			white-space:nowrap;
 			font-size: 14px;
 		}
+        .group_numbers {
+			width: 7rem;
+		}
+        .project_names {
+			width: 40rem;
+		}
+        .member_names {
+			width: 10rem;
+		}
+        .feedback_group {
+			width: 10rem;
+		}
 		td {
 			text-overflow:ellipsis;
 			overflow:hidden;
 			white-space:nowrap;
 			font-size: 14px;
+		}
+        .f-els1_1 {
+			width: 10rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
 		}
 	</style>
 
@@ -164,7 +183,7 @@
                                                 <tr>
                                                     <th>Group Number</th>
                                                     <th>Project</th>
-                                                    <th>Team Leader</th>
+                                                    <th>Team Members</th>
                                                     <th>Last score</th>
                                                     <th>Feedback</th>
                                                 </tr>
@@ -172,13 +191,17 @@
                                                 <tbody class="gro_li">
                                                 {{each coachedGroups}}
                                                 <tr>
-                                                    <td>{{$value.teamNumber}}</td>
-                                                    <td>{{$value.projectTitle}}</td>
-                                                    <th>{{$value.studentName}}</th>
+                                                    <td class="group_numbers">{{$value.teamNumber}}</td>
+                                                    <td class="project_names">{{$value.projectTitle}}</td>
+                                                    <td class="member_names">
+                                                        <div class="f-els1_1" title='{{$value.studentName}}'>
+                                                            {{$value.studentName}}
+                                                        </div>
+                                                    </td>
                                                     <td>{{$value.lastScore}} ({{$value.date}})</td>
-                                                    <td>
-                                                        <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}">View</a>
-                                                        <button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
+                                                    <td class="feedback_group">
+                                                        <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}" class="btn btn-primary">View</a>
+                                                        <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
                                                     </td>
                                                 </tr>
                                                 {{/each}}
@@ -209,7 +232,7 @@
     <!--provide_form-->
     {{each coachedGroups}}
     <div class="modal fade in active" id="provide_form_{{$value.teamNumber}}" tabindex="-1" role="dialog" aria-labelledby="provide_form_label_{{$value.teamNumber}}" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="width: 850px;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="provide_form_label">Provide new feedback</h5>
