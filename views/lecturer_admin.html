@@ -42,6 +42,12 @@
 			border: 1px solid #0b2e13;
 			background:#0f6674;
 		}
+		.table-responsive th {
+			text-align: center;
+		}
+		.table-responsive td {
+			text-align: center;
+		}
 	</style>
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -177,9 +183,9 @@
 															<td>{{$value.moduleName}}</td>
 															<td>{{$value.NumberOfStudent}}</td>
 															<td>{{$value.NumberOfTeam}}</td>
-															<td>
-																<button href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.moduleCode}}">View</button>
-																<button style="float: right" href="#" class="call-to-action" data-toggle="modal" data-target="#modify_form_{{$value.moduleCode}}">Modify</button>
+															<td style="width: 15rem">
+																<button style="float: left;"href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.moduleCode}}">View</button>
+																<button style="float: right; position: relative" href="#" class="call-to-action" data-toggle="modal" data-target="#modify_form_{{$value.moduleCode}}">Modify</button>
 															</td>
 														</tr>
 														{{/each}}

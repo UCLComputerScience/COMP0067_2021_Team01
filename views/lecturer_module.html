@@ -54,10 +54,10 @@
 			text-align: center;
 		}
 		.members_unit {
-			width: 15rem;
+			width: 11rem;
 		}
 		.members {
-			width: 15rem;
+			width: 11rem;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -84,10 +84,10 @@
 			text-align: center;
 		}
 		.project_unit {
-			width: 22rem;
+			width: 23rem;
 		}
 		.project {
-			width: 22rem;
+			width: 23rem;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -101,6 +101,12 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
+			text-align: center;
+		}
+		.table-responsive {
+			margin: 0 20px 0 20px;
+		}
+		.table-responsive th {
 			text-align: center;
 		}
 	</style>
@@ -202,7 +208,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+									<div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s" style="background-color: #ffffff; margin: 0 0 25px 0">
 										<ul id="myTab" class="nav nav-pills nav-justified" role="tablist">
 											<li role="presentation" class="tab active"><a href="#Students_need_attention" data-toggle="tab" class="t1">Students need attention</a></li>
 											<li role="presentation" class="tab"><a href="#Groups_need_attention" data-toggle="tab" class="t1">Groups need attention</a></li>
@@ -212,7 +218,7 @@
 										<br>
 										<div id="mytab-content" class="card-body tab-content">
 											<div class="tab-pane fade in active" id="Students_need_attention">
-												<div class="table-responsive">
+												<div class="table-responsive" >
 													<table class="table table-bordered" id="dataTable1" cellspacing="0">
 														<thead class="thead">
 														<tr>
@@ -262,7 +268,7 @@
 														{{each attGroups}}
 														<tr>
 															<td>{{$value.index}}</td>
-															<td><a href="lecturer_group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">GROUP {{$value.teamNumber}}</a></td>
+															<td><a href="lecturer_group?moduleID={{module.moduleCode}}&teamNumber={{$value.teamNumber}}">{{$value.teamNumber}}</a></td>
 															<td class="project_unit"><div class="project" title="{{$value.projectTitle}}">{{$value.projectTitle}}</div></td>
 															<td class="name_unit"><div class="name" title="{{$value.forename}} {{$value.surname}}">{{$value.forename}} {{$value.surname}}</div></td>
 															<td class="members_unit"><div class="members" title="{{$value.studentName}}">{{$value.studentName}}</div></td>

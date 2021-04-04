@@ -60,6 +60,12 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
+		.table-responsive th {
+			text-align: center;
+		}
+		.table-responsive td {
+			text-align: center;
+		}
 	</style>
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -204,11 +210,11 @@
 														<tbody>
 														{{each feedback}}
 														<tr>
-															<td>{{$value.weekNumber}}</td>
-															<td id="{{$value.weekNumber}}">{{$value.score}}</td>
-															<td>{{$value.contribution}}</td>
-															<td>{{$value.writtenFeedback}}</td>
-															<td class="date">{{$value.date}}</td>
+															<td style="vertical-align: middle">{{$value.weekNumber}}</td>
+															<td style="vertical-align: middle" id="{{$value.weekNumber}}">{{$value.score}}</td>
+															<td style="vertical-align: middle">{{$value.contribution}}</td>
+															<td style="vertical-align: middle">{{$value.writtenFeedback}}</td>
+															<td style="vertical-align: middle" class="date">{{$value.date}}</td>
 														</tr>
 														{{/each}}
 														</tbody>

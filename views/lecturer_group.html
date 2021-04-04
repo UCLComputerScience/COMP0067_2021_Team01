@@ -50,7 +50,7 @@
 			font-weight: normal;
 			color: #495057;
 		}
-		.date {
+		.date_unit {
 			width: 9rem;
 		}
 		#team_score_plot {
@@ -60,6 +60,12 @@
 			margin-left: auto;
 			margin-right: auto;
 			float: left;
+		}
+		.table-responsive th {
+			text-align: center;
+		}
+		.table-responsive td {
+			text-align: center;
 		}
 	</style>
 
@@ -191,21 +197,21 @@
 													<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
 														<thead>
 														<tr>
-															<th>Week</th>
-															<th>Team Score</th>
-															<th>Individual Contributions</th>
-															<th>Team Feedback</th>
-															<th>Date</th>
+															<th style="vertical-align: middle">Week</th>
+															<th style="vertical-align: middle">Team Score</th>
+															<th style="vertical-align: middle">Individual Contributions</th>
+															<th style="vertical-align: middle">Team Feedback</th>
+															<th style="vertical-align: middle">Date</th>
 														</tr>
 														</thead>
 														<tbody>
 														{{each feedback}}
 														<tr>
-															<td>{{$value.weekNumber}}</td>
-															<td id="{{$value.weekNumber}}">{{$value.score}}</td>
-															<td>{{$value.contributions}}</td>
-															<td>{{$value.writtenFeedback}}</td>
-															<td class="date">{{$value.date}}</td>
+															<td style="vertical-align: middle">{{$value.weekNumber}}</td>
+															<td style="vertical-align: middle" id="{{$value.weekNumber}}">{{$value.score}}</td>
+															<td style="vertical-align: middle">{{$value.contributions}}</td>
+															<td style="vertical-align: middle" class="fd_unit">{{$value.writtenFeedback}}</td>
+															<td style="vertical-align: middle" class="date_unit">{{$value.date}}</td>
 														</tr>
 														{{/each}}
 														</tbody>

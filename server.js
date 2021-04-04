@@ -618,7 +618,7 @@ web.get('/student_feedback', function (req, res) {
             if (error) {
                 console.log(error)
             }
-            fs.exists("/public/images/"+Stu[0].fileLocation, (exists) => {
+            fs.exists("/public/images/" + Stu[0].fileLocation, (exists) => {
                 if (exists === false) {
                     Stu[0].fileLocation = "/public/images/profile_default.jpeg"
                 }
@@ -737,6 +737,9 @@ web.get('/student_homepage', function (req, res) {
         }
         req.session.allModules = allMod
         var allModules = req.session.allModules
+        for (var i = 1; i <= allModules.length; i++) {
+            allModules[i-1].index = i;
+        }
         var html = [
             "Sorry student, you haven't registered a module",
         ]
@@ -759,13 +762,13 @@ web.get('/student_homepage', function (req, res) {
     // connection.end()
 })
 
-web.get('/TA_Homepage', function(req, res){
+web.get('/TA_Homepage', function (req, res) {
     if (req.session.uname) {
         var uname = req.session.uname
     } else {
         res.redirect('/expire')
     }
-    var querySelectMods = 'SELECT * FROM Module WHERE Module.moduleCode IN (SELECT projectinfo.moduleCode FROM projectinfo JOIN ta ON (projectinfo.taStudentSPR=ta.taStudentSPR) WHERE projectinfo.taStudentSPR="'+uname+'")'
+    var querySelectMods = 'SELECT * FROM Module WHERE Module.moduleCode IN (SELECT projectinfo.moduleCode FROM projectinfo JOIN ta ON (projectinfo.taStudentSPR=ta.taStudentSPR) WHERE projectinfo.taStudentSPR="' + uname + '")'
 
     var connection = mysql.createConnection({
         host: host,
@@ -781,7 +784,7 @@ web.get('/TA_Homepage', function(req, res){
         req.session.allMods = TAMods
         var allMods = req.session.allMods
         for (var i = 1; i <= allMods.length; i++) {
-            allMods[i-1].index = i;
+            allMods[i - 1].index = i;
         }
         res.render('TA_homepage.html', {
             uname: uname,
@@ -791,10 +794,10 @@ web.get('/TA_Homepage', function(req, res){
     // connection.end()
 })
 
-web.get('/TA_module', function(req,res){
-    if(req.session.uname){
+web.get('/TA_module', function (req, res) {
+    if (req.session.uname) {
         var uname = req.session.uname
-    } else{
+    } else {
         res.redirect('/login')
     }
     var reqObj = req.query
@@ -804,23 +807,23 @@ web.get('/TA_module', function(req,res){
     var allMod = req.session.allMods
 
     // This query selects the module names and module codes to display
-    var querySelectCurrentMod = 'SELECT moduleName, moduleCode FROM Module WHERE `moduleCode`="'+selectedModID+'"'
+    var querySelectCurrentMod = 'SELECT moduleName, moduleCode FROM Module WHERE `moduleCode`="' + selectedModID + '"'
 
     // This query shows all the groups a TA coaches
     var queryMembersTeam = 'SELECT ModStuTe.teamNumber, group_concat(Student.surname, " ", Student.forename Separator ", ") studentName ' +
         'FROM `ModStuTe` JOIN `Student` ON ModStuTe.studentSPR=Student.studentSPR ' +
-        'WHERE `moduleCode`="'+selectedModID+'" GROUP BY ModStuTe.teamNumber '
+        'WHERE `moduleCode`="' + selectedModID + '" GROUP BY ModStuTe.teamNumber '
     var queryGroupAveScore = 'SELECT teamNumber, AVG(score) avgScore FROM `TeamFeedback` ' +
-        'WHERE moduleCode = "'+selectedModID+'" GROUP BY teamNumber '
+        'WHERE moduleCode = "' + selectedModID + '" GROUP BY teamNumber '
     var queryGroupLatestScore = 'SELECT teamNumber, score lastScore, DATE_FORMAT(date,"%Y-%m-%d") date, messageLecturer FROM TeamFeedback ' +
-        'WHERE `moduleCode`="'+selectedModID+'" and (teamNumber, weekNumber) IN ' +
-        '(SELECT teamNumber, MAX(weekNumber) FROM TeamFeedback WHERE `moduleCode`="'+selectedModID+'" GROUP BY teamNumber) '
-    var queryGroupTA='SELECT * FROM `ProjectInfo` JOIN `TA` ON (ProjectInfo.taStudentSPR=TA.taStudentSPR) '
+        'WHERE `moduleCode`="' + selectedModID + '" and (teamNumber, weekNumber) IN ' +
+        '(SELECT teamNumber, MAX(weekNumber) FROM TeamFeedback WHERE `moduleCode`="' + selectedModID + '" GROUP BY teamNumber) '
+    var queryGroupTA = 'SELECT * FROM `ProjectInfo` JOIN `TA` ON (ProjectInfo.taStudentSPR=TA.taStudentSPR) '
     var queryCoachedGroups = queryGroupTA +
-        'JOIN (' + queryMembersTeam + ') AS TeamMembers ON (ProjectInfo.teamNumber=TeamMembers.teamNumber) '+
-        'JOIN ('+queryGroupAveScore+') AS gAvgScore ON (ProjectInfo.teamNumber=gAvgScore.teamNumber) ' +
-        'JOIN ('+queryGroupLatestScore+') AS gLastScore ON (ProjectInfo.teamNumber=gLastScore.teamNumber) ' +
-        'WHERE ProjectInfo.moduleCode="'+selectedModID+'" AND ProjectInfo.taStudentSPR="'+uname+'" '
+        'JOIN (' + queryMembersTeam + ') AS TeamMembers ON (ProjectInfo.teamNumber=TeamMembers.teamNumber) ' +
+        'JOIN (' + queryGroupAveScore + ') AS gAvgScore ON (ProjectInfo.teamNumber=gAvgScore.teamNumber) ' +
+        'JOIN (' + queryGroupLatestScore + ') AS gLastScore ON (ProjectInfo.teamNumber=gLastScore.teamNumber) ' +
+        'WHERE ProjectInfo.moduleCode="' + selectedModID + '" AND ProjectInfo.taStudentSPR="' + uname + '" '
 
     var connection = mysql.createConnection({
         host: host,
@@ -829,19 +832,20 @@ web.get('/TA_module', function(req,res){
         database: databaseName
     })
     connection.connect()
-    connection.query(querySelectCurrentMod,function(error, ModCurrent){
-        if (error){
+    connection.query(querySelectCurrentMod, function (error, ModCurrent) {
+        if (error) {
             console.log(error)
         }
-        connection.query(queryCoachedGroups,function(error,TAGroups){
-            if (error){
+        connection.query(queryCoachedGroups, function (error, TAGroups) {
+            if (error) {
                 console.log(error)
             }
-            var studentNames =TAGroups[0].studentName
+
+            var studentNames = TAGroups[0].studentName
             var studentNamesArray = studentNames.split(',')
 
 
-            res.render('TA_module.html',{
+            res.render('TA_module.html', {
                 uname: uname,
                 mods: allMod,
                 module: ModCurrent[0],
@@ -854,18 +858,41 @@ web.get('/TA_module', function(req,res){
     })
 })
 
-web.get('/feedbackErin', function(req,res){
+web.get('/TA_group', function(req,res){
     if(req.session.uname){
         var uname = req.session.uname
-    } else{
+    } else {
         res.redirect('/login')
     }
     var reqObj = req.query
     req.session.modID = reqObj.moduleID
     var selectedModID = req.session.modID
-    var allModTA = req.session.allMods
+    req.session.teamNumber = reqObj.teamNumber
+    var teamNumber = req.session.teamNumber
 
+    var allMod = req.session.allMods
+    var allTAGroups = req.session.TAGroup
+
+
+    // This query selects the module names and module codes to display
     var querySelectCurrentMod = 'SELECT moduleName, moduleCode FROM Module WHERE `moduleCode`="'+selectedModID+'"'
+
+    // This query shows all the group members in a module
+    var queryTeamMembers = 'SELECT Student.surname, Student.forename, Student.fileLocation, ModStuTe.memberIndex FROM `Student` JOIN `ModStuTe` ' +
+        'ON ModStuTe.studentSPR=Student.studentSPR ' +
+        'WHERE ModStuTe.teamNumber="' + teamNumber + '" AND `moduleCode`="'+selectedModID+'" '
+
+    // query team feedback
+    var queryTeamFeedback = 'SELECT teamNumber, weekNumber, score, writtenFeedback, messageLecturer, DATE_FORMAT(date,"%Y-%m-%d") date ' +
+        'FROM `TeamFeedback`' +
+        'WHERE teamNumber="' + teamNumber + '" AND `moduleCode`="'+selectedModID+'"'
+
+    // This query select all student feedback information for a given group in a module
+    var queryStudentFeedback = 'SELECT concat(Student.surname, " ", Student.forename) studentName, studentfeedback.weekNumber,studentfeedback.score, studentfeedback.contribution, studentfeedback.writtenFeedback FROM `student` JOIN `studentfeedback` ON student.studentSPR=studentfeedback.studentSPR JOIN `ModStuTe`' +
+        'ON (studentfeedback.studentSPR=ModStuTe.studentSPR AND studentfeedback.moduleCode=ModStuTe.moduleCode)' +
+        'WHERE modstute.teamNumber = "' + teamNumber + '" AND studentfeedback.moduleCode = "' + selectedModID +'"'
+    // how to get the week number
+
     var connection = mysql.createConnection({
         host: host,
         user: username,
@@ -873,20 +900,99 @@ web.get('/feedbackErin', function(req,res){
         database: databaseName
     })
     connection.connect()
-    connection.query(querySelectCurrentMod,function(error, ModCurrent){
-        if (error){
+    connection.query(querySelectCurrentMod, function (error, ModCurrent) {
+        if (error) {
             console.log(error)
         }
-        res.render('feedback-Erin.html',{
-            uname: uname,
-            modules: allModTA,
-            module: ModCurrent[0],
+        connection.query(queryTeamMembers,function(error,TeamMembers){
+            if (error){
+                console.log(error)
+            }
+            req.session.teamMember = 0
+            for (var i = 0; i < TeamMembers.length; i++) {
+                fs.exists("./public/images/" + TeamMembers[i].fileLocation, (exists) => {
+                    if (exists === false) {
+                        TeamMembers[req.session.teamMember].fileLocation = "/public/images/profile_default.jpeg"
+                        req.session.teamMember++
+                    }
+                    else {
+                        if (TeamMembers[req.session.teamMember].fileLocation === '') {
+                            TeamMembers[req.session.teamMember].fileLocation = "/public/images/profile_default.jpeg"
+                        }
+                        else {
+                            TeamMembers[req.session.teamMember].fileLocation = "/public/images/" + TeamMembers[req.session.teamMember].fileLocation
+                        }
+                        req.session.teamMember++
+                    }
+                });
+            }
+            connection.query(queryTeamFeedback, function(error,TeamFeedback){
+                if (error){
+                    console.log(error)
+                }
+                connection.query(queryStudentFeedback, function(error,Student){
+                    if (error){
+                        console.log(error)
+                    }
+                    var memberNum = 0
+                    var weeklyFeedback = new Array()
+                    // console.log(typeof Student)
+                    loop:
+                    for (var weekNum=1; weekNum<21; weekNum++) {
+                        if (weekNum > TeamFeedback.length) {
+                            break
+                        }
+                        weeklyFeedback[weekNum-1] = new Array()
+                        for (const teamF of TeamFeedback) {
+                            if (typeof(teamF) === "undefined") {
+                                break loop
+                            }
+                            if (parseInt(teamF.weekNumber) === weekNum) {
+                                weeklyFeedback[weekNum - 1].push(teamNumber);
+                                weeklyFeedback[weekNum - 1].push(teamF.weekNumber);
+                                weeklyFeedback[weekNum - 1].push(teamF.score);
+                                weeklyFeedback[weekNum - 1].push(teamF.writtenFeedback);
+                                weeklyFeedback[weekNum - 1].push(teamF.messageLecture);
+                                break
+                            }
+                        }
+                        if (weeklyFeedback[weekNum - 1].length === 0) {
+                            weeklyFeedback[weekNum - 1] = null
+                            break
+                        }
+                        for (const stuF of Student) {
+                            if (typeof(stuF) === "undefined") {
+                                break loop
+                            }
+                            if (parseInt(stuF.weekNumber) === weekNum){
+                                memberNum++
+                                weeklyFeedback[weekNum-1].push(stuF.studentName);
+                                weeklyFeedback[weekNum-1].push(stuF.score);
+                                weeklyFeedback[weekNum-1].push(stuF.contribution);
+                                weeklyFeedback[weekNum-1].push(stuF.writtenFeedback);
+                            }
+                            // console.log(FeedbackByWeek[weekNum-1].length)
+                        }
+                        weeklyFeedback[weekNum-1].splice(5, 0, memberNum)
+                        memberNum = 0
+                    }
+                    // console.log(weeklyFeedback)
+                    res.render('TA_group.html',{
+                        uname: uname,
+                        mods: allMod,
+                        module: ModCurrent[0],
+                        teamMember: TeamMembers,
+                        teamFeedback: TeamFeedback,
+                        student : Student,
+                        weeklyFeedback : weeklyFeedback
+                    })
+                })
+            })
         })
-
     })
 })
 
-web.post('/provideFeedback', function(req,res){
+web.post('/provideFeedback', function (req, res) {
     if (req.session.uname) {
         var uname = req.session.uname
     } else {
@@ -901,10 +1007,10 @@ web.post('/provideFeedback', function(req,res){
     // console.log(studentContribution)
     // console.log(feedbackStudent)
 
-    var queryStudentSPR = 'SELECT studentSPR FROM ModStuTe WHERE moduleCode="'+selectedModID+'" AND teamNumber="'+feedback.teamNumber+'"'
+    var queryStudentSPR = 'SELECT studentSPR FROM ModStuTe WHERE moduleCode="' + selectedModID + '" AND teamNumber="' + feedback.teamNumber + '"'
 
     var insertTeamFeed = 'INSERT INTO teamfeedback (`moduleCode`,`weekNumber`,`teamNumber`,`score`,`writtenFeedback`,`messageLecturer`)' +
-        'VALUES ("'+selectedModID+'", "'+feedback.weekNumber+'", "'+feedback.teamNumber+'","'+feedback.teamScore+'", "'+feedback.feedbackTeam+'", "'+feedback.message+'")'
+        'VALUES ("' + selectedModID + '", "' + feedback.weekNumber + '", "' + feedback.teamNumber + '","' + feedback.teamScore + '", "' + feedback.feedbackTeam + '", "' + feedback.message + '")'
 
     var connection = mysql.createConnection({
         host: host,
@@ -915,25 +1021,25 @@ web.post('/provideFeedback', function(req,res){
     connection.connect()
 
 
-    connection.query(insertTeamFeed,function(error,resultFeedback){
+    connection.query(insertTeamFeed, function (error, resultFeedback) {
         if (error) {
             console.log(error)
         }
-        connection.query(queryStudentSPR, function(error,resultStudents){
+        connection.query(queryStudentSPR, function (error, resultStudents) {
             if (error) {
                 console.log(error)
             }
-            var studentSPRNumber=[]
-            for (i=0;i<resultStudents.length;i++){
-                var studentSPR =resultStudents[i].studentSPR
+            var studentSPRNumber = []
+            for (i = 0; i < resultStudents.length; i++) {
+                var studentSPR = resultStudents[i].studentSPR
                 studentSPRNumber.push(studentSPR)
             }
 
-            for (i=0; i<studentSPRNumber.length; i++) {
+            for (i = 0; i < studentSPRNumber.length; i++) {
                 var insertIntoStudentFeedback = 'INSERT INTO studentfeedback (`studentSPR`,`moduleCode`,`weekNumber`,`score`,`contribution`,`writtenFeedback`,`messageLecturer`)' +
-                    'VALUES ("'+studentSPRNumber[i]+'","'+selectedModID+'", "'+feedback.weekNumber+'", "'+studentScore[i]+'", "'+studentContribution[i]+'", "'+feedbackStudent[i]+'", "'+feedback.message+'")'
+                    'VALUES ("' + studentSPRNumber[i] + '","' + selectedModID + '", "' + feedback.weekNumber + '", "' + studentScore[i] + '", "' + studentContribution[i] + '", "' + feedbackStudent[i] + '", "' + feedback.message + '")'
 
-                connection.query(insertIntoStudentFeedback,function(error,resultFeedback){
+                connection.query(insertIntoStudentFeedback, function (error, resultFeedback) {
                     if (error) {
                         console.log(error)
                     }
@@ -944,57 +1050,21 @@ web.post('/provideFeedback', function(req,res){
     res.redirect('/TA_homepage')
 })
 
-web.post('/updateFeedback', function(req,res){
-        if (req.session.uname) {
-            var uname = req.session.uname
-        } else {
-            res.redirect('/login')
-        }
-        var feedback = req.body
-        var studentScore = [feedback.studentScore1,feedback.studentScore2,feedback.studentScore3]
-        var studentContribution = [feedback.contributionStudent1,feedback.contributionStudent2,feedback.contributionStudent3]
-        var feedbackStudent = [feedback.feedbackStudent1,feedback.feedbackStudent2,feedback.feedbackStudent3]
-        var studentSPR =['20063053','20035389','19056538']
-
-        var connection = mysql.createConnection({
-            host: host,
-            user: username,
-            password: password,
-            database: databaseName
-        })
-        connection.connect()
-
-        var updateTeamFeed = 'Update teamfeedback SET `score`="'+feedback.teamScore+'" `writtenFeedback`="'+feedback.feedbackTeam+'" `messageLecturer`="'+feedback.message+'" WHERE `moduleCode`="COMP0067" AND `weekNumber`="'+feedback.weekNumber+'"  AND `teamNumber`="1"'
-        connection.query(updateTeamFeed,function(error,resultUpdate){
-            if (error) {
-                console.log(error)
-            }
-        })
-
-        for (i=0; i<studentScore.length; i++) {
-            var updateStudentFeedback = 'Update studentfeedback SET `score`="'+studentScore[i]+'" `contribution`="'+studentContribution[i]+'" `writtenFeedbaack`="'+feedbackStudent[i]+'" `messageLecturer`="'+feedback.message+'" WHERE `studentSPR`="'+studentSPR[i]+'" AND `moduleCode`="COMP0067" AND `weekNumber`= "'+feedback.weekNumber+'"'
-
-            connection.query(updateStudentFeedback,function(error,resultUpdate){
-                if (error) {
-                    console.log(error)
-                }
-            })
-        }
-        connection.end()
-        res.redirect('/TA_homepage')
-    }
-)
-
-web.get('/UpdatePage',function(req, res) {
-    if (req.session.uname){
+web.post('/updateFeedback', function (req, res) {
+    if (req.session.uname) {
         var uname = req.session.uname
-        var allModules = req.session.allModules
     } else {
         res.redirect('/login')
     }
-
-    var querySelectFeedbackTeam = 'SELECT * FROM teamfeedback  WHERE `moduleCode`="COMP0067" AND `weekNumber`="'+feedback.weekNumber+'"  AND `teamNumber`="1"'
-    var querySelectFeedbackStudent = 'SELECT * FROM studentfeedback WHERE `studentSPR`="'+studentSPR[i]+'" AND `moduleCode`="COMP0067" AND `weekNumber`= "'+feedback.weekNumber+'"'
+    var feedback = req.body
+    var selectedModID = req.session.modID
+    var studentScore = feedback.studentScore
+    var studentContribution = feedback.studentContribution
+    var feedbackStudent = feedback.studentFeedback
+    // Update teamfeedback table
+    var queryUpdateTeam = 'UPDATE `teamfeedback` SET `score`="' + feedback.teamScore + '", `writtenFeedback`="' + feedback.feedbackTeam + '", ' +
+        '`messageLecturer`="' + feedback.message + '" WHERE `moduleCode`="' + selectedModID + '" AND `teamNumber`="' + feedback.teamNumber +'" AND `weekNumber=`"' + feedback.weekNumber + '"'
+    var queryStudentSPR = 'SELECT studentSPR FROM ModStuTe WHERE moduleCode="' + selectedModID + '" AND teamNumber="' + feedback.teamNumber + '"'
 
     var connection = mysql.createConnection({
         host: host,
@@ -1003,14 +1073,35 @@ web.get('/UpdatePage',function(req, res) {
         database: databaseName
     })
     connection.connect()
-    connection.query(querySelectFeedbackTeam, function(error,updateInfo){
-        if (error){
+
+    connection.query(queryUpdateTeam, function (error, results) {
+        if (error) {
             console.log(error)
         }
-        res.render('UpdatePage-Erin.html',{
+        connection.query(queryStudentSPR, function(error, resultStudents){
+            if (error){
+                console.log(error)
+            }
+            // Update studentFeedback table
+            var studentSPRNumber = []
+            for (i = 0; i < resultStudents.length; i++) {
+                var studentSPR = resultStudents[i].studentSPR
+                studentSPRNumber.push(studentSPR)
+            }
 
+            for (i = 0; i < studentSPRNumber.length; i++) {
+                var insertIntoStudentFeedback = 'UPDATE `studentfeedback` SET `score`="' + studentScore[i] + '",`contribution`="' + studentContribution[i] + '",`writtenFeedback`="' + feedbackStudent[i] + '",`messageLecturer`="' + feedback.message + '"' +
+                    'WHERE `moduleCode`="' + selectedModID + '" AND `studentSPR`="' + studentSPRNumber[i] +'" AND `weekNumber=`"' + feedback.weekNumber + '"'
+            }
+            connection.query(insertIntoStudentFeedback, function(error,studentFeedbackResult){
+                if (error){
+                    console.log(error)
+                }
+            })
         })
+
     })
+    res.redirect('/TA_homepage')
 })
 
 web.listen(3000, function () {
