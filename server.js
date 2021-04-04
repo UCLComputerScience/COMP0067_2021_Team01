@@ -5,8 +5,8 @@ var xlsx = require('node-xlsx')
 var fs = require('fs')
 var web = express()
 var databaseName = "feedback"
-var password = "password"
-var username = "username"
+var password = ""
+var username = "root"
 var host = "localhost"
 
 web.engine('html', require('express-art-template'))
@@ -1062,8 +1062,10 @@ web.post('/updateFeedback', function (req, res) {
     var studentContribution = feedback.studentContribution
     var feedbackStudent = feedback.studentFeedback
     // Update teamfeedback table
+    // exception handling: when there is no change in the score select, make sure the original score is selected not the word 'select'
+    // second exception handling: when the feedback and message are longer than 200 characters, popup saying it needs to be shorter
     var queryUpdateTeam = 'UPDATE `teamfeedback` SET `score`="' + feedback.teamScore + '", `writtenFeedback`="' + feedback.feedbackTeam + '", ' +
-        '`messageLecturer`="' + feedback.message + '" WHERE `moduleCode`="' + selectedModID + '" AND `teamNumber`="' + feedback.teamNumber +'" AND `weekNumber=`"' + feedback.weekNumber + '"'
+        '`messageLecturer`="' + feedback.message + '" WHERE `moduleCode`="' + selectedModID + '" AND `teamNumber`="' + feedback.teamNumber +'" AND `weekNumber`="' + feedback.weekNumber + '"'
     var queryStudentSPR = 'SELECT studentSPR FROM ModStuTe WHERE moduleCode="' + selectedModID + '" AND teamNumber="' + feedback.teamNumber + '"'
 
     var connection = mysql.createConnection({
@@ -1088,16 +1090,18 @@ web.post('/updateFeedback', function (req, res) {
                 var studentSPR = resultStudents[i].studentSPR
                 studentSPRNumber.push(studentSPR)
             }
-
+            // exception handling: when there is no change in the score select, make sure the original score is selected not the word 'select'
+            // second exception handling: when the feedback and message are longer than 200 characters, popup saying it needs to be shorter
             for (i = 0; i < studentSPRNumber.length; i++) {
                 var insertIntoStudentFeedback = 'UPDATE `studentfeedback` SET `score`="' + studentScore[i] + '",`contribution`="' + studentContribution[i] + '",`writtenFeedback`="' + feedbackStudent[i] + '",`messageLecturer`="' + feedback.message + '"' +
-                    'WHERE `moduleCode`="' + selectedModID + '" AND `studentSPR`="' + studentSPRNumber[i] +'" AND `weekNumber=`"' + feedback.weekNumber + '"'
+                    'WHERE `moduleCode`="' + selectedModID + '" AND `studentSPR`="' + studentSPRNumber[i] +'" AND `weekNumber`="' + feedback.weekNumber + '"'
+
+                connection.query(insertIntoStudentFeedback, function(error,studentFeedbackResult){
+                    if (error){
+                        console.log(error)
+                    }
+                })
             }
-            connection.query(insertIntoStudentFeedback, function(error,studentFeedbackResult){
-                if (error){
-                    console.log(error)
-                }
-            })
         })
 
     })

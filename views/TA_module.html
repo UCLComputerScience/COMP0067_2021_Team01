@@ -40,43 +40,43 @@
             background:#0f6674;
         }
         .container-fluid .tab {
-            border-radius:5px;
-            border: 1px solid #c0c0c0;
-            background-color: #ffffff;
-        }
-        .table {
-            table-layout:auto;
-            text-overflow:ellipsis;
-            overflow:hidden;
-            white-space:nowrap;
-            font-size: 14px;
-        }
+			border-radius:5px;
+			border: 1px solid #c0c0c0;
+			background-color: #ffffff;
+		}
+		.table {
+			table-layout:auto;
+			text-overflow:ellipsis;
+			overflow:hidden;
+			white-space:nowrap;
+			font-size: 14px;
+		}
         .group_numbers {
-            width: 7rem;
-        }
+			width: 7rem;
+		}
         .project_names {
-            width: 40rem;
-        }
+			width: 40rem;
+		}
         .member_names {
-            width: 10rem;
-        }
+			width: 10rem;
+		}
         .feedback_group {
-            width: 10rem;
-        }
-        td {
-            text-overflow:ellipsis;
-            overflow:hidden;
-            white-space:nowrap;
-            font-size: 14px;
-        }
+			width: 10rem;
+		}
+		td {
+			text-overflow:ellipsis;
+			overflow:hidden;
+			white-space:nowrap;
+			font-size: 14px;
+		}
         .f-els1_1 {
-            width: 10rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            text-align: center;
-        }
-    </style>
+			width: 10rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-align: center;
+		}
+	</style>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="/public/favicon.ico">
@@ -173,37 +173,38 @@
                                 </div>
                                 <div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
                                     <br>
-                                    <div class="table-responsive" style="margin:auto 25px auto 25px">
-                                        <!--                                            <p class="text-center">Group Table</p>-->
-                                        <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
-                                            <thead class="thead">
-                                            <tr>
-                                                <th>Group Number</th>
-                                                <th>Project</th>
-                                                <th>Team Members</th>
-                                                <th>Last score</th>
-                                                <th>Feedback</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody class="gro_li">
-                                            {{each coachedGroups}}
-                                            <tr>
-                                                <td class="group_numbers">{{$value.teamNumber}}</td>
-                                                <td class="project_names">{{$value.projectTitle}}</td>
-                                                <td class="member_names">
-                                                    <div class="f-els1_1" title='{{$value.studentName}}'>
-                                                        {{$value.studentName}}
-                                                    </div>
-                                                </td>
-                                                <td>{{$value.lastScore}} ({{$value.date}})</td>
-                                                <td class="feedback_group">
-                                                    <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}" class="btn btn-primary">View</a>
-                                                    <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
-                                                </td>
-                                            </tr>
-                                            {{/each}}
-                                            </tbody>
-                                        </table>
+                                        <div class="table-responsive" style="margin:auto 25px auto 25px">
+<!--                                            <p class="text-center">Group Table</p>-->
+                                            <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
+                                                <thead class="thead">
+                                                <tr>
+                                                    <th>Group Number</th>
+                                                    <th>Project</th>
+                                                    <th>Team Members</th>
+                                                    <th>Last score</th>
+                                                    <th>Feedback</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="gro_li">
+                                                {{each coachedGroups}}
+                                                <tr>
+                                                    <td class="group_numbers">{{$value.teamNumber}}</td>
+                                                    <td class="project_names">{{$value.projectTitle}}</td>
+                                                    <td class="member_names">
+                                                        <div class="f-els1_1" title='{{$value.studentName}}'>
+                                                            {{$value.studentName}}
+                                                        </div>
+                                                    </td>
+                                                    <td>{{$value.lastScore}} ({{$value.date}})</td>
+                                                    <td class="feedback_group">
+                                                        <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}" class="btn btn-primary">View</a>
+                                                        <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
+                                                    </td>
+                                                </tr>
+                                                {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
