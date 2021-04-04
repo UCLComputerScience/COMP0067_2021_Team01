@@ -58,6 +58,9 @@
         .update_feed {
             width: 10rem;
         }
+        th.Contribution {
+            width: 12rem
+        }
         .f-els1_1 {
             width: 40rem;
             overflow: hidden;
@@ -294,8 +297,8 @@
                         <tr>
                             <th>Student Name</th>
                             <th>Week</th>
-                            <th>Score</th>
-                            <th>Contribution</th>
+                            <th style="width: 7rem;">Score</th>
+                            <th class="Contribution">Contribution</th>
                             <th>Individual Feedback</th>
                         </tr>
                         </thead>
@@ -376,7 +379,7 @@
                 "                            <td>"+stu_weekly_feedback[i][2+4*n]+"</td>\n" +   //获取第n个组员姓名
                 "                            <td>"+weekNumber+"</td>\n" +
                 "                            <td>\n" +
-                "                                <select class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
+                "                                <select style=\"width: 7rem; float: left;\"class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
                 "                                    <option value=\"Select\">"+stu_weekly_feedback[i][3+4*n]+"</option>\n" +  //获取第n个组员score
                 "                                    <option value=\"0\">0</option>\n" +
                 "                                    <option value=\"1\">1</option>\n" +
