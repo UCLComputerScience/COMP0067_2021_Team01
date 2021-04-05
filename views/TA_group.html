@@ -16,7 +16,6 @@
   //////////////////////////////////////////////////////
   FREE HTML5 TEMPLATE
   DESIGNED & DEVELOPED by FREEHTML5.CO
-
   Website: 		http://freehtml5.co/
   Email: 			info@freehtml5.co
   Twitter: 		http://twitter.com/fh5co
@@ -44,6 +43,13 @@
             border: 1px solid #c0c0c0;
             background-color: #ffffff;
         }
+        .table {
+            table-layout:auto;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
+            text-align: center;
+        }
         .font1 {
             font-weight: bold;
             color: #000000;
@@ -58,6 +64,9 @@
         .update_feed {
             width: 10rem;
         }
+        th.Contribution {
+            width: 12rem
+        }
         .f-els1_1 {
             width: 40rem;
             overflow: hidden;
@@ -70,6 +79,15 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            text-align: center;
+        }
+        .table-responsive th {
+            text-align: center;
+        }
+        td {
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
             text-align: center;
         }
     </style>
@@ -198,20 +216,20 @@
                                                 <tbody>
                                                 {{each teamFeedback}}
                                                 <tr>
-                                                    <td>{{$value.weekNumber}}</td>
-                                                    <td class="team_score">{{$value.score}}</td>
-                                                    <td>
+                                                    <td style="vertical-align: middle">{{$value.weekNumber}}</td>
+                                                    <td style="vertical-align: middle" class="team_score">{{$value.score}}</td>
+                                                    <td style="vertical-align: middle">
                                                         <div class="f-els1_1" title='{{$value.writtenFeedback}}'>
                                                             {{$value.writtenFeedback}}
                                                         </div>
                                                     </td>
-                                                    <td>
+                                                    <td style="vertical-align: middle">
                                                         <div class="f-els1_2" title='{{$value.messageLecturer}}'>
                                                             {{$value.messageLecturer}}
                                                         </div>
                                                     </td>
-                                                    <td>{{$value.date}}</td>
-                                                    <td class="update_feed">
+                                                    <td style="vertical-align: middle">{{$value.date}}</td>
+                                                    <td style="vertical-align: middle" class="update_feed">
                                                         <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#update_form_{{$value.weekNumber}}">Update</button>
                                                     </td>
                                                 </tr>
@@ -294,8 +312,8 @@
                         <tr>
                             <th>Student Name</th>
                             <th>Week</th>
-                            <th>Score</th>
-                            <th>Contribution</th>
+                            <th style="width: 7rem;">Score</th>
+                            <th class="Contribution">Contribution</th>
                             <th>Individual Feedback</th>
                         </tr>
                         </thead>
@@ -373,10 +391,10 @@
             var weekNumber = stu_weekly_feedback[i][1]    //获取该行周数
             stu_weekly_feedback_html = stu_weekly_feedback_html +
                 "                         <tr>\n" +
-                "                            <td>"+stu_weekly_feedback[i][2+4*n]+"</td>\n" +   //获取第n个组员姓名
-                "                            <td>"+weekNumber+"</td>\n" +
-                "                            <td>\n" +
-                "                                <select class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
+                "                            <td style=\"vertical-align: middle\">"+stu_weekly_feedback[i][2+4*n]+"</td>\n" +   //获取第n个组员姓名
+                "                            <td style=\"vertical-align: middle\">"+weekNumber+"</td>\n" +
+                "                            <td style=\"vertical-align: middle\">\n" +
+                "                                <select style=\"width: 7rem; float: left;\"class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
                 "                                    <option value=\"Select\">"+stu_weekly_feedback[i][3+4*n]+"</option>\n" +  //获取第n个组员score
                 "                                    <option value=\"0\">0</option>\n" +
                 "                                    <option value=\"1\">1</option>\n" +
@@ -386,10 +404,10 @@
                 "                                    <option value=\"5\">5</option>\n" +
                 "                                </select>\n" +
                 "                            </td>\n" +
-                "                            <td>\n" +
+                "                            <td style=\"vertical-align: middle\">\n" +
                 "                                <textarea class=\"form-control\" name = \"studentContribution\" rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
                 "                            </td>\n" +
-                "                            <td>\n" +
+                "                            <td style=\"vertical-align: middle\">\n" +
                 "                                <textarea class=\"form-control\" name = \"studentFeedback\" rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
                 "                            </td>\n" +
                 "                        </tr>"
@@ -404,4 +422,3 @@
 </script>
 </body>
 </html>
-
