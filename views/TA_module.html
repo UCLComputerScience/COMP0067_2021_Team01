@@ -133,7 +133,7 @@
                         <ul class="dropdown-menu" role="menu" >
                             <div class="fh5co-link-wrap">
                                 {{each mods}}
-                                <li><a href="TA_module?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+                                <li><a href="TA_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
                                 {{/each}}
                             </div>
                         </ul>
@@ -174,14 +174,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+                                <div class="wow fadeInUp table-responsive" data-wow-duration="1s" data-wow-delay="1.4s" style="background-color: #ffffff; margin: 0 0 25px 0">
                                     <br>
-                                    <div class="table-responsive" style="margin:auto 25px auto 25px">
+                                    <div style="margin:auto 25px auto 25px">
                                         <!--                                            <p class="text-center">Group Table</p>-->
-                                        <table class="table table-bordered" id="dataTable4" width="100%" cellspacing="0">
+                                        <table class="table table-bordered" width="100%" cellspacing="0">
                                             <thead class="thead">
                                             <tr>
-                                                <th>Group Number</th>
+                                                <th>Group</th>
                                                 <th>Project</th>
                                                 <th>Team Members</th>
                                                 <th>Last score</th>
@@ -191,15 +191,15 @@
                                             <tbody class="gro_li">
                                             {{each coachedGroups}}
                                             <tr>
-                                                <td class="group_numbers">{{$value.teamNumber}}</td>
-                                                <td class="project_names">{{$value.projectTitle}}</td>
-                                                <td class="member_names">
+                                                <td style="vertical-align: middle" class="group_numbers">{{$value.teamNumber}}</td>
+                                                <td style="vertical-align: middle" class="project_names">{{$value.projectTitle}}</td>
+                                                <td style="vertical-align: middle" class="member_names">
                                                     <div class="f-els1_1" title='{{$value.studentName}}'>
                                                         {{$value.studentName}}
                                                     </div>
                                                 </td>
-                                                <td>{{$value.lastScore}} ({{$value.date}})</td>
-                                                <td class="feedback_group">
+                                                <td style="vertical-align: middle">{{$value.lastScore}} ({{$value.date}})</td>
+                                                <td style="vertical-align: middle" class="feedback_group">
                                                     <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}" class="btn btn-primary">View</a>
                                                     <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
                                                 </td>
