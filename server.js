@@ -5,8 +5,8 @@ var xlsx = require('node-xlsx')
 var fs = require('fs')
 var web = express()
 var databaseName = "feedback"
-var password = ""
-var username = "root"
+var password = "password"
+var username = "username"
 var host = "localhost"
 
 web.engine('html', require('express-art-template'))
@@ -56,15 +56,7 @@ web.post('/login', function(req, res){
         }
         else if (loginInfo[0].password === user.upassword) {
             if (loginInfo[0].userType === "lecturer"){
-                // var queryUserInfo = 'SELECT * FROM `LoginInfo` '
-                // connection.query(queryUserInfo, function (error, UserInfo) {
-                //     if (error) {
-                //         console.log(error)
-                //     }
-                //     console.log(user.uname, UserInfo)
-                //     req.session.fullName = UserInfo[0].forename + ' ' + UserInfo[0].surname
-                    res.redirect('/lecturer_homepage')
-                // })
+                res.redirect('/lecturer_homepage')
             }
             else if (loginInfo[0].userType === "student") {
                 res.redirect('/student_homepage')
@@ -87,7 +79,8 @@ web.get('/lecturer_Homepage', function(req, res){
     } else {
         res.redirect('/expire')
     }
-    var querySelect = 'SELECT * FROM Module WHERE employeeID = "' + uname + '"'
+    var querySelect = 'SELECT * FROM `Module` JOIN (SELECT `employeeID`, `surname`, `forename` FROM `Lecturer` WHERE `employeeID`="'+uname+'") LecturerName ON LecturerName.employeeID=Module.employeeID'
+
     var connection = mysql.createConnection({
         host: host,
         user: username,
@@ -104,9 +97,10 @@ web.get('/lecturer_Homepage', function(req, res){
         for (var i = 1; i <= allModules.length; i++) {
             allModules[i-1].index = i;
         }
+        req.session.lFullName = allModules[0].forename + ' ' + allModules[0].surname
         res.render('lecturer_Homepage.html', {
             fullName: fullName,
-            uname: uname,
+            uname: req.session.lFullName,
             modules: allModules
         })
     })
@@ -209,7 +203,7 @@ web.get('/lecturer_module', function(req, res){
                         }
                         // console.log(attGroupInfo)
                         res.render('lecturer_module.html', {
-                            uname: uname,
+                            uname: req.session.lFullName,
                             modules: allModule,
                             module: currentModule[0],
                             allStudents: allStuInfo,
@@ -295,7 +289,7 @@ web.get('/lecturer_group', function(req, res){
                 }
                 // console.log(teamFeedback)
                 res.render('lecturer_group.html', {
-                    uname: uname,
+                    uname: req.session.lFullName,
                     teamNumber: teamNumber,
                     modules: allModules,
                     module: currentModule[0],
@@ -362,7 +356,7 @@ web.get('/lecturer_student', function(req, res){
                     console.log(error)
                 }
                 res.render('lecturer_student.html', {
-                    uname: uname,
+                    uname: req.session.lFullName,
                     modules: allModules,
                     module: currentModule[0],
                     student: student[0],
@@ -566,7 +560,7 @@ web.get('/lecturer_admin', function(req, res){
         res.render('lecturer_admin.html', {
             modules: allModules,
             moduleInfo: moduleInfo,
-            uname: uname
+            uname: req.session.lFullName
         })
     })
     connection.end()
@@ -690,7 +684,7 @@ web.get('/student_feedback', function (req, res) {
 
 
                                         res.render('student_feedback.html', {
-                                            uname: uname,
+                                            uname: req.session.sFullName,
                                             module: CMod[0],
                                             team: Stea[0],
                                             project: SPro[0],
@@ -724,6 +718,8 @@ web.get('/student_homepage', function (req, res) {
     }
     //var querySelect = 'SELECT * FROM Module where moduleCode in (select moduleCode from modstute where studentSPR="' + uname + '" ) '
     var querySelect = 'SELECT * FROM Module where moduleCode in (select moduleCode from modstute where studentSPR="' + uname + '" ) '
+    var queryStudentName = 'SELECT surname, forename FROM `Student` WHERE `studentSPR`="'+req.session.uname+'"'
+
     var connection = mysql.createConnection({
         host: host,
         user: username,
@@ -740,24 +736,17 @@ web.get('/student_homepage', function (req, res) {
         for (var i = 1; i <= allModules.length; i++) {
             allModules[i-1].index = i;
         }
-        var html = [
-            "Sorry student, you haven't registered a module",
-        ]
-        if (allModules.length === 0) {
+        connection.query(queryStudentName, function (error, StudentName) {
+            if (error) {
+                console.log(error)
+            }
+            req.session.sFullName = StudentName[0].forename + " " + StudentName[0].surname
             res.render('student_homepage.html', {
-                html: html,
                 modules: allModules,
-                uname: uname,
+                uname: req.session.sFullName,
                 utype: utype
             })
-        } else {
-            res.render('student_homepage.html', {
-                html: '',
-                modules: allModules,
-                uname: uname,
-                utype: utype
-            })
-        }
+        })
     })
     // connection.end()
 })
@@ -768,7 +757,8 @@ web.get('/TA_Homepage', function (req, res) {
     } else {
         res.redirect('/expire')
     }
-    var querySelectMods = 'SELECT * FROM Module WHERE Module.moduleCode IN (SELECT projectinfo.moduleCode FROM projectinfo JOIN ta ON (projectinfo.taStudentSPR=ta.taStudentSPR) WHERE projectinfo.taStudentSPR="' + uname + '")'
+    var querySelectMods = 'SELECT * FROM Module WHERE Module.moduleCode IN (SELECT projectinfo.moduleCode FROM projectinfo JOIN TA ON (projectinfo.taStudentSPR=ta.taStudentSPR) WHERE projectinfo.taStudentSPR="' + uname + '")'
+    var queryTAName = 'SELECT surname, forename FROM `TA` WHERE `taStudentSPR`="'+uname+'"'
 
     var connection = mysql.createConnection({
         host: host,
@@ -786,9 +776,15 @@ web.get('/TA_Homepage', function (req, res) {
         for (var i = 1; i <= allMods.length; i++) {
             allMods[i - 1].index = i;
         }
-        res.render('TA_homepage.html', {
-            uname: uname,
-            mods: allMods
+        connection.query(queryTAName, function (error, TAName) {
+            if (error) {
+                console.log(error)
+            }
+            req.session.taFullName = TAName[0].forename + " " + TAName[0].surname
+            res.render('TA_homepage.html', {
+                uname: req.session.taFullName,
+                mods: allMods
+            })
         })
     })
     // connection.end()
@@ -846,7 +842,7 @@ web.get('/TA_module', function (req, res) {
 
 
             res.render('TA_module.html', {
-                uname: uname,
+                uname: req.session.taFullName,
                 mods: allMod,
                 module: ModCurrent[0],
                 coachedGroups: TAGroups,
@@ -978,7 +974,7 @@ web.get('/TA_group', function(req,res){
                     }
                     // console.log(weeklyFeedback)
                     res.render('TA_group.html',{
-                        uname: uname,
+                        uname: req.session.taFullName,
                         mods: allMod,
                         module: ModCurrent[0],
                         teamMember: TeamMembers,
@@ -1003,14 +999,16 @@ web.post('/provideFeedback', function (req, res) {
     var studentScore = feedback.studentScore
     var studentContribution = feedback.studentContribution
     var feedbackStudent = feedback.studentFeedback
-    // console.log(studentScore)
-    // console.log(studentContribution)
-    // console.log(feedbackStudent)
+
+    var currentdate = new Date(); 
+    var date = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth()+1)  + "-" 
+                + currentdate.getDate()
 
     var queryStudentSPR = 'SELECT studentSPR FROM ModStuTe WHERE moduleCode="' + selectedModID + '" AND teamNumber="' + feedback.teamNumber + '"'
 
-    var insertTeamFeed = 'INSERT INTO teamfeedback (`moduleCode`,`weekNumber`,`teamNumber`,`score`,`writtenFeedback`,`messageLecturer`)' +
-        'VALUES ("' + selectedModID + '", "' + feedback.weekNumber + '", "' + feedback.teamNumber + '","' + feedback.teamScore + '", "' + feedback.feedbackTeam + '", "' + feedback.message + '")'
+    var insertTeamFeed = 'INSERT INTO teamfeedback (`moduleCode`,`weekNumber`,`teamNumber`,`score`,`writtenFeedback`,`messageLecturer`,`date`)' +
+        'VALUES ("' + selectedModID + '", "' + feedback.weekNumber + '", "' + feedback.teamNumber + '","' + feedback.teamScore + '", "' + feedback.feedbackTeam + '", "' + feedback.message + '", "' + date + '")'
 
     var connection = mysql.createConnection({
         host: host,
@@ -1036,8 +1034,8 @@ web.post('/provideFeedback', function (req, res) {
             }
 
             for (i = 0; i < studentSPRNumber.length; i++) {
-                var insertIntoStudentFeedback = 'INSERT INTO studentfeedback (`studentSPR`,`moduleCode`,`weekNumber`,`score`,`contribution`,`writtenFeedback`,`messageLecturer`)' +
-                    'VALUES ("' + studentSPRNumber[i] + '","' + selectedModID + '", "' + feedback.weekNumber + '", "' + studentScore[i] + '", "' + studentContribution[i] + '", "' + feedbackStudent[i] + '", "' + feedback.message + '")'
+                var insertIntoStudentFeedback = 'INSERT INTO studentfeedback (`studentSPR`,`moduleCode`,`weekNumber`,`score`,`contribution`,`writtenFeedback`,`messageLecturer`, `date`)' +
+                    'VALUES ("' + studentSPRNumber[i] + '","' + selectedModID + '", "' + feedback.weekNumber + '", "' + studentScore[i] + '", "' + studentContribution[i] + '", "' + feedbackStudent[i] + '", "' + feedback.message + '", "' + date + '")'
 
                 connection.query(insertIntoStudentFeedback, function (error, resultFeedback) {
                     if (error) {
@@ -1061,11 +1059,17 @@ web.post('/updateFeedback', function (req, res) {
     var studentScore = feedback.studentScore
     var studentContribution = feedback.studentContribution
     var feedbackStudent = feedback.studentFeedback
+    var feedbackTeamScore = feedback.teamScore
+
+    var currentdate = new Date(); 
+    var date = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth()+1)  + "-" 
+                + currentdate.getDate()
+
     // Update teamfeedback table
-    // exception handling: when there is no change in the score select, make sure the original score is selected not the word 'select'
     // second exception handling: when the feedback and message are longer than 200 characters, popup saying it needs to be shorter
-    var queryUpdateTeam = 'UPDATE `teamfeedback` SET `score`="' + feedback.teamScore + '", `writtenFeedback`="' + feedback.feedbackTeam + '", ' +
-        '`messageLecturer`="' + feedback.message + '" WHERE `moduleCode`="' + selectedModID + '" AND `teamNumber`="' + feedback.teamNumber +'" AND `weekNumber`="' + feedback.weekNumber + '"'
+    var queryUpdateTeam = 'UPDATE `teamfeedback` SET `score`="' + feedbackTeamScore + '", `writtenFeedback`="' + feedback.feedbackTeam + '", ' +
+        '`messageLecturer`="' + feedback.message + '", `date`="'+date+'" WHERE `moduleCode`="' + selectedModID + '" AND `teamNumber`="' + feedback.teamNumber +'" AND `weekNumber`="' + feedback.weekNumber + '"'
     var queryStudentSPR = 'SELECT studentSPR FROM ModStuTe WHERE moduleCode="' + selectedModID + '" AND teamNumber="' + feedback.teamNumber + '"'
 
     var connection = mysql.createConnection({
@@ -1079,6 +1083,7 @@ web.post('/updateFeedback', function (req, res) {
     connection.query(queryUpdateTeam, function (error, results) {
         if (error) {
             console.log(error)
+            console.log(feedbackTeamScore)
         }
         connection.query(queryStudentSPR, function(error, resultStudents){
             if (error){
@@ -1090,15 +1095,15 @@ web.post('/updateFeedback', function (req, res) {
                 var studentSPR = resultStudents[i].studentSPR
                 studentSPRNumber.push(studentSPR)
             }
-            // exception handling: when there is no change in the score select, make sure the original score is selected not the word 'select'
             // second exception handling: when the feedback and message are longer than 200 characters, popup saying it needs to be shorter
             for (i = 0; i < studentSPRNumber.length; i++) {
-                var insertIntoStudentFeedback = 'UPDATE `studentfeedback` SET `score`="' + studentScore[i] + '",`contribution`="' + studentContribution[i] + '",`writtenFeedback`="' + feedbackStudent[i] + '",`messageLecturer`="' + feedback.message + '"' +
+                var insertIntoStudentFeedback = 'UPDATE `studentfeedback` SET `score`="' + studentScore[i] + '",`contribution`="' + studentContribution[i] + '",`writtenFeedback`="' + feedbackStudent[i] + '",`messageLecturer`="' + feedback.message + '", `date`="'+date+'"' +
                     'WHERE `moduleCode`="' + selectedModID + '" AND `studentSPR`="' + studentSPRNumber[i] +'" AND `weekNumber`="' + feedback.weekNumber + '"'
 
                 connection.query(insertIntoStudentFeedback, function(error,studentFeedbackResult){
                     if (error){
                         console.log(error)
+                        console.log(studentScore)
                     }
                 })
             }

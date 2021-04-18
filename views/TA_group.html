@@ -16,7 +16,6 @@
   //////////////////////////////////////////////////////
   FREE HTML5 TEMPLATE
   DESIGNED & DEVELOPED by FREEHTML5.CO
-
   Website: 		http://freehtml5.co/
   Email: 			info@freehtml5.co
   Twitter: 		http://twitter.com/fh5co
@@ -44,6 +43,13 @@
             border: 1px solid #c0c0c0;
             background-color: #ffffff;
         }
+        .table {
+            table-layout:auto;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
+            text-align: center;
+        }
         .font1 {
             font-weight: bold;
             color: #000000;
@@ -58,6 +64,9 @@
         .update_feed {
             width: 10rem;
         }
+        th.Contribution {
+            width: 12rem
+        }
         .f-els1_1 {
             width: 40rem;
             overflow: hidden;
@@ -70,6 +79,15 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            text-align: center;
+        }
+        .table-responsive th {
+            text-align: center;
+        }
+        td {
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
             text-align: center;
         }
     </style>
@@ -118,7 +136,7 @@
                 <a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
                 <a href="#">Traffic Light Feedback System</a>
             </div>
-            <div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
+            <div class="col-lg-5 col-md-5 col-sm-5 text-center fh5co-link-wrap">
                 <ul data-offcanvass="yes">
                     <li><a href="TA_homepage">Home</a></li>
                     <li class="dropdown active">
@@ -126,14 +144,14 @@
                         <ul class="dropdown-menu" role="menu" >
                             <div class="fh5co-link-wrap">
                                 {{each mods}}
-                                <li><a href="TA_group?moduleID={{$value.moduleCode}}">{{$value.moduleName}}</a></li>
+                                <li><a href="TA_group?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
                                 {{/each}}
                             </div>
                         </ul>
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 text-right fh5co-link-wrap">
+            <div class="col-lg-4 col-md-4 col-sm-4 text-right fh5co-link-wrap">
                 <ul class="fh5co-special" data-offcanvass="yes">
                     <li><a href="#">Hi, {{uname}}</a></li>
                     <li><a href="#" class="call-to-action" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
@@ -183,41 +201,46 @@
                                                 {{/each}}
                                             </div>
                                         </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
-                                                <thead>
-                                                <tr>
-                                                    <th>Week</th>
-                                                    <th>Score</th>
-                                                    <th>Feedback</th>
-                                                    <th>Message to Lecturer</th>
-                                                    <th>Date</th>
-                                                    <th>Feedback</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                {{each teamFeedback}}
-                                                <tr>
-                                                    <td>{{$value.weekNumber}}</td>
-                                                    <td class="team_score">{{$value.score}}</td>
-                                                    <td>
-                                                        <div class="f-els1_1" title='{{$value.writtenFeedback}}'>
-                                                            {{$value.writtenFeedback}}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="f-els1_2" title='{{$value.messageLecturer}}'>
-                                                            {{$value.messageLecturer}}
-                                                        </div>
-                                                    </td>
-                                                    <td>{{$value.date}}</td>
-                                                    <td class="update_feed">
-                                                        <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#update_form_{{$value.weekNumber}}">Update</button>
-                                                    </td>
-                                                </tr>
-                                                {{/each}}
-                                                </tbody>
-                                            </table>
+                                        <br>
+                                        <div class="table-responsive" style="background-color: #ffffff; margin: 0 0 25px 0">
+                                            <br>
+                                            <div style="margin:auto 25px auto 25px">
+                                                <table class="table table-bordered" width="100%" cellspacing="0">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Week</th>
+                                                        <th>Group Score</th>
+                                                        <th>Group Feedback</th>
+                                                        <th>Message to Lecturer</th>
+                                                        <th>Date</th>
+                                                        <th>Feedback</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {{each teamFeedback}}
+                                                    <tr>
+                                                        <td style="vertical-align: middle">{{$value.weekNumber}}</td>
+                                                        <td style="vertical-align: middle" class="team_score">{{$value.score}}</td>
+                                                        <td style="vertical-align: middle">
+                                                            <div class="f-els1_1" title='{{$value.writtenFeedback}}'>
+                                                                {{$value.writtenFeedback}}
+                                                            </div>
+                                                        </td>
+                                                        <td style="vertical-align: middle">
+                                                            <div class="f-els1_2" title='{{$value.messageLecturer}}'>
+                                                                {{$value.messageLecturer}}
+                                                            </div>
+                                                        </td>
+                                                        <td style="vertical-align: middle">{{$value.date}}</td>
+                                                        <td style="vertical-align: middle" class="update_feed">
+                                                            <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#update_form_{{$value.weekNumber}}">Update</button>
+                                                        </td>
+                                                    </tr>
+                                                    {{/each}}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -258,7 +281,7 @@
             <form role="form" id="updateFeedback" action="/updateFeedback" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="teamNumber" class="col-form-label">Team Number</label>
+                        <label for="teamNumber" class="col-form-label">Group Number</label>
                         <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>
                     </div>
                     <div class="form-group">
@@ -266,10 +289,10 @@
                         <textarea id="weekNumber" type="text" rows="1" name="weekNumber" required readonly="readonly" class="form-control">{{$value.weekNumber}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="teamScore" class="col-form-label">Team Score</label>
+                        <label for="teamScore" class="col-form-label">Group Score</label>
                         <div class="col-sm">
                             <select class="form-control" name="teamScore" id="teamScore">
-                                <option value="Select">{{$value.score}}</option>
+                                <option value="{{$value.score}}">{{$value.score}}</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -281,7 +304,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Team Feedback</label>
+                        <label>Group Feedback</label>
                         <textarea class="form-control" name="feedbackTeam" rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
                     </div>
                     <div class="form-group">
@@ -294,8 +317,8 @@
                         <tr>
                             <th>Student Name</th>
                             <th>Week</th>
-                            <th>Score</th>
-                            <th>Contribution</th>
+                            <th style="width: 7rem;">Score</th>
+                            <th class="Contribution">Contribution</th>
                             <th>Individual Feedback</th>
                         </tr>
                         </thead>
@@ -373,11 +396,12 @@
             var weekNumber = stu_weekly_feedback[i][1]    //获取该行周数
             stu_weekly_feedback_html = stu_weekly_feedback_html +
                 "                         <tr>\n" +
-                "                            <td>"+stu_weekly_feedback[i][2+4*n]+"</td>\n" +   //获取第n个组员姓名
-                "                            <td>"+weekNumber+"</td>\n" +
-                "                            <td>\n" +
-                "                                <select class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
+                "                            <td style=\"vertical-align: middle\">"+stu_weekly_feedback[i][2+4*n]+"</td>\n" +   //获取第n个组员姓名
+                "                            <td style=\"vertical-align: middle\">"+weekNumber+"</td>\n" +
+                "                            <td style=\"vertical-align: middle\">\n" +
+                "                                <select style=\"width: 7rem; float: left;\"class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
                 "                                    <option value=\"Select\">"+stu_weekly_feedback[i][3+4*n]+"</option>\n" +  //获取第n个组员score
+                // Change the select to the "+stu_weekly_feedback[i][3+4*n]+", but don't know how
                 "                                    <option value=\"0\">0</option>\n" +
                 "                                    <option value=\"1\">1</option>\n" +
                 "                                    <option value=\"2\">2</option>\n" +
@@ -386,10 +410,10 @@
                 "                                    <option value=\"5\">5</option>\n" +
                 "                                </select>\n" +
                 "                            </td>\n" +
-                "                            <td>\n" +
+                "                            <td style=\"vertical-align: middle\">\n" +
                 "                                <textarea class=\"form-control\" name = \"studentContribution\" rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
                 "                            </td>\n" +
-                "                            <td>\n" +
+                "                            <td style=\"vertical-align: middle\">\n" +
                 "                                <textarea class=\"form-control\" name = \"studentFeedback\" rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
                 "                            </td>\n" +
                 "                        </tr>"
@@ -404,4 +428,3 @@
 </script>
 </body>
 </html>
-
