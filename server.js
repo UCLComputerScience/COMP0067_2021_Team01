@@ -5,8 +5,8 @@ var xlsx = require('node-xlsx')
 var fs = require('fs')
 var web = express()
 var databaseName = "feedback"
-var password = "password"
-var username = "username"
+var password = ""
+var username = "root"
 var host = "localhost"
 
 web.engine('html', require('express-art-template'))
