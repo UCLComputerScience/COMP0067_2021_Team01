@@ -51,6 +51,9 @@
             white-space:nowrap;
             text-align: center;
         }
+        .table th{
+            text-align: center;
+        }
         .group_numbers {
 			width: 7rem;
 		}
@@ -184,7 +187,7 @@
                                                 <th>Group</th>
                                                 <th>Project</th>
                                                 <th>Team Members</th>
-                                                <th>Last score</th>
+                                                <th style="width: 10rem">Last score</th>
                                                 <th>Feedback</th>
                                             </tr>
                                             </thead>
@@ -243,14 +246,14 @@
             <form role="form" id="provideFeedback" action="/provideFeedback" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="teamNumber" class="col-form-label">Team Number</label>
+                        <label for="teamNumber" class="col-form-label">Group Number</label>
                         <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>
                         <small id="scoreHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
                     </div>
                     <div class="form-group">
-                        <label for="weekNumber" class="col-form-label">Week Number</label>
+                        <label for="weekNumber" class="col-form-label">Week</label>
                         <div class="col-sm">
-                            <select class="form-control" name="weekNumber" id="weekNumber">
+                            <select class="form-control" name="weekNumber" id="weekNumber" required>
                                 <option value="Select">Select a week number</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -278,10 +281,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="teamScore" class="col-form-label">Team Score</label>
+                        <label for="teamScore" class="col-form-label">Group Score</label>
                         <div class="col-sm">
-                            <select class="form-control" name="teamScore" id="teamScore">
-                                <option value="Select">Select a score for the team</option>
+                            <select class="form-control" name="teamScore"id="teamScore" required>
+                                <option value="Select">Select a score for the group</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -293,8 +296,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="teamFeedback">Team Feedback</label>
-                        <textarea class="form-control" name="feedbackTeam" rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>
+                        <label for="teamFeedback">Group Feedback</label>
+                        <textarea class="form-control" name="feedbackTeam"  required rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="message">Message to Lecturer</label>
@@ -314,8 +317,8 @@
                         <tr>
                             <td>{{$value}}</td>
                             <td>
-                                <select class="form-control" name="studentScore" id="studentScore">
-                                    <option value="Select">Select a score</option>
+                                <select style="width: 10rem; text-align: center;"class="form-control" name="studentScore" id="studentScore" required>
+                                    <option value="Select">Select</option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -325,10 +328,10 @@
                                 </select>
                             </td>
                             <td>
-                                <textarea class="form-control" name = "studentContribution" rows="1" placeholder="Enter the contribution, 0-1."></textarea>
+                                <textarea class="form-control" name = "studentContribution" required rows="1" placeholder="Enter the contribution, 0-1."></textarea>
                             </td>
                             <td>
-                                <textarea class="form-control" name = "studentFeedback" rows="1" placeholder="Enter a short feedback."></textarea>
+                                <textarea class="form-control" name = "studentFeedback" required rows="1" placeholder="Enter a short feedback."></textarea>
                             </td>
                         </tr>
                         {{/each}}

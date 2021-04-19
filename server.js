@@ -1045,7 +1045,7 @@ web.post('/provideFeedback', function (req, res) {
             }
         })
     })
-    res.redirect('/TA_homepage')
+    res.redirect('/TA_module?moduleID='+selectedModID)
 })
 
 web.post('/updateFeedback', function (req, res) {
@@ -1110,7 +1110,7 @@ web.post('/updateFeedback', function (req, res) {
         })
 
     })
-    res.redirect('/TA_homepage')
+    res.redirect('/TA_group?moduleID='+selectedModID+'&teamNumber='+feedback.teamNumber)
 })
 
 web.listen(3000, function () {
