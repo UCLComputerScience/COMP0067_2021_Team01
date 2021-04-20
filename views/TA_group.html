@@ -308,7 +308,7 @@
                     </div>
                     <div class="form-group">
                         <label>Group Feedback</label>
-                        <textarea class="form-control" name="feedbackTeam" rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
+                        <textarea class="form-control" name="feedbackTeam" required rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Message to Lecturer</label>
@@ -404,7 +404,6 @@
                 "                            <td style=\"vertical-align: middle\">\n" +
                 "                                <select style=\"width: 7rem; float: left;\"class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
                 "                                    <option value=\""+stu_weekly_feedback[i][3+4*n]+"\">"+stu_weekly_feedback[i][3+4*n]+"</option>\n" +  //获取第n个组员score
-                // Change the select to the "+stu_weekly_feedback[i][3+4*n]+", but don't know how
                 "                                    <option value=\"0\">0</option>\n" +
                 "                                    <option value=\"1\">1</option>\n" +
                 "                                    <option value=\"2\">2</option>\n" +
@@ -414,10 +413,10 @@
                 "                                </select>\n" +
                 "                            </td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
-                "                                <textarea class=\"form-control\" name = \"studentContribution\" rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
+                "                                <textarea class=\"form-control\" name = \"studentContribution\" required rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
                 "                            </td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
-                "                                <textarea class=\"form-control\" name = \"studentFeedback\" rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
+                "                                <textarea class=\"form-control\" name = \"studentFeedback\" required rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
                 "                            </td>\n" +
                 "                        </tr>"
         }
