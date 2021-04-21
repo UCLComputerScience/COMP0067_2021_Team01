@@ -38,6 +38,24 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 	<style>
+		.menu li {
+			list-style:none;
+			float:left;
+			width:90px;
+			overflow:visible;
+			cursor:pointer;
+		}
+
+		ul.level2 {
+			width:90px;
+			display:none;
+		}
+		ul.level2 {
+			margin:-28px 0 0 90px;
+		}
+		li.imyeah:hover > ul, ul.level2 > li.imyeah:hover > ul {
+			display:block;
+		}
 		.fh5co-nav-style-1 .dropdown .dropdown-menu {
 			border: 1px solid #0b2e13;
 			background:#0f6674;
@@ -96,14 +114,22 @@
 				</div>
 				<div class="col-lg-5 col-md-5 col-sm-5 text-center fh5co-link-wrap">
 					<ul data-offcanvass="yes">
-						<li><a href="lecturer_homepage">Home</a></li>
+						<li><a href="lecturer_homepage" style="margin-left: 0;">Home</a></li>
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu" >
 								<div class="fh5co-link-wrap">
 									{{each modules}}
-									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
+									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}&YT={{$value.yearTerm}}">{{$value.moduleCode}}</a></li>
 									{{/each}}
+								</div>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown">Semester<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu" >
+								<div class="fh5co-link-wrap" style="width: 145px; text-align: center" id="year_semester">
+
 								</div>
 							</ul>
 						</li>
@@ -160,6 +186,7 @@
 												</div>
 											</div>
 											<div style="float: right;">
+												<button href="#" class="call-to-action" data-toggle="modal" data-target="#export_to_csv">Export module feedback</button>
 												<button href="#" class="call-to-action" data-toggle="modal" data-target="#create_form">Create a new module</button>
 											</div>
 											<br>
@@ -184,7 +211,7 @@
 															<td>{{$value.NumberOfStudent}}</td>
 															<td>{{$value.NumberOfTeam}}</td>
 															<td style="width: 15rem">
-																<button style="float: left;"href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.moduleCode}}">View</button>
+																<button style="float: left;" href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.moduleCode}}">View</button>
 																<button style="float: right; position: relative" href="#" class="call-to-action" data-toggle="modal" data-target="#modify_form_{{$value.moduleCode}}">Modify</button>
 															</td>
 														</tr>
@@ -193,6 +220,9 @@
 													</table>
 												</div>
 											</div>
+<!--											<div style="float: right; margin:auto auto 25px auto">-->
+<!--												<button href="#" class="call-to-action" data-toggle="modal" data-target="#set_year_semester">Set current year and semester</button>-->
+<!--											</div>-->
 										</div>
 									</div>
 								</div>
@@ -214,6 +244,73 @@
 	</div>
 	<!-- END page-->
 
+<!--	&lt;!&ndash;set_year_semester&ndash;&gt;-->
+<!--	<div class="modal fade" id="set_year_semester" tabindex="-1" role="dialog" aria-labelledby="lecturer_setYS"-->
+<!--		 aria-hidden="true">-->
+<!--		<div class="modal-dialog" role="document">-->
+<!--			<div class="modal-content">-->
+<!--				<div class="modal-header">-->
+<!--					<h5 class="modal-title" id="set_label">Export module feedback</h5>-->
+<!--					<button class="close" type="button" data-dismiss="modal" aria-label="Close">-->
+<!--						<span aria-hidden="true">×</span>-->
+<!--					</button>-->
+<!--				</div>-->
+<!--				<form role="form" id="setYS" action="/lecturer_setYS" method="post">-->
+<!--					<div class="modal-body">-->
+<!--						<div class="form-group"><br>-->
+<!--							<label>Year(Select a year)</label>-->
+<!--							<select class="form-control" name="year" id="year" required>-->
+
+<!--							</select>-->
+<!--						</div>-->
+<!--						<div class="form-group"><br>-->
+<!--							<label>Semester(Select a semester)</label>-->
+<!--							<select class="form-control" name="semester" id="semester" required>-->
+<!--								<option value="1" selected="selected">1</option>-->
+<!--								<option value="2">2</option>-->
+<!--								<option value="3">3</option>-->
+<!--							</select>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="modal-footer form-group">-->
+<!--						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>-->
+<!--						<button class="btn btn-primary" type="submit">Submit</button>-->
+<!--					</div>-->
+<!--				</form>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+
+	<!--export_csv-->
+	<div class="modal fade" id="export_to_csv" tabindex="-1" role="dialog" aria-labelledby="lecturer_exportCsv"
+		 aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="export_label">Export module feedback</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<form role="form" id="exportMod" action="/lecturer_exportCsv" method="post">
+					<div class="modal-body">
+						{{each moduleInfo}}
+						<div class="form-group" align="center">
+							<label>
+								<input type="checkbox" value="{{$value.moduleCode}}" name="module">  {{$value.moduleName}}
+							</label>
+						</div><br>
+						{{/each}}
+					</div>
+					<div class="modal-footer form-group">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+						<button class="btn btn-primary" type="submit">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 	<!--create_form-->
 	<div class="modal fade" id="create_form" tabindex="-1" role="dialog" aria-labelledby="create_form_label"
 		 aria-hidden="true">
@@ -225,7 +322,7 @@
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<form role="form" id="addMod" action="/lecturer_addModule" method="post">
+				<form role="form" id="addMod" action="/lecturer_addModule" enctype="multipart/form-data" method="post">
 					<div class="modal-body">
 						<div class="form-group"><br>
 							<label>Module ID</label>
@@ -234,6 +331,10 @@
 						<div class="form-group">
 							<label>Module name</label>
 							<input type="text" name="modName" class="form-control" required placeholder="Enter module name">
+						</div>
+						<div class="form-group">
+							<label>Year semester</label>
+							<input type="text" name="modYs" class="form-control" required placeholder="Enter module's year and semester (2021-1)">
 						</div>
 						<div class="form-group">
 							<label>Module description</label>
@@ -352,7 +453,6 @@
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 					</div>
 				</form>
-
 			</div>
 		</div>
 	</div>
@@ -407,5 +507,31 @@
 	<!-- Main -->
 	<script src="/public/js/main.js"></script>
 
+	<script>
+		// var date = new Date()
+		// var cur_year = parseInt(date.getFullYear())
+		// var stu_year_selection_html = '<option value="'+cur_year+'" selected="selected">'+cur_year+'</option>\n' +
+		// 		'<option value="'+(cur_year-1)+'">'+(cur_year-2)+'</option>\n' +
+		// 		'<option value="'+(cur_year-2)+'">'+(cur_year-1)+'</option>\n' +
+		// 		'<option value="'+(cur_year-3)+'">'+(cur_year+1)+'</option>\n' +
+		// 		'<option value="'+(cur_year-4)+'">'+(cur_year+2)+'</option>'
+		// document.getElementById("year").innerHTML = stu_year_selection_html    //将该周的html插入对应的modal
+	</script>
+<script>
+	var year_dropsown_list_html = ''
+	var date = new Date()
+	var cur_year = parseInt(date.getFullYear())
+	for (var i=0; i<4; i++) {
+		year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year '+(cur_year-i)+'</a>\n' +
+				'\t\t\t\t\t\t\t\t\t\t<ul class="level2">\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li>select a semester</li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-1">1</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-2">2</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-3">3</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t</ul>\n' +
+				'\t\t\t\t\t\t\t\t\t</li><br>'
+	}
+	document.getElementById("year_semester").innerHTML = year_dropsown_list_html
+</script>
 	</body>
 </html>

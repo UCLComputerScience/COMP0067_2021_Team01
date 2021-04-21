@@ -16,7 +16,6 @@
   //////////////////////////////////////////////////////
   FREE HTML5 TEMPLATE
   DESIGNED & DEVELOPED by FREEHTML5.CO
-
   Website: 		http://freehtml5.co/
   Email: 			info@freehtml5.co
   Twitter: 		http://twitter.com/fh5co
@@ -55,14 +54,14 @@
             text-align: center;
         }
         .group_numbers {
-			width: 7rem;
-		}
+            width: 7rem;
+        }
         .project_names {
-			width: 40rem;
-		}
+            width: 40rem;
+        }
         .member_names {
-			width: 10rem;
-		}
+            width: 10rem;
+        }
         .feedback_group {
             width: 10rem;
         }
@@ -132,7 +131,7 @@
                 <ul data-offcanvass="yes">
                     <li><a href="TA_homepage">Home</a></li>
                     <li class="dropdown active">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" >
                             <div class="fh5co-link-wrap">
                                 {{each mods}}
@@ -408,7 +407,7 @@
             e.preventDefault();
             if ($('#weekNumber').val() == 'Select') {
                 $("#weekNumber").focus();
-            } 
+            }
             else if ($('#teamScore').val()== 'Select'){
                 $("#teamScore").focus();
             }
@@ -419,23 +418,23 @@
                 $("#feedbackTeam").focus();
                 alert("You have exceeded the 200 maximum character");
             }
-            else if ($('#studentScore_$value.indexnumber').val()== 'Select'){
-                $("#studentScore_$value.indexnumber").focus();
-            }
-            else if ($('#studentContribution_$value.indexnumber').val()==''){
-                $("#studentContribution_$value.indexnumber").focus();
-            }
-            // else if (typeof($('#studentContribution').val())=='string'){
-            //     $("#studentContribution").focus();
-            //     alert("Please enter a numerical value.");
+            // else if ($('#studentScore_$value.indexnumber').val()== 'Select'){
+            //     $("#studentScore_$value.indexnumber").focus();
             // }
-            else if ($('#studentContribution_$value.indexnumber').val()>1){
-                $("#studentContribution_$value.indexnumber").focus();
-                alert("Please enter a numerical value smaller or equal to 1");
-            }
-            else if ($('#studentFeedback_$value.indexnumber').val()==''){
-                $("#studentFeedback_$value.indexnumber").focus();
-            }
+            // else if ($('#studentContribution_$value.indexnumber').val()==''){
+            //     $("#studentContribution_$value.indexnumber").focus();
+            // }
+                // else if (typeof($('#studentContribution').val())=='string'){
+                //     $("#studentContribution").focus();
+                //     alert("Please enter a numerical value.");
+            // }
+            // else if ($('#studentContribution_$value.indexnumber').val()>1){
+            //     $("#studentContribution_$value.indexnumber").focus();
+            //     alert("Please enter a numerical value smaller or equal to 1");
+            // }
+            // else if ($('#studentFeedback_$value.indexnumber').val()==''){
+            //     $("#studentFeedback_$value.indexnumber").focus();
+            // }
             else {
                 $('#provideFeedback').submit();
             }
