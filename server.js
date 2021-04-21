@@ -821,6 +821,9 @@ web.get('/TA_module', function (req, res) {
         'JOIN (' + queryGroupLatestScore + ') AS gLastScore ON (ProjectInfo.teamNumber=gLastScore.teamNumber) ' +
         'WHERE ProjectInfo.moduleCode="' + selectedModID + '" AND ProjectInfo.taStudentSPR="' + uname + '" '
 
+    // This query shows the weeks that have had feedback
+    var queryWeekNumber = 'SELECT weekNumber FROM `teamfeedback` WHERE `moduleCode`="' + selectedModID + '" GROUP BY weekNumber'
+
     var connection = mysql.createConnection({
         host: host,
         user: username,
@@ -839,17 +842,42 @@ web.get('/TA_module', function (req, res) {
 
             var studentNames = TAGroups[0].studentName
             var studentNamesArray = studentNames.split(',')
-
-
-            res.render('TA_module.html', {
-                uname: req.session.taFullName,
-                mods: allMod,
-                module: ModCurrent[0],
-                coachedGroups: TAGroups,
-                studentNames: studentNamesArray
-
+            var studentIndexNames = new Array()
+            var studentNumber = studentNamesArray.length
+            for (i=0; i<studentNumber; i++){
+                studentIndexNames[i] = new Object()
+                studentIndexNames[i].indexnumber = i.toString()
+                studentIndexNames[i].name = studentNamesArray[i]
+            }
+            console.log(studentIndexNames)
+            connection.query(queryWeekNumber, function(error, weekNumbers){
+                if (error) {
+                    console.log(error)
+                }
+                var weekexist = new Array()
+                for (j=0; j<weekNumbers.length; j++){
+                    weekexist[j]=weekNumbers[j].weekNumber
+                }
+                var weeknum =new Array()
+                var listIndex=0
+                for (s=1; s<21;s++){
+                    if (weekexist.includes(s.toString())){
+                        continue
+                    }
+                    else{
+                        weeknum[listIndex]=s.toString()
+                    }
+                    listIndex++
+                }
+                res.render('TA_module.html', {
+                    uname: req.session.taFullName,
+                    mods: allMod,
+                    module: ModCurrent[0],
+                    coachedGroups: TAGroups,
+                    studentNames: studentIndexNames,
+                    weekNumbers: weeknum
+                })
             })
-
         })
     })
 })
