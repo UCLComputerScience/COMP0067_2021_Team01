@@ -50,6 +50,9 @@
             white-space:nowrap;
             text-align: center;
         }
+        .table th{
+            text-align: center;
+        }
         .font1 {
             font-weight: bold;
             color: #000000;
@@ -140,7 +143,7 @@
                 <ul data-offcanvass="yes">
                     <li><a href="TA_homepage">Home</a></li>
                     <li class="dropdown active">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" >
                             <div class="fh5co-link-wrap">
                                 {{each mods}}
@@ -292,7 +295,7 @@
                         <label for="teamScore" class="col-form-label">Group Score</label>
                         <div class="col-sm">
                             <select class="form-control" name="teamScore" id="teamScore">
-                                <option value="Select">{{$value.score}}</option>
+                                <option value="{{$value.score}}">{{$value.score}}</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -305,7 +308,7 @@
                     </div>
                     <div class="form-group">
                         <label>Group Feedback</label>
-                        <textarea class="form-control" name="feedbackTeam" rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
+                        <textarea class="form-control" name="feedbackTeam" required rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Message to Lecturer</label>
@@ -400,7 +403,7 @@
                 "                            <td style=\"vertical-align: middle\">"+weekNumber+"</td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
                 "                                <select style=\"width: 7rem; float: left;\"class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
-                "                                    <option value=\"Select\">"+stu_weekly_feedback[i][3+4*n]+"</option>\n" +  //获取第n个组员score
+                "                                    <option value=\""+stu_weekly_feedback[i][3+4*n]+"\">"+stu_weekly_feedback[i][3+4*n]+"</option>\n" +  //获取第n个组员score
                 "                                    <option value=\"0\">0</option>\n" +
                 "                                    <option value=\"1\">1</option>\n" +
                 "                                    <option value=\"2\">2</option>\n" +
@@ -410,10 +413,10 @@
                 "                                </select>\n" +
                 "                            </td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
-                "                                <textarea class=\"form-control\" name = \"studentContribution\" rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
+                "                                <textarea class=\"form-control\" name = \"studentContribution\" required rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
                 "                            </td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
-                "                                <textarea class=\"form-control\" name = \"studentFeedback\" rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
+                "                                <textarea class=\"form-control\" name = \"studentFeedback\" required rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
                 "                            </td>\n" +
                 "                        </tr>"
         }

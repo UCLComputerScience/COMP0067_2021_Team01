@@ -16,7 +16,6 @@
   //////////////////////////////////////////////////////
   FREE HTML5 TEMPLATE
   DESIGNED & DEVELOPED by FREEHTML5.CO
-
   Website: 		http://freehtml5.co/
   Email: 			info@freehtml5.co
   Twitter: 		http://twitter.com/fh5co
@@ -51,6 +50,9 @@
             white-space:nowrap;
             text-align: center;
         }
+        .table th{
+            text-align: center;
+        }
         .group_numbers {
             width: 7rem;
         }
@@ -70,7 +72,7 @@
             text-align: center;
         }
         .f-els1_1 {
-            width: 10rem;
+            width: 12rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -129,7 +131,7 @@
                 <ul data-offcanvass="yes">
                     <li><a href="TA_homepage">Home</a></li>
                     <li class="dropdown active">
-                        <a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" >
                             <div class="fh5co-link-wrap">
                                 {{each mods}}
@@ -183,15 +185,15 @@
                                             <tr>
                                                 <th>Group</th>
                                                 <th>Project</th>
-                                                <th>Team Members</th>
-                                                <th>Last score</th>
+                                                <th style="width: 10rem">Team Members</th>
+                                                <th style="width: 10rem">Last score</th>
                                                 <th>Feedback</th>
                                             </tr>
                                             </thead>
                                             <tbody class="gro_li">
                                             {{each coachedGroups}}
                                             <tr>
-                                                <td style="vertical-align: middle" class="group_numbers">{{$value.teamNumber}}</td>
+                                                <td style="vertical-align: middle; width: 12rem;" class="group_numbers">{{$value.teamNumber}}</td>
                                                 <td style="vertical-align: middle" class="project_names">{{$value.projectTitle}}</td>
                                                 <td style="vertical-align: middle" class="member_names">
                                                     <div class="f-els1_1" title='{{$value.studentName}}'>
@@ -243,14 +245,14 @@
             <form role="form" id="provideFeedback" action="/provideFeedback" method="post">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="teamNumber" class="col-form-label">Team Number</label>
+                        <label for="teamNumber" class="col-form-label">Group Number</label>
                         <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>
                         <small id="scoreHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
                     </div>
                     <div class="form-group">
-                        <label for="weekNumber" class="col-form-label">Week Number</label>
+                        <label for="weekNumber" class="col-form-label">Week</label>
                         <div class="col-sm">
-                            <select class="form-control" name="weekNumber" id="weekNumber">
+                            <select class="form-control" name="weekNumber" id="weekNumber" required>
                                 <option value="Select">Select a week number</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -273,15 +275,14 @@
                                 <option value="19">19</option>
                                 <option value="20">20</option>
                             </select>
-                            <!-- <input type="text" class="form-control" name="teamScore" id="teamScore"placeholder="Enter the score for each team for a given project"> -->
                             <small id="weekHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="teamScore" class="col-form-label">Team Score</label>
+                        <label for="teamScore" class="col-form-label">Group Score</label>
                         <div class="col-sm">
-                            <select class="form-control" name="teamScore" id="teamScore">
-                                <option value="Select">Select a score for the team</option>
+                            <select class="form-control" name="teamScore"id="teamScore" required>
+                                <option value="Select">Select a score for the group</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -293,8 +294,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="teamFeedback">Team Feedback</label>
-                        <textarea class="form-control" name="feedbackTeam" rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>
+                        <label for="teamFeedback">Group Feedback</label>
+                        <textarea class="form-control" name="feedbackTeam" id="feedbackTeam" required rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="message">Message to Lecturer</label>
@@ -314,8 +315,8 @@
                         <tr>
                             <td>{{$value}}</td>
                             <td>
-                                <select class="form-control" name="studentScore" id="studentScore">
-                                    <option value="Select">Select a score</option>
+                                <select style="width: 10rem; text-align: center;"class="form-control" name="studentScore" id="studentScore" required>
+                                    <option value="Select">Select</option>
                                     <option value="0">0</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -325,10 +326,10 @@
                                 </select>
                             </td>
                             <td>
-                                <textarea class="form-control" name = "studentContribution" rows="1" placeholder="Enter the contribution, 0-1."></textarea>
+                                <textarea class="form-control" name = "studentContribution" id="studentContribution" required rows="1" placeholder="Enter the contribution, 0-1."></textarea>
                             </td>
                             <td>
-                                <textarea class="form-control" name = "studentFeedback" rows="1" placeholder="Enter a short feedback."></textarea>
+                                <textarea class="form-control" name = "studentFeedback" id="studentFeedback" required rows="1" placeholder="Enter a short feedback."></textarea>
                             </td>
                         </tr>
                         {{/each}}
@@ -337,7 +338,7 @@
                 </div>
                 <div class="modal-footer form-group">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" id="mySubmit" type="submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -393,5 +394,49 @@
 <script src="/public/js/datatables-demo.js"></script>
 <!-- Main -->
 <script src="/public/js/main.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#mySubmit').click(function (e) {
+            // var textarea = document.forms["form"].elements.textarea;
+            // $("#textarea").keyup(function(){
+            // $("#count").text("Characters left: " + (500 - $(this).val().length));
+            // });
+            e.preventDefault();
+            if ($('#weekNumber').val() == 'Select') {
+                $("#weekNumber").focus();
+            }
+            else if ($('#teamScore').val()== 'Select'){
+                $("#teamScore").focus();
+            }
+            else if ($('#feedbackTeam').val()==''){
+                $("#feedbackTeam").focus();
+            }
+            else if ($('#feedbackTeam').val().length >200){
+                $("#feedbackTeam").focus();
+                alert("You have exceeded the 200 maximum character");
+            }
+            else if ($('#studentScore').val()== 'Select'){
+                $("#studentScore").focus();
+            }
+            else if ($('#studentContribution').val()==''){
+                $("#studentContribution").focus();
+            }
+                // else if (typeof($('#studentContribution').val())=='string'){
+                //     $("#studentContribution").focus();
+                //     alert("Please enter a numerical value.");
+            // }
+            else if ($('#studentContribution').val()>1){
+                $("#studentContribution").focus();
+                alert("Please enter a numerical value smaller or equal to 1");
+            }
+            else if ($('#studentFeedback').val()==''){
+                $("#studentFeedback").focus();
+            }
+            else {
+                $('#provideFeedback').submit();
+            }
+        });
+    });
+</script>
 </body>
 </html>

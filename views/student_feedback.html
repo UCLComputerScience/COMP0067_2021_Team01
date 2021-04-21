@@ -38,7 +38,24 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 	<style>
+		.menu li {
+			list-style:none;
+			float:left;
+			width:90px;
+			overflow:visible;
+			cursor:pointer;
+		}
 
+		ul.level2 {
+			width:90px;
+			display:none;
+		}
+		ul.level2 {
+			margin:-28px 0 0 90px;
+		}
+		li.imyeah:hover > ul, ul.level2 > li.imyeah:hover > ul {
+			display:block;
+		}
 		.fh5co-nav-style-1 .dropdown .dropdown-menu {
 			border: 1px solid #0b2e13;
 			background: #0f6674;
@@ -217,7 +234,7 @@
 				<ul data-offcanvass="yes">
 					<li><a href="student_homepage">Home</a></li>
 					<li class="dropdown active">
-						<a class="dropdown-toggle" data-toggle="dropdown">Module<span class="caret"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<div class="fh5co-link-wrap">
 								{{each modules}}
@@ -228,7 +245,14 @@
 							</div>
 						</ul>
 					</li>
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">Semester<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu" >
+							<div class="fh5co-link-wrap" style="width: 145px; text-align: center" id="year_semester">
 
+							</div>
+						</ul>
+					</li>
 				</ul>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-4 text-right fh5co-link-wrap">
@@ -646,7 +670,22 @@
 
 	// });
 </script>
-
+<script>
+	var year_dropsown_list_html = ''
+	var date = new Date()
+	var cur_year = parseInt(date.getFullYear())
+	for (var i=0; i<4; i++) {
+		year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year '+(cur_year-i)+'</a>\n' +
+				'\t\t\t\t\t\t\t\t\t\t<ul class="level2">\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li>select a semester</li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="student_setYS?YS='+(cur_year-i)+'-1">1</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="student_setYS?YS='+(cur_year-i)+'-2">2</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="student_setYS?YS='+(cur_year-i)+'-3">3</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t</ul>\n' +
+				'\t\t\t\t\t\t\t\t\t</li><br>'
+	}
+	document.getElementById("year_semester").innerHTML = year_dropsown_list_html
+</script>
 
 
 </body>
