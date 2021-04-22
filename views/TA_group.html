@@ -34,6 +34,37 @@
     <meta name="twitter:url" content="" />
     <meta name="twitter:card" content="" />
     <style>
+        .add {
+            border: 1px solid #888888;
+            /*width: 10%;*/
+            height: 25px;
+            color: #ccc;
+            transition: color .25s;
+            position: relative;
+        }
+        .add::before{
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            margin-left: -9px;
+            margin-top: -3px;
+            border-top: 3px solid;
+        }
+        .add::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 20px;
+            margin-left: 0;
+            margin-top: -10px;
+            border-left: 3px solid;
+        }
+        .add:hover {
+            color: blue;
+        }
         .fh5co-nav-style-1 .dropdown .dropdown-menu {
             border: 1px solid #0b2e13;
             background:#0f6674;
@@ -78,7 +109,7 @@
             text-align: center;
         }
         .f-els1_2 {
-            width: 10rem;
+            width: 20rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -147,7 +178,7 @@
                         <ul class="dropdown-menu" role="menu" >
                             <div class="fh5co-link-wrap">
                                 {{each mods}}
-                                <li><a href="TA_group?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
+                                <li><a href="TA_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
                                 {{/each}}
                             </div>
                         </ul>
@@ -194,21 +225,38 @@
                                     <div class="fade in active wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
                                         <div class="row">
                                             <div class="container">
-                                                {{each teamMember}}
-                                                <div class="text-center" style="display: block; float: left; position: relative; width:160px; height:200px">
-                                                    <img src="{{$value.fileLocation}}" width="130" height="160" >
-                                                    <div class="row text-center">
-                                                        <h5><font class="font1">Member {{$value.memberIndex}}:</font><br><font class="font2">{{$value.forename}} {{$value.surname}}</font></h5>
+                                                <div class="col-md-6">
+                                                    <div style="width: 100%; display: block">
+                                                        {{each teamMember}}
+                                                        <div class="text-center" style="display: block; float: left; position: relative; width:160px; height:200px">
+                                                            <img src="{{$value.fileLocation}}" width="130" height="160" >
+                                                            <div class="row text-center">
+                                                                <h5><font class="font1">Member {{$value.memberIndex}}:</font><br><font class="font2">{{$value.forename}} {{$value.surname}}</font></h5>
+                                                            </div>
+                                                        </div>
+                                                        {{/each}}
                                                     </div>
                                                 </div>
-                                                {{/each}}
+                                                <div class="col-md-6">
+                                                    <div class="container" style="margin-top: 15px; width:100%">
+                                                        <h4 style="margin-bottom: 10px; color: #062c33">Module plan</h4>
+                                                        <textarea rows="5" style="margin: 10px 0 10px 0; width: 90%;">{{module.modulePlan}}</textarea>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <br>
-                                        <div class="table-responsive" style="background-color: #ffffff; margin: 0 0 25px 0">
+                                        <div class="row">
+                                            <button class="call-to-action add col-lg-offset-9 col-lg-1" data-toggle="modal" data-target="#provide_form">
+                                            </button>
+                                            <div class="col-lg-2" style="position: relative; margin-bottom: 10px">
+                                                provide feedback
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive row" style="background-color: #ffffff; margin: 0 0 25px 0">
                                             <br>
                                             <div style="margin:auto 25px auto 25px">
-                                                <table class="table table-bordered" width="100%" cellspacing="0">
+                                                <table id="dataTable1" class="table table-bordered" width="100%" cellspacing="0">
                                                     <thead>
                                                     <tr>
                                                         <th>Week</th>
@@ -236,14 +284,13 @@
                                                         </td>
                                                         <td style="vertical-align: middle">{{$value.date}}</td>
                                                         <td style="vertical-align: middle" class="update_feed">
-                                                            <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#update_form_{{$value.weekNumber}}">Update</button>
+                                                            <button href="#" class="call-to-action" data-toggle="modal" data-target="#update_form_{{$value.weekNumber}}" id="{{$value.weekNumber}}" onclick="getID(id)">Update</button>
                                                         </td>
                                                     </tr>
                                                     {{/each}}
                                                     </tbody>
                                                 </table>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -267,8 +314,105 @@
     <!-- END footer -->
 </div>
 
-<input type="hidden" value="{{weeklyFeedback}}" id="weekly_feedback">
+<!--provide_form-->
+<div class="modal fade in active" id="provide_form" tabindex="-1" role="dialog" aria-labelledby="provide_form_label" aria-hidden="true">
+    <div class="modal-dialog" role="document" style="width: 850px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="provide_form_label">Provide new feedback</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form role="form" id="provideFeedback" action="/provideFeedback" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="teamNumber" class="col-form-label">Group Number</label>
+                        <textarea id="teamNumber_provide" type="text" rows="1" name="teamNumber" readonly="readonly" class="form-control">{{group}}</textarea>
+                        <small id="scoreHelp1" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="weekNumber_provide" class="col-form-label">Week</label>
+                        <div class="col-sm">
+                            <select class="form-control" name="weekNumber" id="weekNumber">
+                                <option value="Select">Select a week number</option>
+                                {{each weekNumbers}}
+                                <option value="{{$value}}">{{$value}}</option>
+                                {{/each}}
+                            </select>
+                            <small id="weekHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="teamScore" class="col-form-label">Group Score</label>
+                        <div class="col-sm">
+                            <select class="form-control" name="teamScore" id="teamScore_provide">
+                                <option value="Select">Select a score for the group</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <small id="scoreHelp2" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="teamFeedback">Group Feedback</label>
+                        <textarea class="form-control" name="feedbackTeam" id="feedbackTeam_provide" rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message to Lecturer</label>
+                        <textarea class="form-control" name="message" rows="5" placeholder="Enter message to the lecturer, if any, for the whole team for the past week"></textarea>
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Score</th>
+                            <th>Contribution(%)</th>
+                            <th>Individual Feedback</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each teamMember}}
+                        <tr>
+                            <td>{{$value.forename}} {{$value.surname}}</td>
+                            <td>
+                                <select style="width: 10rem; text-align: center;" class="form-control" name="studentScore" id="studentScore_provide_{{$value.memberIndex}}">
+                                    <option value="Select">Select</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td>
+                                <textarea class="form-control" name="studentContribution" id="studentContribution_provide_{{$value.memberIndex}}" rows="1" placeholder="Enter the contribution, 0-100."></textarea>
+                            </td>
+                            <td>
+                                <textarea class="form-control" name="studentFeedback" id="studentFeedback_provide_{{$value.memberIndex}}" rows="1" placeholder="Enter a short feedback."></textarea>
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer form-group">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="provide_submit" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+<input type="hidden" value="{{weeklyFeedback}}" id="weekly_feedback">
+<input type="hidden" value="{{memberNumber}}" id="member_number">
+<input type="hidden" value="{{weeks}}" id="weeks">
 <!-- END page-->
 <!--update_form-->
 {{each teamFeedback}}
@@ -281,20 +425,20 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form role="form" id="updateFeedback" action="/updateFeedback" method="post">
+            <form role="form" id="updateFeedback_{{$value.weekNumber}}" action="/updateFeedback" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="teamNumber" class="col-form-label">Group Number</label>
-                        <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>
+                        <textarea id="teamNumber_update" type="text" rows="1" name="teamNumber" readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="weekNumber" class="col-form-label">Week Number</label>
-                        <textarea id="weekNumber" type="text" rows="1" name="weekNumber" required readonly="readonly" class="form-control">{{$value.weekNumber}}</textarea>
+                        <textarea id="weekNumber_update" type="text" rows="1" name="weekNumber" readonly="readonly" class="form-control">{{$value.weekNumber}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="teamScore" class="col-form-label">Group Score</label>
                         <div class="col-sm">
-                            <select class="form-control" name="teamScore" id="teamScore">
+                            <select class="form-control" name="teamScore" id="teamScore_modify_{{$value.weekNumber}}">
                                 <option value="{{$value.score}}">{{$value.score}}</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
@@ -308,7 +452,7 @@
                     </div>
                     <div class="form-group">
                         <label>Group Feedback</label>
-                        <textarea class="form-control" name="feedbackTeam" required rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
+                        <textarea class="form-control" name="feedbackTeam" id="feedbackTeam_modify_{{$value.weekNumber}}" rows="5" placeholder="Enter feedback for the whole team for the past week">{{$value.writtenFeedback}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Message to Lecturer</label>
@@ -321,7 +465,7 @@
                             <th>Student Name</th>
                             <th>Week</th>
                             <th style="width: 7rem;">Score</th>
-                            <th class="Contribution">Contribution</th>
+                            <th class="Contribution">Contribution(%)</th>
                             <th>Individual Feedback</th>
                         </tr>
                         </thead>
@@ -332,7 +476,7 @@
                 </div>
                 <div class="modal-footer form-group">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="submit" id="modify_submit_{{$value.weekNumber}}">Submit</button>
                 </div>
             </form>
         </div>
@@ -402,7 +546,7 @@
                 "                            <td style=\"vertical-align: middle\">"+stu_weekly_feedback[i][2+4*n]+"</td>\n" +   //获取第n个组员姓名
                 "                            <td style=\"vertical-align: middle\">"+weekNumber+"</td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
-                "                                <select style=\"width: 7rem; float: left;\"class=\"form-control\" name=\"studentScore\" id=\"studentScore\">\n" +
+                "                                <select style=\"width: 7rem; float: left;\" class=\"form-control\" name=\"studentScore\" id=\"studentScore_modify_"+(i+1)+"_"+n+"\">\n" +
                 "                                    <option value=\""+stu_weekly_feedback[i][3+4*n]+"\">"+stu_weekly_feedback[i][3+4*n]+"</option>\n" +  //获取第n个组员score
                 "                                    <option value=\"0\">0</option>\n" +
                 "                                    <option value=\"1\">1</option>\n" +
@@ -413,10 +557,10 @@
                 "                                </select>\n" +
                 "                            </td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
-                "                                <textarea class=\"form-control\" name = \"studentContribution\" required rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
+                "                                <textarea class=\"form-control\" name = \"studentContribution\" id=\"studentContribution_modify_"+(i+1)+"_"+n+"\" rows=\"1\" placeholder=\"Enter the contribution, 0-100.\">"+stu_weekly_feedback[i][4+4*n]+"</textarea>\n" +  //获取第n个组员contribution
                 "                            </td>\n" +
                 "                            <td style=\"vertical-align: middle\">\n" +
-                "                                <textarea class=\"form-control\" name = \"studentFeedback\" required rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
+                "                                <textarea class=\"form-control\" name = \"studentFeedback\" id=\"studentFeedback_modify_"+(i+1)+"_"+n+"\" rows=\"1\" placeholder=\"Enter a short feedback.\">"+stu_weekly_feedback[i][5+4*n]+"</textarea>\n" +  //获取第n个组员feedback
                 "                            </td>\n" +
                 "                        </tr>"
         }
@@ -426,7 +570,204 @@
         document.getElementById(id).innerHTML = stu_weekly_feedback_html    //将该周的html插入对应的modal
         stu_weekly_feedback_html = ""  //将html变量清空，准备下一次while循环
     }
+</script>
+<script>
+    var get_id =''
+    $(document).ready(function () {
+        $('#provide_submit').click(function (e) {
+            e.preventDefault();
+            var number = parseInt(document.getElementById("member_number").value)
+            var fd_id = ''
+            var con_id = ''
+            var sco_id = ''
+            var contribution = 0
+            var state = 0
+            for(var i = 1; i <= number; i++) {
+                con_id = "#studentContribution_update_" + i
+                contribution = contribution + parseInt($(con_id).val())
+                // console.log(contribution)
+            }
+            if ($('#weekNumber').val() === 'Select') {
+                $("#weekNumber").focus();
+                // alert("Please select a week.");
+            }
+            else if ($('#teamScore_provide').val() === 'Select'){
+                $("#teamScore_provide").focus();
+                // alert("Please select a score.");
+            }
+            else if ($('#feedbackTeam_provide').val() === ''){
+                $("#feedbackTeam_provide").focus();
+            }
+            else if (typeof $('#feedbackTeam_provide').val() === 'undefined'){
+                $('#feedbackTeam_provide').focus();
+            }
+            else if ($('#feedbackTeam_provide').val().length > 200){
+                $("#feedbackTeam_provide").focus();
+                alert("You have exceeded the 200 maximum character");
+            }
+            else {
+                state = 1
+            }
+            if (state === 1) {
+                for(i = 1; i <= number; i++) {
+                    fd_id = "#studentFeedback_provide_" + i
+                    con_id = "#studentContribution_provide_" + i
+                    sco_id = "#studentScore_provide_" + i
+                    // console.log("****************")
+                    if ($(sco_id).val() === 'Select'){
+                        $(sco_id).focus();
+                        state = 0;
+                        alert("Please select a score.");
+                        break;
+                    }
+                    else if ($(con_id).val() === ''){
+                        $(con_id).focus();
+                        state = 0;
+                        break;
+                    }
+                    else if (typeof $(con_id).val() === 'undefined'){
+                        $(con_id).focus();
+                        state = 0;
+                        break;
+                    }
+                    else if ($(con_id).val()>100 || $(con_id).val()<0){
+                        $(con_id).focus();
+                        alert("Please enter a numerical value from 0 to 100");
+                        state = 0;
+                        break;
+                    }
+                    else if ($(fd_id).val() === ''){
+                        $(fd_id).focus();
+                        state = 0;
+                        break;
+                    }
+                    else if (typeof $(fd_id).val() === 'undefined'){
+                        $(fd_id).focus();
+                        state = 0;
+                        break;
+                    }
+                    else if ($(fd_id).val().length > 200){
+                        $(fd_id).focus();
+                        alert("You have exceeded the 200 maximum character");
+                        state = 0;
+                        break;
+                    }
+                }
+            }
+            if (state === 1) {
+                // console.log("&&&&&&&&&&&&&&&&")
+                // console.log(contribution)
+                if (contribution !== 100) {
+                    alert("The sum of contributions should be equal to 100");
+                }
+                else {
+                    $('#provideFeedback').submit();
+                }
+            }
+        });
+    });
 
+    function getID(id) {
+        get_id =id
+        // console.log(get_id)
+    }
+
+    $(document).ready(function () {
+        var btn_id = ''
+        var weeks = parseInt(document.getElementById("weeks").value)
+
+        for (var m = 1; m <= weeks; m++) {
+            btn_id = '#modify_submit_'+m
+            $(btn_id).click(function (e) {
+                // console.log(get_id)
+                e.preventDefault();
+                var number = parseInt(document.getElementById("member_number").value)
+                var fd_id = ''
+                var con_id = ''
+                var sco_id = ''
+                var contribution = 0
+                var state = 0
+                for(var i = 1; i <= number; i++) {
+                    con_id = "#studentContribution_modify_" + get_id + '_' + i
+                    contribution = contribution + parseInt($(con_id).val())
+                    console.log(contribution)
+                }
+                if ($('#teamScore_modify_' + get_id).val() === 'Select'){
+                    $("#teamScore_modify_" + get_id).focus();
+                    // alert("Please select a score.");
+                }
+                else if ($('#feedbackTeam_modify_' + get_id).val() === ''){
+                    $("#feedbackTeam_modify_" + get_id).focus();
+                }
+                else if (typeof $('#feedbackTeam_modify_' + get_id).val() === 'undefined'){
+                    $('#feedbackTeam_modify_' + get_id).focus();
+                }
+                else if ($('#feedbackTeam_modify_' + get_id).val().length > 200){
+                    $("#feedbackTeam_modify_" + get_id).focus();
+                    alert("You have exceeded the 200 maximum character");
+                }
+                else {
+                    state = 1
+                }
+                if (state === 1) {
+                    for(i = 1; i <= number; i++) {
+                        fd_id = "#studentFeedback_modify_" + get_id + '_' + i
+                        con_id = "#studentContribution_modify_" + get_id + '_' + i
+                        sco_id = "#studentScore_modify_" + get_id + '_' + i
+                        // console.log("****************")
+                        if ($(sco_id).val() === 'Select'){
+                            $(sco_id).focus();
+                            state = 0;
+                            alert("Please select a score.");
+                            break;
+                        }
+                        else if ($(con_id).val() === ''){
+                            $(con_id).focus();
+                            state = 0;
+                            break;
+                        }
+                        else if (typeof $(con_id).val() === 'undefined'){
+                            $(con_id).focus();
+                            state = 0;
+                            break;
+                        }
+                        else if ($(con_id).val()>100 || $(con_id).val()<0){
+                            $(con_id).focus();
+                            alert("Please enter a numerical value from 0 to 100");
+                            state = 0;
+                            break;
+                        }
+                        else if ($(fd_id).val() === ''){
+                            $(fd_id).focus();
+                            state = 0;
+                            break;
+                        }
+                        else if (typeof $(fd_id).val() === 'undefined'){
+                            $(fd_id).focus();
+                            state = 0;
+                            break;
+                        }
+                        else if ($(fd_id).val().length > 200){
+                            $(fd_id).focus();
+                            alert("You have exceeded the 200 maximum character");
+                            state = 0;
+                            break;
+                        }
+                    }
+                }
+                if (state === 1) {
+                    // console.log("&&&&&&&&&&&&&&&&")
+                    // console.log(contribution)
+                    if (contribution !== 100) {
+                        alert("The sum of contributions should be equal to 100");
+                    }
+                    else {
+                        $('#updateFeedback_'+get_id).submit();
+                    }
+                }
+            });
+        }
+    });
 </script>
 </body>
 </html>

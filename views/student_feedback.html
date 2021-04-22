@@ -145,7 +145,7 @@
 			width: 33rem;
 		}
 		.f-els1_1 {
-			width: 33rem;
+			width: 60rem;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -176,6 +176,14 @@
 			border-radius:5px;
 			border: 1px solid #c0c0c0;
 			background-color: #ffffff;
+		}
+		.font1 {
+			font-weight: bold;
+			color: #000000;
+		}
+		.font2 {
+			font-weight: normal;
+			color: #495057;
 		}
 	</style>
 
@@ -238,8 +246,8 @@
 						<ul class="dropdown-menu" role="menu">
 							<div class="fh5co-link-wrap">
 								{{each modules}}
-								<li><a
-										href="student_feedback?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a>
+								<li>
+									<a href="student_feedback?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a>
 								</li>
 								{{/each}}
 							</div>
@@ -269,162 +277,151 @@
 		 style="background-image: url(/public/images/img_same_dimension_3.jpg);">
 		<!--			<div class="fh5co-overlay"></div>-->
 		<div class="fh5co-cover-text">
-			<div class="fh5co-overlay"></div>
-			<div class="fh5co-cover-text">
+			<div class="container">
+				<br><br><br><br><br>
+				<nav class="navbar" role="navigation">
+					<ol class="breadcrumb">
+						<li class="li"><a href="student_homepage">Home</a></li>
+						<li class="active">{{module.moduleName}}</li>
+					</ol>
+				</nav>
+			</div>
 
-				<div>
-					<div class="container">
-						<br><br><br><br><br>
-						<nav class="navbar" role="navigation">
-							<ol class="breadcrumb">
-								<li class="li"><a href="student_homepage">Home</a></li>
-								<li class="active">{{module.moduleName}}</li>
-							</ol>
-						</nav>
-
-					</div>
-
-					<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"
-						 style="background-color: #f9f6f0; border: 1px solid #999999">
-
-						<div>
+			<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s" style="background-color: #f9f6f0; border: 1px solid #999999">
+				<div class="card-body">
+					<div class="fade in active wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+						<div class="row">
 							<input type="hidden" value="{{studata}}" id="student">
 							<input type="hidden" value="{{teamdata}}" id="team">
-							<div class="row" style="position:relative;
-								top:-15px; left:100px;width:500px;margin-right:0px;display: inline-block;text-align: center;">
 
-								<figure class=" highcharts-figure">
+							<div class="img col-md-3" align="center">
+								<br><br><br><br>
+								<img src="{{student.fileLocation}}" width="180" height="200">
+							</div>
+							<div class="col-md-3">
+								<br><br><br><br>
+								<div class="row">
+									<h5><font class="font1">Name:</font><font class="font2"> {{student.forename}} {{student.surname}}</font></h5>
+								</div>
+								<div class="row">
+									<h5><font class="font1">Group:</font><font class="font2"> {{team.teamNumber}}</font></h5>
+								</div>
+								<div class="row">
+									<h5><font class="font1">Project:</font><font class="font2"> {{project.projectTitle}}</font></h5>
+								</div>
+								<div class="row">
+									<h5><font class="font1">Average score:</font><font class="font2"> {{Score.score_avg}}</font></h5>
+								</div>
+								<div class="row">
+									<h5><font class="font1">Email:</font><font class="font2"> {{student.email}}</font></h5>
+								</div>
+							</div>
+							<div class="col-md-6" style="text-align: center;">
+								<figure class="highcharts-figure">
+									<!--														<p class="highcharts-description">Student Weekly Score</p>-->
 									<div id="aaa"></div>
-
 								</figure>
-							</div>
-							<div style="position:relative;
-								top:20px; left:250px;width:300px;display: inline-block;">
-
-								<div class="col-md-3" style="position:relative;
-									top:0px;width:300px;">
-
-									<br>
-
-									<div class="row" style="text-align: center">
-										<div class="row"><img src="{{student.fileLocation}}" width="120"
-															  height="160">
-										</div>
-										<br>
-										<p><b>Name:</b> {{student.forename}} {{student.surname}} </p>
-										<p><b>Group:</b> {{team.teamNumber}} </p>
-										<p> <b>Project:</b>
-											{{project.projectTitle}}
-										</p>
-										<p><b>Average score:</b> {{Score.score_avg}} </p>
-										<p><b>Email:</b> {{student.email}}</p>
-									</div>
-
-								</div>
-
-							</div>
-						</div>
-
-
-<!--						<div id="layoutSidenav_content">-->
-							<br>
-							<main>
-								<div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s" style="background-color: #ffffff;margin: 0 0 25px 0">
-									<ul id="myTab" class="nav nav-pills nav-justified" role="tablist">
-										<li role="presentation" class="tab active"><a href="#Students_need_attention" data-toggle="tab" class="t1">Student</a></li>
-										<li role="presentation" class="tab"><a href="#Groups_need_attention" data-toggle="tab" class="t1">Group</a></li>
-									</ul>
-									<br>
-									<div id="mytab-content" class="card-body tab-content">
-										<div class="tab-pane fade in active" id="Students_need_attention">
-											<div class="table-responsive">
-												<table class="table table-bordered" id="dataTable"
-													   cellspacing="0">
-													<thead class="thead">
-													<tr>
-														<th>Week</th>
-														<th>Score</th>
-														<th>Contribution</th>
-														<th class="fd">Feedback</th>
-														<th class="msg">Message</th>
-														<th>Date</th>
-													</tr>
-													</thead>
-													<tbody class="stu_at ">
-													{{each Selectfeedback}}
-													<tr>
-														<td>{{$value.weekNumber}}</td>
-														<td id="studentScore">{{$value.score}}</td>
-														<td>{{$value.contribution}}</td>
-														<td class="fd">
-															<div class="f-els1_1"
-																 title='{{$value.writtenFeedback}}'>
-																{{$value.writtenFeedback}}
-															</div>
-														</td>
-														<td class="msg">
-															<div class="f-els2_2"
-																 title='{{$value.messageLecturer}}'>
-																{{$value.messageLecturer}}
-															</div>
-														</td>
-														<td>{{$value.date}}</td>
-													</tr>
-
-													{{/each}}
-													</tbody>
-												</table>
-											</div>
-										</div>
-
-										<div class="tab-pane fade" id="Groups_need_attention">
-											<div class="table-responsive">
-
-												<table class="table table-bordered" id="dataTable" width="100%"
-													   cellspacing="0">
-													<thead class="thead">
-													<tr>
-														<th>Week</th>
-														<th>score</th>
-														<th>Feedback</th>
-														<th>Message</th>
-														<th>Date</th>
-													</tr>
-													</thead>
-													<tbody class="gro_at">
-
-													{{each Selectteamfeedback}}
-													<tr>
-														<td>{{$value.weekNumber}}</td>
-														<td id="teamScore">{{$value.score}}</td>
-														<td class="fd">
-															<div class="f-els1_1"
-																 title='{{$value.writtenFeedback}}'>
-																{{$value.writtenFeedback}}</div>
-														</td>
-														<td class="msg">
-															<div class="f-els2_2"
-																 title='{{$value.messageLecturer}}'>
-																{{$value.messageLecturer}}
-															</div>
-														</td>
-														<td>{{$value.date}}</td>
-													</tr>
-													<!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
-													{{/each}}
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-								<br>
-							</main>
+							</div><br>
 						</div>
 					</div>
+
+<!--						<div id="layoutSidenav_content">-->
+					<br>
+					<main>
+						<div class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s" style="background-color: #ffffff;margin: 0 0 25px 0">
+							<ul id="myTab" class="nav nav-pills nav-justified" role="tablist">
+								<li role="presentation" class="tab active"><a href="#Students_need_attention" data-toggle="tab" class="t1">Student</a></li>
+								<li role="presentation" class="tab"><a href="#Groups_need_attention" data-toggle="tab" class="t1">Group</a></li>
+							</ul>
+							<br>
+							<div id="mytab-content" class="card-body tab-content">
+								<div class="tab-pane fade in active" id="Students_need_attention">
+									<div class="table-responsive">
+										<table class="table table-bordered" id="dataTable11"
+											   cellspacing="0">
+											<thead class="thead">
+											<tr>
+												<th>Week</th>
+												<th>Score</th>
+												<th>Contribution</th>
+												<th class="fd">Feedback</th>
+<!--												<th class="msg">Message</th>-->
+												<th>Date</th>
+											</tr>
+											</thead>
+											<tbody class="stu_at ">
+											{{each Selectfeedback}}
+											<tr>
+												<td>{{$value.weekNumber}}</td>
+												<td id="studentScore">{{$value.score}}</td>
+												<td>{{$value.contribution}}%</td>
+												<td class="fd">
+													<div class="f-els1_1"
+														 title='{{$value.writtenFeedback}}'>
+														{{$value.writtenFeedback}}
+													</div>
+												</td>
+<!--												<td class="msg">-->
+<!--													<div class="f-els2_2"-->
+<!--														 title='{{$value.messageLecturer}}'>-->
+<!--														{{$value.messageLecturer}}-->
+<!--													</div>-->
+<!--												</td>-->
+												<td>{{$value.date}}</td>
+											</tr>
+
+											{{/each}}
+											</tbody>
+										</table>
+									</div>
+								</div>
+
+								<div class="tab-pane fade" id="Groups_need_attention">
+									<div class="table-responsive">
+
+										<table class="table table-bordered" id="dataTable12" width="100%"
+											   cellspacing="0">
+											<thead class="thead">
+											<tr>
+												<th>Week</th>
+												<th>score</th>
+												<th>Feedback</th>
+<!--												<th>Message</th>-->
+												<th>Date</th>
+											</tr>
+											</thead>
+											<tbody class="gro_at">
+
+											{{each Selectteamfeedback}}
+											<tr>
+												<td>{{$value.weekNumber}}</td>
+												<td id="teamScore">{{$value.score}}</td>
+												<td class="fd">
+													<div class="f-els1_1"
+														 title='{{$value.writtenFeedback}}'>
+														{{$value.writtenFeedback}}</div>
+												</td>
+<!--												<td class="msg">-->
+<!--													<div class="f-els2_2"-->
+<!--														 title='{{$value.messageLecturer}}'>-->
+<!--														{{$value.messageLecturer}}-->
+<!--													</div>-->
+<!--												</td>-->
+												<td>{{$value.date}}</td>
+											</tr>
+											<!--                            <td>{{$value.Feedback5}}. <small>(<a href="student.html">Click</a> to see the details.)</small></td>-->
+											{{/each}}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+					</main>
 				</div>
-				<br>
-<!--			</div>-->
+			</div>
+			<br>
 		</div>
 		<!--footer-->
 		<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
@@ -513,10 +510,13 @@
 	console.log(arrtea)
 
 	Highcharts.chart('aaa', {
+		credits:{
+			enabled:false
+		},
 		chart: {
 			type: 'line',
 			scrollablePlotArea: {
-				minWidth: 500,
+				maxWidth: 500,
 				scrollPositionX: 1
 			}
 		},
@@ -524,7 +524,6 @@
 			text: 'score line chart',
 			align: 'center'
 		},
-
 		yAxis:
 				{
 					title:
@@ -534,49 +533,43 @@
 					minorGridLineWidth: 0,
 					gridLineWidth: 0,
 					alternateGridColor: null,
-
+					min:0,
+					tickInterval:1,
+					max:5,
 					plotBands:
 							[
 								{ // Light breeze
 									from: 0,
 									to: 1,
 									color: '#ffb3b3',
-
 								},
 								{ // Light breeze
 									from: 1,
 									to: 2,
 									color: '#ffc5aa',
-
 								},
 								{ // Light breeze
 									from: 2,
 									to: 3,
 									color: '#ffe48b',
-
 								},
 								{ // Light breeze
 									from: 3,
 									to: 4,
 									color: '#b2f7b5',
-
 								},
 								{ // Light breeze
 									from: 4,
 									to: 5,
 									color: '#b3e7ff',
-
 								},
 								{ // Light breeze
 									from: 5,
 									to: 6,
 									color: '#b3b4ff',
-
 								}
 							]
-
 				},
-
 		plotOptions: {
 			line: {
 				lineWidth: 3,
@@ -595,11 +588,12 @@
 		},
 		series: [{
 			name: 'student score',
-			data: arrstu
-
+			data: arrstu,
+			color: 'red'
 		}, {
 			name: 'group score',
-			data: arrtea
+			data: arrtea,
+			color: 'blue'
 		}],
 		navigation: {
 			menuItemStyle: {
@@ -607,68 +601,6 @@
 			}
 		}
 	});
-	// Highcharts.chart('aaa', {
-
-	// 	title: {
-	// 		text: 'score line chart'
-	// 	},
-
-
-
-	// 	yAxis: {
-	// 		title: {
-	// 			text: 'score '
-	// 		}
-	// 	},
-
-	// 	xAxis: {
-	// 		title: {
-	// 			text: 'week number '
-	// 		},
-	// 		accessibility: {
-	// 			rangeDescription: 1
-	// 		}
-	// 	},
-
-	// 	legend: {
-	// 		layout: 'vertical',
-	// 		align: 'right',
-	// 		verticalAlign: 'middle'
-	// 	},
-
-	// 	plotOptions: {
-	// 		series: {
-	// 			label: {
-	// 				connectorAllowed: false
-	// 			},
-	// 			pointStart: 1
-	// 		}
-	// 	},
-
-	// 	series: [{
-	// 		name: 'student score',
-	// 		data: arrstu
-	// 	}, {
-	// 		name: 'team score',
-	// 		data: arrtea
-	// 	}],
-
-	// 	responsive: {
-	// 		rules: [{
-	// 			condition: {
-	// 				maxWidth: 500
-	// 			},
-	// 			chartOptions: {
-	// 				legend: {
-	// 					layout: 'horizontal',
-	// 					align: 'center',
-	// 					verticalAlign: 'bottom'
-	// 				}
-	// 			}
-	// 		}]
-	// 	}
-
-	// });
 </script>
 <script>
 	var year_dropsown_list_html = ''

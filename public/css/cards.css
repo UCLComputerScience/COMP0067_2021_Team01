@@ -879,7 +879,7 @@ a:hover .lnk-icon-right {
 */
 .fh5co-cover {
   position: relative;
-  min-height: 800px;
+  min-height: calc(100vh - 100px);
 }
 .fh5co-cover .fh5co-cover-text {
   position: relative;
@@ -1050,7 +1050,7 @@ a:hover .lnk-icon-right {
 }
 .fh5co-project-style-2 .fh5co-projects ul li {
   padding: 0;
-  margin: 0;
+  margin: 17px;
   position: relative;
   list-style: none;
   -webkit-box-shadow: inset 0 20px 20px -20px rgba(0, 0, 0, 0.8);
@@ -1062,12 +1062,20 @@ a:hover .lnk-icon-right {
   background-size: cover;
   background-attachment: fixed;
   position: relative;
+  float: left;
+  width: 30%;
 }
 .fh5co-project-style-2 .fh5co-projects ul li a {
   width: 100%;
   position: relative;
   display: block;
+  transition: all .5s;
 }
+
+.fh5co-project-style-2 .fh5co-projects ul li a:hover {
+  opacity: 0.6;
+}
+
 .fh5co-project-style-2 .fh5co-projects ul li a .fh5co-overlay {
   background: #000;
   position: absolute;

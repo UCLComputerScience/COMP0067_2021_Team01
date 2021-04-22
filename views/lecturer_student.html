@@ -238,7 +238,7 @@
 														<tr>
 															<td style="vertical-align: middle">{{$value.weekNumber}}</td>
 															<td style="vertical-align: middle" id="{{$value.weekNumber}}">{{$value.score}}</td>
-															<td style="vertical-align: middle">{{$value.contribution}}</td>
+															<td style="vertical-align: middle">{{$value.contribution}}%</td>
 															<td style="vertical-align: middle">{{$value.writtenFeedback}}</td>
 															<td style="vertical-align: middle" class="date">{{$value.date}}</td>
 														</tr>
@@ -335,6 +335,9 @@
 			i++;
 		}
 		Highcharts.chart('student_score_plot', {
+			credits:{
+				enabled:false
+			},
 			title: {
 				text: 'Student Weekly Score'
 			},

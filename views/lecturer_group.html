@@ -79,10 +79,10 @@
 			margin-right: auto;
 			float: left;
 		}
-		.table-responsive th {
+		.table-responsive th, .table-modal th {
 			text-align: center;
 		}
-		.table-responsive td {
+		.table-responsive td, .table-modal td {
 			text-align: center;
 		}
 	</style>
@@ -228,6 +228,7 @@
 															<th style="vertical-align: middle">Individual Contributions</th>
 															<th style="vertical-align: middle">Group Feedback</th>
 															<th style="vertical-align: middle">Date</th>
+															<th style="vertical-align: middle">Individual feedback</th>
 														</tr>
 														</thead>
 														<tbody>
@@ -235,9 +236,12 @@
 														<tr>
 															<td style="vertical-align: middle">{{$value.weekNumber}}</td>
 															<td style="vertical-align: middle" id="{{$value.weekNumber}}">{{$value.score}}</td>
-															<td style="vertical-align: middle">{{$value.contributions}}</td>
+															<td style="vertical-align: middle">{{$value.contributions}}%</td>
 															<td style="vertical-align: middle" class="fd_unit">{{$value.writtenFeedback}}</td>
 															<td style="vertical-align: middle" class="date_unit">{{$value.date}}</td>
+															<td style="vertical-align: middle">
+																<button href="#" class="call-to-action" data-toggle="modal" data-target="#feedback_{{$value.weekNumber}}">Feedback</button>
+															</td>
 														</tr>
 														{{/each}}
 														</tbody>
@@ -264,6 +268,79 @@
 		</div>
 	</div>
 	<!-- END page-->
+	<input type="hidden" value="{{weeklyFeedback}}" id="weekly_feedback">
+	<!--individual_feedback_form-->
+	{{each feedback}}
+	<div class="modal fade in active" id="feedback_{{$value.weekNumber}}" tabindex="-1" role="dialog" aria-labelledby="update_form_{{$value.weekNumber}}" aria-hidden="true">
+		<div class="modal-dialog" role="document" style="width: 850px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="update_form_label">Individual feedback</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<br>
+				<form role="form" id="updateFeedback" action="/updateFeedback" method="post">
+					<div class="modal-body">
+						<div>
+							<h3 style="text-align: center; color: #888888">WEEK {{$value.weekNumber}} GROUP {{teamNumber}}</h3>
+						</div>
+<!--						<div class="form-group">-->
+<!--							<label for="teamNumber" class="col-form-label">Group Number</label>-->
+<!--							<textarea id="teamNumber_update" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>-->
+<!--						</div>-->
+<!--						<div class="form-group">-->
+<!--							<label for="weekNumber" class="col-form-label">Week Number</label>-->
+<!--							<textarea id="weekNumber_update" type="text" rows="1" name="weekNumber" required readonly="readonly" class="form-control">{{$value.weekNumber}}</textarea>-->
+<!--						</div>-->
+<!--						<div class="form-group">-->
+<!--							<label for="teamScore" class="col-form-label">Group Score</label>-->
+<!--							<div class="col-sm">-->
+<!--								<select class="form-control" name="teamScore" id="teamScore">-->
+<!--									<option value="{{$value.score}}">{{$value.score}}</option>-->
+<!--									<option value="0">0</option>-->
+<!--									<option value="1">1</option>-->
+<!--									<option value="2">2</option>-->
+<!--									<option value="3">3</option>-->
+<!--									<option value="4">4</option>-->
+<!--									<option value="5">5</option>-->
+<!--								</select>-->
+<!--								<small id="scoreHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--						<div class="form-group">-->
+<!--							<label>Group Feedback</label>-->
+<!--							<textarea class="form-control" name="feedbackTeam" required rows="5" readonly="readonly">{{$value.writtenFeedback}}</textarea>-->
+<!--						</div>-->
+<!--						<div class="form-group">-->
+<!--							<label>Message to Lecturer</label>-->
+<!--							<textarea class="form-control" name="message" rows="5" readonly="readonly">{{$value.messageLecturer}}</textarea>-->
+<!--						</div>-->
+						<table class="table table-bordered table-modal">
+							<thead>
+							<tr>
+								<th>Name</th>
+								<th>Week</th>
+								<th style="width: 7rem;">Score</th>
+								<th class="Contribution">Contribution</th>
+								<th>Individual Feedback</th>
+							</tr>
+							</thead>
+							<tbody id="stu_feedback_html_week{{$value.weekNumber}}">
+
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer form-group">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+<!--						<button class="btn btn-primary" type="submit">Submit</button>-->
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	{{/each}}
 
 	<!-- Logout Modal-->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -393,22 +470,47 @@
 
 		});
 	</script>
-<script>
-	var year_dropsown_list_html = ''
-	var date = new Date()
-	var cur_year = parseInt(date.getFullYear())
-	for (var i=0; i<4; i++) {
-		year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year '+(cur_year-i)+'</a>\n' +
-				'\t\t\t\t\t\t\t\t\t\t<ul class="level2">\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li>select a semester</li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-1">1</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-2">2</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-3">3</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t</ul>\n' +
-				'\t\t\t\t\t\t\t\t\t</li><br>'
-	}
-	document.getElementById("year_semester").innerHTML = year_dropsown_list_html
-</script>
-
+	<script>
+		var year_dropsown_list_html = ''
+		var date = new Date()
+		var cur_year = parseInt(date.getFullYear())
+		for (var i=0; i<4; i++) {
+			year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year '+(cur_year-i)+'</a>\n' +
+					'\t\t\t\t\t\t\t\t\t\t<ul class="level2">\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li>select a semester</li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-1">1</a></li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-2">2</a></li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-3">3</a></li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t</ul>\n' +
+					'\t\t\t\t\t\t\t\t\t</li><br>'
+		}
+		document.getElementById("year_semester").innerHTML = year_dropsown_list_html
+	</script>
+	<script>
+		var stu_weekly_feedback = document.getElementById("weekly_feedback").value  //获取{{teamFeedback}}，赋值给stu_weekly_feedback
+		stu_weekly_feedback = JSON.parse(stu_weekly_feedback)
+		// console.log(typeof stu_weekly_feedback)
+		// console.log(stu_weekly_feedback.length)
+		var stu_weekly_feedback_html = ""
+		//循环一次，为一个modal插入对应周的数据
+		for (var i = 0; i < stu_weekly_feedback.length; i++) {  //判断第i行是否有数据，有则说明该周有数据
+			for (var n = 1; n <= stu_weekly_feedback[i][5]; n++) {  //stu_weekly_feedback[i][4]为该组人数，n代表第n个组员，for循环遍历每个组员
+				var weekNumber = stu_weekly_feedback[i][1]    //获取该行周数
+				stu_weekly_feedback_html = stu_weekly_feedback_html +
+						"                         <tr>\n" +
+						"                            <td style=\"vertical-align: middle\" readonly=\"readonly\">"+stu_weekly_feedback[i][2+4*n]+"</td>\n" +   //获取第n个组员姓名
+						"                            <td style=\"vertical-align: middle\" readonly=\"readonly\">"+weekNumber+"</td>\n" +
+						"                            <td style=\"vertical-align: middle\" readonly=\"readonly\">"+stu_weekly_feedback[i][3+4*n]+"</td>\n" +  //获取第n个组员score
+						"                            <td style=\"vertical-align: middle\">"+stu_weekly_feedback[i][4+4*n]+"%</td>\n" +  //获取第n个组员contribution
+						"                            <td style=\"vertical-align: middle\">"+stu_weekly_feedback[i][5+4*n]+"%</td>\n" +  //获取第n个组员feedback
+						"                        </tr>"
+			}
+			// for 循环后获得本组所有人该周成绩的 table html
+			id = "stu_feedback_html_week"+(i+1)
+			console.log(id)
+			document.getElementById(id).innerHTML = stu_weekly_feedback_html    //将该周的html插入对应的modal
+			stu_weekly_feedback_html = ""  //将html变量清空，准备下一次while循环
+		}
+	</script>
 	</body>
 </html>

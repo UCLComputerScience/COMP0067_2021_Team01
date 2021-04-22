@@ -53,7 +53,6 @@
 			overflow:visible;
 			cursor:pointer;
 		}
-
 		ul.level2 {
 			width:90px;
 			display:none;
@@ -63,6 +62,12 @@
 		}
 		li.imyeah:hover > ul, ul.level2 > li.imyeah:hover > ul {
 			display:block;
+		}
+		img {
+			display: inline-block;
+			width: 100%;
+			min-height: 220px;
+			max-height: 220px;
 		}
 	</style>
 
@@ -167,15 +172,15 @@
 														{{each modules}}
 														<li class="wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s" data-stellar-background-ratio="0.5">
 															<div id="module_list">
-																<a href="lecturer_module?moduleID={{$value.moduleCode}}&YT={{$value.yearTerm}}" style="background-image: url(/public/images/img_same_dimension_1.jpg);">
+																<a href="lecturer_module?moduleID={{$value.moduleCode}}&YT={{$value.yearTerm}}">
 																	<div class="fh5co-text">
 																		<div class="fh5co-text-inner">
-
+																			<img style="border-bottom: 1px solid #c0c0c0;" src="{{$value.imgPath}}"/>
 																		</div>
 																	</div>
 																</a>
 																<div class="container" style="margin-top: 15px; width:100%">
-																	<h4 style="margin-bottom: 10px; color: #062c33">{{$value.moduleName}}</h4>
+																	<h4 style="margin-bottom: 10px; color: #062c33">{{$value.moduleName}}({{$value.moduleCode}})</h4>
 																	<p style="margin: 10px 0 10px 0">{{$value.moduleDescription}}</p>
 																</div>
 															</div>
@@ -198,11 +203,9 @@
 		</div>
 		<!--footer-->
 		<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
-			<br>
-			<div style="text-align: center;">
-				<h4>UCL COM0067 team1 </h4>
+			<div style="text-align: center; height: 100px; line-height: 100px;">
+				<b style="color: #000000; font-size: 20px;">UCL COM0067 team1</b>
 			</div>
-			<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
 		</div>
 		<!-- END footer -->
 	</div>

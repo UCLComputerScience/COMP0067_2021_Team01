@@ -186,7 +186,7 @@
 												</div>
 											</div>
 											<div style="float: right;">
-												<button href="#" class="call-to-action" data-toggle="modal" data-target="#export_to_csv">Export module feedback</button>
+<!--												<button href="#" class="call-to-action" data-toggle="modal" data-target="#export_to_csv">Export module feedback</button>-->
 												<button href="#" class="call-to-action" data-toggle="modal" data-target="#create_form">Create a new module</button>
 											</div>
 											<br>
@@ -198,9 +198,11 @@
 														<tr>
 															<th>Module Code</th>
 															<th>Module Name</th>
-															<th>Number of Students</th>
-															<th>Number of Groups</th>
+															<th>Weeks</th>
+															<th>students</th>
+															<th>Groups</th>
 															<th>Operation</th>
+<!--															<th>Export csv</th>-->
 														</tr>
 														</thead>
 														<tbody>
@@ -208,11 +210,22 @@
 														<tr>
 															<td>{{$value.moduleCode}}</td>
 															<td>{{$value.moduleName}}</td>
+															<td>{{$value.numberofWeeks}}</td>
 															<td>{{$value.NumberOfStudent}}</td>
 															<td>{{$value.NumberOfTeam}}</td>
-															<td style="width: 15rem">
+															<td style="width: 30rem">
 																<button style="float: left;" href="#" class="call-to-action" data-toggle="modal" data-target="#view_form_{{$value.moduleCode}}">View</button>
-																<button style="float: right; position: relative" href="#" class="call-to-action" data-toggle="modal" data-target="#modify_form_{{$value.moduleCode}}">Modify</button>
+																<button style="position: relative" href="#" class="call-to-action" data-toggle="modal" data-target="#modify_form_{{$value.moduleCode}}">Modify</button>
+<!--																<form role="form" id="csv_destination" action="/lecturer_addModule" enctype="multipart/form-data" method="post">-->
+<!--																	<div class="form-group col-md-6">-->
+<!--																		<label>Change module cover</label>-->
+<!--																		<input name="coverImage" type="file" accept="image/png, image/jpeg, image/jpg" id="modify_img">-->
+<!--																		<p class="help-block">Select jpg/jpeg file.(optional)</p>-->
+<!--																	</div>-->
+<!--																</form>-->
+																<button style="position: relative"><a href="lecturer_exportCsv?module={{$value.moduleCode}}" style="color: #777777">Export csv</a></button>
+<!--																<button style="float: right; position: relative" href="#" class="call-to-action" data-toggle="modal" data-target="#export_{{$value.moduleCode}}">Export csv</button>-->
+																<button style="float: right; position: relative" href="#" class="call-to-action" data-toggle="modal" data-target="#delete_{{$value.moduleCode}}">Delete</button>
 															</td>
 														</tr>
 														{{/each}}
@@ -231,6 +244,7 @@
 					</div>
 				</div>
 			</div>
+			<br>
 		</div>
 		<!--footer-->
 		<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
@@ -244,32 +258,44 @@
 	</div>
 	<!-- END page-->
 
-<!--	&lt;!&ndash;set_year_semester&ndash;&gt;-->
-<!--	<div class="modal fade" id="set_year_semester" tabindex="-1" role="dialog" aria-labelledby="lecturer_setYS"-->
+	{{each moduleInfo}}
+	<div class="modal fade" id="delete_{{$value.moduleCode}}" tabindex="-1" role="dialog" aria-labelledby="lecturer_delete_module"
+		 aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Ready to delete?</h5>
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Are you sure to delete {{$value.moduleName}} and all relevant data?</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="lecturer_delete_module?module={{$value.moduleCode}}">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+
+	<!--export_csv-->
+<!--	{{each moduleInfo}}-->
+<!--	<div class="modal fade" id="export_{{$value.moduleCode}}" tabindex="-1" role="dialog" aria-labelledby="lecturer_exportCsv"-->
 <!--		 aria-hidden="true">-->
 <!--		<div class="modal-dialog" role="document">-->
 <!--			<div class="modal-content">-->
 <!--				<div class="modal-header">-->
-<!--					<h5 class="modal-title" id="set_label">Export module feedback</h5>-->
+<!--					<h5 class="modal-title" id="export_label">Export feedback of {{$value.moduleName}}</h5>-->
 <!--					<button class="close" type="button" data-dismiss="modal" aria-label="Close">-->
 <!--						<span aria-hidden="true">×</span>-->
 <!--					</button>-->
 <!--				</div>-->
-<!--				<form role="form" id="setYS" action="/lecturer_setYS" method="post">-->
+<!--				<form role="form" id="exportMod" action="/lecturer_exportCsv" method="post">-->
 <!--					<div class="modal-body">-->
-<!--						<div class="form-group"><br>-->
-<!--							<label>Year(Select a year)</label>-->
-<!--							<select class="form-control" name="year" id="year" required>-->
-
-<!--							</select>-->
-<!--						</div>-->
-<!--						<div class="form-group"><br>-->
-<!--							<label>Semester(Select a semester)</label>-->
-<!--							<select class="form-control" name="semester" id="semester" required>-->
-<!--								<option value="1" selected="selected">1</option>-->
-<!--								<option value="2">2</option>-->
-<!--								<option value="3">3</option>-->
-<!--							</select>-->
+<!--						<div class="form-group" align="center">-->
+<!--							<label>Select a dictionary</label>-->
+<!--							<input name="dictionary" type="file" id="dic_{{$value.moduleCode}}">-->
 <!--						</div>-->
 <!--					</div>-->
 <!--					<div class="modal-footer form-group">-->
@@ -280,36 +306,37 @@
 <!--			</div>-->
 <!--		</div>-->
 <!--	</div>-->
+<!--	{{/each}}-->
 
-	<!--export_csv-->
-	<div class="modal fade" id="export_to_csv" tabindex="-1" role="dialog" aria-labelledby="lecturer_exportCsv"
-		 aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="export_label">Export module feedback</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<form role="form" id="exportMod" action="/lecturer_exportCsv" method="post">
-					<div class="modal-body">
-						{{each moduleInfo}}
-						<div class="form-group" align="center">
-							<label>
-								<input type="checkbox" value="{{$value.moduleCode}}" name="module">  {{$value.moduleName}}
-							</label>
-						</div><br>
-						{{/each}}
-					</div>
-					<div class="modal-footer form-group">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<button class="btn btn-primary" type="submit">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+<!--	&lt;!&ndash;export_csv&ndash;&gt;-->
+<!--	<div class="modal fade" id="export_to_csv" tabindex="-1" role="dialog" aria-labelledby="lecturer_exportCsv"-->
+<!--		 aria-hidden="true">-->
+<!--		<div class="modal-dialog" role="document">-->
+<!--			<div class="modal-content">-->
+<!--				<div class="modal-header">-->
+<!--					<h5 class="modal-title" id="export_label">Export module feedback</h5>-->
+<!--					<button class="close" type="button" data-dismiss="modal" aria-label="Close">-->
+<!--						<span aria-hidden="true">×</span>-->
+<!--					</button>-->
+<!--				</div>-->
+<!--				<form role="form" id="exportMod" action="/lecturer_exportCsv" method="post">-->
+<!--					<div class="modal-body">-->
+<!--						{{each moduleInfo}}-->
+<!--						<div class="form-group" align="center">-->
+<!--							<label>-->
+<!--								<input type="checkbox" value="{{$value.moduleCode}}" name="module">  {{$value.moduleName}}-->
+<!--							</label>-->
+<!--						</div><br>-->
+<!--						{{/each}}-->
+<!--					</div>-->
+<!--					<div class="modal-footer form-group">-->
+<!--						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>-->
+<!--						<button class="btn btn-primary" type="submit">Submit</button>-->
+<!--					</div>-->
+<!--				</form>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 
 	<!--create_form-->
 	<div class="modal fade" id="create_form" tabindex="-1" role="dialog" aria-labelledby="create_form_label"
@@ -326,7 +353,7 @@
 					<div class="modal-body">
 						<div class="form-group"><br>
 							<label>Module ID</label>
-							<input type="text" name="modID"  class="form-control" required placeholder="Enter module ID">
+							<input type="text" name="modID" id="create_modID" class="form-control" required placeholder="Enter module ID">
 						</div>
 						<div class="form-group">
 							<label>Module name</label>
@@ -335,6 +362,10 @@
 						<div class="form-group">
 							<label>Year semester</label>
 							<input type="text" name="modYs" class="form-control" required placeholder="Enter module's year and semester (2021-1)">
+						</div>
+						<div class="form-group">
+							<label>Number of Weeks</label>
+							<input type="text" name="NoW" class="form-control" required placeholder="Enter how many weeks the module will last">
 						</div>
 						<div class="form-group">
 							<label>Module description</label>
@@ -346,21 +377,26 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-md-6">
-								<label>Add students</label>
-								<input name="groupingTable" type="file" required >
+								<label>Add grouping csv file</label>
+								<input name="groupingTable" type="file" accept=".xls, .xlsx" id="create_csv" required >
 								<p class="help-block">Select grouping csv file</p>
+							</div>
+							<div class="form-group col-md-6">
+								<label>Add a module cover</label>
+								<input name="coverImage" type="file" accept="image/png, image/jpeg, image/jpg" id="create_img">
+								<p class="help-block">Select jpg/jpeg file</p>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<button class="btn btn-primary" type="submit">Submit</button>
+						<button class="btn btn-primary" id="create_submit" type="submit">Submit</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-
+	<input type="hidden" value="{{allModuleCodes}}" id="moduleCodes">
 	<!--modify_form-->
 	{{each moduleInfo}}
 	<div class="modal fade" id="modify_form_{{$value.moduleCode}}" tabindex="-1" role="dialog" aria-labelledby="modify_form_label_{{$value.moduleCode}}"
@@ -368,12 +404,12 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="modify_form_label_{{$value.moduleCode}}">View your module</h5>
+					<h5 class="modal-title" id="modify_form_label_{{$value.moduleCode}}">Modify your module</h5>
 					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">×</span>
 					</button>
 				</div>
-				<form role="form" action="/lecturer_modifyModule" id="modifyMod" method="post">
+				<form role="form" action="/lecturer_modifyModule" id=modifyMod" enctype="multipart/form-data" method="post">
 					<div class="modal-body">
 						<div class="form-group">
 							<label>Module ID</label>
@@ -382,6 +418,14 @@
 						<div class="form-group">
 							<label>Module Name</label>
 							<textarea id="modifyName" type="text" rows="1" name="modName" required class="form-control">{{$value.moduleName}}</textarea>
+						</div>
+<!--						<div class="form-group">-->
+<!--							<label>Year and semester</label>-->
+<!--							<textarea id="modifys" type="text" rows="1" name="modYs" required class="form-control">{{$value.yearTerm}}</textarea>-->
+<!--						</div>-->
+						<div class="form-group">
+							<label>Number of Weeks</label>
+							<textarea id="modifyNoW" type="text" rows="1" name="NoW" required class="form-control">{{$value.numberofWeeks}}</textarea>
 						</div>
 						<div class="form-group">
 							<label>Module description</label>
@@ -393,18 +437,22 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-md-6">
-								<label>Grouping</label>
-								<input name="groupingTable" type="file">
+								<label>Change grouping csv file</label>
+								<input name="groupingTable" type="file" accept=".xls, .xlsx" id="modify_csv">
 								<p class="help-block">Select grouping csv file.(optional)</p>
+							</div>
+							<div class="form-group col-md-6">
+								<label>Change module cover</label>
+								<input name="coverImage" type="file" accept="image/png, image/jpeg, image/jpg" id="modify_img">
+								<p class="help-block">Select jpg/jpeg file.(optional)</p>
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer form-group">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<button class="btn btn-primary" type="submit">Submit</button>
+						<button class="btn btn-primary" id="modify_submit" type="submit">Submit</button>
 					</div>
 				</form>
-
 			</div>
 		</div>
 	</div>
@@ -431,6 +479,10 @@
 						<div class="form-group">
 							<label>Module Name</label>
 							<textarea id="modName" type="text" rows="1" name="modName" readonly="readonly" class="form-control">{{$value.moduleName}}</textarea>
+						</div>
+						<div class="form-group">
+							<label>Number of Weeks</label>
+							<textarea type="text" rows="1" name="modName" readonly="readonly" class="form-control">{{$value.numberofWeeks}}</textarea>
 						</div>
 						<div class="form-group">
 							<label>Module description</label>
@@ -517,21 +569,42 @@
 		// 		'<option value="'+(cur_year-4)+'">'+(cur_year+2)+'</option>'
 		// document.getElementById("year").innerHTML = stu_year_selection_html    //将该周的html插入对应的modal
 	</script>
-<script>
-	var year_dropsown_list_html = ''
-	var date = new Date()
-	var cur_year = parseInt(date.getFullYear())
-	for (var i=0; i<4; i++) {
-		year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year '+(cur_year-i)+'</a>\n' +
-				'\t\t\t\t\t\t\t\t\t\t<ul class="level2">\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li>select a semester</li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-1">1</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-2">2</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-3">3</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t</ul>\n' +
-				'\t\t\t\t\t\t\t\t\t</li><br>'
-	}
-	document.getElementById("year_semester").innerHTML = year_dropsown_list_html
-</script>
+	<script>
+		var year_dropsown_list_html = ''
+		var date = new Date()
+		var cur_year = parseInt(date.getFullYear())
+		for (var i=0; i<4; i++) {
+			year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year '+(cur_year-i)+'</a>\n' +
+					'\t\t\t\t\t\t\t\t\t\t<ul class="level2">\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li>select a semester</li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-1">1</a></li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-2">2</a></li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-3">3</a></li>\n' +
+					'\t\t\t\t\t\t\t\t\t\t</ul>\n' +
+					'\t\t\t\t\t\t\t\t\t</li><br>'
+		}
+		document.getElementById("year_semester").innerHTML = year_dropsown_list_html
+	</script>
+	<script>
+		var moduleCodes = document.getElementById("moduleCodes").value
+		// console.log(typeof moduleCodes)
+		// console.log(moduleCodes)
+		$(document).ready(function () {
+			$('#create_submit').click(function (e) {
+				e.preventDefault();
+				var newCode = '"'+$('#create_modID').val()+'"'
+				if (moduleCodes.indexOf(newCode) !== -1) {
+					console.log("**************")
+					$("#create_modID").focus();
+					alert("This moduleCode has already existed or you made a typo.\n" +
+							"If you want to modify this module, please click 'modify' button.\n" +
+							"If you want to create a new module, please check your input.");
+				}
+				else {
+					$('#addMod').submit();
+				}
+			})
+		})
+	</script>
 	</body>
 </html>

@@ -187,6 +187,7 @@
                                                 <th>Project</th>
                                                 <th style="width: 10rem">Team Members</th>
                                                 <th style="width: 10rem">Last score</th>
+                                                <th style="width: 10rem">Date & week</th>
                                                 <th>Feedback</th>
                                             </tr>
                                             </thead>
@@ -200,10 +201,11 @@
                                                         {{$value.studentName}}
                                                     </div>
                                                 </td>
-                                                <td style="vertical-align: middle">{{$value.lastScore}} ({{$value.date}})</td>
+                                                <td style="vertical-align: middle">{{$value.lastScore}}</td>
+                                                <td style="vertical-align: middle">{{$value.date}}; week {{$value.weekNumber}}</td>
                                                 <td style="vertical-align: middle" class="feedback_group">
-                                                    <a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}" class="btn btn-primary">View</a>
-                                                    <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>
+                                                    <button><a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}" style="color: #888888">View</a></button>
+<!--                                                    <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>-->
                                                 </td>
                                             </tr>
                                             {{/each}}
@@ -230,124 +232,88 @@
 </div>
 
 <!-- END page-->
-<!-- </div> -->
+
 <!--provide_form-->
-{{each coachedGroups}}
-<div class="modal fade in active" id="provide_form_{{$value.teamNumber}}" tabindex="-1" role="dialog" aria-labelledby="provide_form_label_{{$value.teamNumber}}" aria-hidden="true">
-    <div class="modal-dialog" role="document" style="width: 850px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="provide_form_label">Provide new feedback</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <form role="form" id="provideFeedback" action="/provideFeedback" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="teamNumber" class="col-form-label">Group Number</label>
-                        <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>
-                        <small id="scoreHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="weekNumber" class="col-form-label">Week</label>
-                        <div class="col-sm">
-                            <select class="form-control" name="weekNumber" id="weekNumber" required>
-                                <option value="Select">Select a week number</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                            </select>
-                            <small id="weekHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="teamScore" class="col-form-label">Group Score</label>
-                        <div class="col-sm">
-                            <select class="form-control" name="teamScore"id="teamScore" required>
-                                <option value="Select">Select a score for the group</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <small id="scoreHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="teamFeedback">Group Feedback</label>
-                        <textarea class="form-control" name="feedbackTeam" id="feedbackTeam" required rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message to Lecturer</label>
-                        <textarea class="form-control" name="message" rows="5" placeholder="Enter message to the lecturer, if any, for the whole team for the past week"></textarea>
-                    </div>
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Student Name</th>
-                            <th>Score</th>
-                            <th>Contribution</th>
-                            <th>Individual Feedback</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {{each studentNames}}
-                        <tr>
-                            <td>{{$value}}</td>
-                            <td>
-                                <select style="width: 10rem; text-align: center;"class="form-control" name="studentScore" id="studentScore" required>
-                                    <option value="Select">Select</option>
-                                    <option value="0">0</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </td>
-                            <td>
-                                <textarea class="form-control" name = "studentContribution" id="studentContribution" required rows="1" placeholder="Enter the contribution, 0-1."></textarea>
-                            </td>
-                            <td>
-                                <textarea class="form-control" name = "studentFeedback" id="studentFeedback" required rows="1" placeholder="Enter a short feedback."></textarea>
-                            </td>
-                        </tr>
-                        {{/each}}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="modal-footer form-group">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <button class="btn btn-primary" id="mySubmit" type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-{{/each}}
+<!--{{each coachedGroups}}-->
+<!--<div class="modal fade in active" id="provide_form_{{$value.teamNumber}}" tabindex="-1" role="dialog" aria-labelledby="provide_form_label_{{$value.teamNumber}}" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document" style="width: 850px;">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="provide_form_label">Provide new feedback</h5>-->
+<!--                <button class="close" type="button" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">×</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <form role="form" id="provideFeedback" action="/provideFeedback" method="post">-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="teamNumber" class="col-form-label">Group Number</label>-->
+<!--                        <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>-->
+<!--                        <small id="scoreHelp1" class="form-text text-muted"><span class="text-dange">* Required.</span></small>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="weekNumber" class="col-form-label">Week</label>-->
+<!--                        <div class="col-sm">-->
+<!--                            <select class="form-control" name="weekNumber" id="weekNumber" required>-->
+<!--                                <option value="Select">Select a week number</option>-->
+<!--                                {{each weekNumbers}}-->
+<!--                                <option value="{{$value}}">{{$value}}</option>-->
+<!--                                {{/each}}-->
+<!--                            </select>-->
+<!--                            <small id="weekHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="teamScore" class="col-form-label">Group Score</label>-->
+<!--                        <div class="col-sm">-->
+<!--                            <select class="form-control" name="teamScore" id="teamScore" required>-->
+<!--                                <option value="Select">Select a score for the group</option>-->
+<!--                                <option value="0">0</option>-->
+<!--                                <option value="1">1</option>-->
+<!--                                <option value="2">2</option>-->
+<!--                                <option value="3">3</option>-->
+<!--                                <option value="4">4</option>-->
+<!--                                <option value="5">5</option>-->
+<!--                            </select>-->
+<!--                            <small id="scoreHelp2" class="form-text text-muted"><span class="text-dange">* Required.</span></small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="teamFeedback">Group Feedback</label>-->
+<!--                        <textarea class="form-control" name="feedbackTeam" id="feedbackTeam" required rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="message">Message to Lecturer</label>-->
+<!--                        <textarea class="form-control" name="message" rows="5" placeholder="Enter message to the lecturer, if any, for the whole team for the past week"></textarea>-->
+<!--                    </div>-->
+<!--                    <table class="table table-bordered">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Student Name</th>-->
+<!--                            <th>Score</th>-->
+<!--                            <th>Contribution(%)</th>-->
+<!--                            <th>Individual Feedback</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody id="table_team{{$value.teamNumber}}">-->
+
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div class="modal-footer form-group">-->
+<!--                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>-->
+<!--                    <button class="btn btn-primary" id="mySubmit" type="submit">Submit</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{{/each}}-->
+
+<input type="hidden" value="{{studentNames}}" id="stu_index_team">
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="logoutModal" tabindexnumber="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -394,49 +360,47 @@
 <script src="/public/js/datatables-demo.js"></script>
 <!-- Main -->
 <script src="/public/js/main.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#mySubmit').click(function (e) {
-            // var textarea = document.forms["form"].elements.textarea;
-            // $("#textarea").keyup(function(){
-            // $("#count").text("Characters left: " + (500 - $(this).val().length));
-            // });
-            e.preventDefault();
-            if ($('#weekNumber').val() == 'Select') {
-                $("#weekNumber").focus();
-            }
-            else if ($('#teamScore').val()== 'Select'){
-                $("#teamScore").focus();
-            }
-            else if ($('#feedbackTeam').val()==''){
-                $("#feedbackTeam").focus();
-            }
-            else if ($('#feedbackTeam').val().length >200){
-                $("#feedbackTeam").focus();
-                alert("You have exceeded the 200 maximum character");
-            }
-            else if ($('#studentScore').val()== 'Select'){
-                $("#studentScore").focus();
-            }
-            else if ($('#studentContribution').val()==''){
-                $("#studentContribution").focus();
-            }
-                // else if (typeof($('#studentContribution').val())=='string'){
-                //     $("#studentContribution").focus();
-                //     alert("Please enter a numerical value.");
-            // }
-            else if ($('#studentContribution').val()>1){
-                $("#studentContribution").focus();
-                alert("Please enter a numerical value smaller or equal to 1");
-            }
-            else if ($('#studentFeedback').val()==''){
-                $("#studentFeedback").focus();
-            }
-            else {
-                $('#provideFeedback').submit();
-            }
-        });
-    });
-</script>
+<!--<script>-->
+<!--    var stu_index_team = document.getElementById("stu_index_team").value  //获取{{teamFeedback}}，赋值给stu_weekly_feedback-->
+<!--    stu_index_team = JSON.parse(stu_index_team)-->
+<!--    // console.log(typeof stu_index_team)-->
+<!--    // console.log(stu_index_team)-->
+<!--    // console.log(Object.keys(stu_index_team).length)-->
+<!--    var length_obj_father = Object.keys(stu_index_team).length-->
+<!--    var stu_index_team_html = ""-->
+<!--    for (var i = 0; i < length_obj_father; i++) {-->
+<!--        // console.log(Object.keys(stu_index_team[i]).length)-->
+<!--        var length_obj_son = Object.keys(stu_index_team[i]).length-->
+<!--        for (var j = 0; j < length_obj_son; j++) {-->
+<!--            console.log(stu_index_team[i][j])-->
+<!--            stu_index_team_html = stu_index_team_html +-->
+<!--                '<tr>\n' +-->
+<!--                '                            <td>'+stu_index_team[i][j].name+'</td>\n' +-->
+<!--                '                            <td>\n' +-->
+<!--                '                                <select style="width: 10rem; text-align: center;" class="form-control" name="studentScore" id="studentScore_'+stu_index_team[i][j].teamNumber+'_'+stu_index_team[i][j].indexNumber+'" required>\n' +-->
+<!--                '                                    <option value="Select">Select</option>\n' +-->
+<!--                '                                    <option value="0">0</option>\n' +-->
+<!--                '                                    <option value="1">1</option>\n' +-->
+<!--                '                                    <option value="2">2</option>\n' +-->
+<!--                '                                    <option value="3">3</option>\n' +-->
+<!--                '                                    <option value="4">4</option>\n' +-->
+<!--                '                                    <option value="5">5</option>\n' +-->
+<!--                '                                </select>\n' +-->
+<!--                '                            </td>\n' +-->
+<!--                '                            <td>\n' +-->
+<!--                '                                <textarea class="form-control" name = "studentContribution" id="studentContribution_'+stu_index_team[i][j].teamNumber+'_'+stu_index_team[i][j].indexNumber+'" required rows="1" placeholder="Enter the contribution, 0-100."></textarea>\n' +-->
+<!--                '                            </td>\n' +-->
+<!--                '                            <td>\n' +-->
+<!--                '                                <textarea class="form-control" name = "studentFeedback" id="studentFeedback_'+stu_index_team[i][j].teamNumber+'_'+stu_index_team[i][j].indexNumber+'" required rows="1" placeholder="Enter a short feedback."></textarea>\n' +-->
+<!--                '                            </td>\n' +-->
+<!--                '                        </tr>'-->
+<!--        }-->
+<!--        id = "table_team"+(i+1)-->
+<!--        console.log(id)-->
+<!--        document.getElementById(id).innerHTML = stu_index_team_html    //将该周的html插入对应的modal-->
+<!--        stu_index_team_html = ""  //将html变量清空，准备下一次while循环-->
+<!--    }-->
+<!--</script>-->
+
 </body>
 </html>
