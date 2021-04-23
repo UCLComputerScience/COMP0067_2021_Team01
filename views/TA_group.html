@@ -581,9 +581,9 @@
             var contribution = 0
             var state = 0
             for(var i = 1; i <= number; i++) {
-                con_id = "#studentContribution_update_" + i
+                con_id = "#studentContribution_provide_" + i
                 contribution = contribution + parseInt($(con_id).val())
-                // console.log(contribution)
+                console.log(contribution)
             }
             if ($('#weekNumber').val() === 'Select') {
                 $("#weekNumber").focus();
@@ -653,8 +653,8 @@
                 }
             }
             if (state === 1) {
-                // console.log("&&&&&&&&&&&&&&&&")
-                // console.log(contribution)
+                console.log("&&&&&&&&&&&&&&&&")
+                console.log(contribution)
                 if (contribution !== 100) {
                     alert("The sum of contributions should be equal to 100");
                 }
@@ -688,7 +688,7 @@
                 for(var i = 1; i <= number; i++) {
                     con_id = "#studentContribution_modify_" + get_id + '_' + i
                     contribution = contribution + parseInt($(con_id).val())
-                    console.log(contribution)
+                    // console.log(contribution)
                 }
                 if ($('#teamScore_modify_' + get_id).val() === 'Select'){
                     $("#teamScore_modify_" + get_id).focus();
