@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Voltage &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FREEHTML5.CO" />
+
+    <!--
+  //////////////////////////////////////////////////////
+  FREE HTML5 TEMPLATE
+  DESIGNED & DEVELOPED by FREEHTML5.CO
+  Website: 		http://freehtml5.co/
+  Email: 			info@freehtml5.co
+  Twitter: 		http://twitter.com/fh5co
+  Facebook: 		https://www.facebook.com/fh5co
+  //////////////////////////////////////////////////////
+  -->
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="" />
+    <meta name="twitter:url" content="" />
+    <meta name="twitter:card" content="" />
+    <style>
+        .fh5co-nav-style-1 .dropdown .dropdown-menu {
+            border: 1px solid #0b2e13;
+            background:#0f6674;
+        }
+        .container-fluid .tab {
+            border-radius:5px;
+            border: 1px solid #c0c0c0;
+            background-color: #ffffff;
+        }
+        .table {
+            table-layout:auto;
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
+            text-align: center;
+        }
+        .table th{
+            text-align: center;
+        }
+        .group_numbers {
+            width: 7rem;
+        }
+        .project_names {
+            width: 40rem;
+        }
+        .member_names {
+            width: 10rem;
+        }
+        .feedback_group {
+            width: 10rem;
+        }
+        td {
+            text-overflow:ellipsis;
+            overflow:hidden;
+            white-space:nowrap;
+            text-align: center;
+        }
+        .f-els1_1 {
+            width: 12rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .table-responsive th {
+            text-align: center;
+        }
+    </style>
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="/public/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700' rel='stylesheet' type='text/css'>
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/public/css/animate.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="/public/css/icomoon.css">
+    <!-- Magnific Popup-->
+    <link rel="stylesheet" href="/public/css/magnific-popup.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="/public/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/public/css/bootstrap.css">
+
+    <!-- Cards -->
+    <link rel="stylesheet" href="/public/css/cards.css">
+
+    <!-- Modernizr JS -->
+    <script src="/public/js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="/public/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!--table-->
+    <!--	<link href="/public/css/styles.css" rel="stylesheet" />-->
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+<!--Navigation bar-->
+<div id="fh5co-page">
+    <nav class="fh5co-nav-style-1" role="navigation" data-offcanvass-position="fh5co-offcanvass-left" style="background-image: url(/public/images/moodle.jpg);">
+        <div class="container">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 fh5co-logo">
+                <a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
+                <a href="#">Traffic Light Feedback System</a>
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-5 text-center fh5co-link-wrap">
+                <ul data-offcanvass="yes">
+                    <li><a href="TA_homepage">Home</a></li>
+                    <li class="dropdown active">
+                        <a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" >
+                            <div class="fh5co-link-wrap">
+                                {{each mods}}
+                                <li><a href="TA_module?moduleID={{$value.moduleCode}}">{{$value.moduleCode}}</a></li>
+                                {{/each}}
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 text-right fh5co-link-wrap">
+                <ul class="fh5co-special" data-offcanvass="yes">
+                    <li><a href="#">Hi, {{uname}}</a></li>
+                    <li><a href="#" class="call-to-action" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="fh5co-cover fh5co-cover-style-2" data-stellar-background-ratio="0" data-next="yes" style="background-image: url(/public/images/img_same_dimension_3.jpg);">
+        <div class="fh5co-cover-text">
+            <div class="container">
+                <br><br><br><br><br>
+                <nav class="navbar" role="navigation" >
+                    <ol class="breadcrumb">
+                        <li class="li"><a href="TA_homepage">Home</a></li>
+                        <li class="active">{{module.moduleName}}</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
+                <div id="layoutSidenav_content">
+                    <br>
+                    <main>
+                        <div class="container-fluid">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="text-center">
+                                            <div class="fh5co-cover-intro">
+                                                <h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s" style="color: #000000">{{module.moduleName}}</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wow fadeInUp table-responsive" data-wow-duration="1s" data-wow-delay="1.4s" style="background-color: #ffffff; margin: 0 0 25px 0">
+                                    <br>
+                                    <div style="margin:auto 25px auto 25px">
+                                        <!--                                            <p class="text-center">Group Table</p>-->
+                                        <table class="table table-bordered" width="100%" cellspacing="0">
+                                            <thead class="thead">
+                                            <tr>
+                                                <th>Group</th>
+                                                <th>Project</th>
+                                                <th style="width: 10rem">Team Members</th>
+                                                <th style="width: 10rem">Last score</th>
+                                                <th style="width: 10rem">Date & week</th>
+                                                <th>Feedback</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="gro_li">
+                                            {{each coachedGroups}}
+                                            <tr>
+                                                <td style="vertical-align: middle; width: 12rem;" class="group_numbers">{{$value.teamNumber}}</td>
+                                                <td style="vertical-align: middle" class="project_names">{{$value.projectTitle}}</td>
+                                                <td style="vertical-align: middle" class="member_names">
+                                                    <div class="f-els1_1" title='{{$value.studentName}}'>
+                                                        {{$value.studentName}}
+                                                    </div>
+                                                </td>
+                                                <td style="vertical-align: middle">{{$value.lastScore}}</td>
+                                                <td style="vertical-align: middle">{{$value.date}}; week {{$value.weekNumber}}</td>
+                                                <td style="vertical-align: middle" class="feedback_group">
+                                                    <button><a href="TA_group?moduleID={{$value.moduleCode}}&teamNumber={{$value.teamNumber}}" style="color: #888888">View</a></button>
+<!--                                                    <button class="btn btn-primary" href="#" class="call-to-action" data-toggle="modal" data-target="#provide_form_{{$value.teamNumber}}">Provide</button>-->
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
+        <div style="text-align: center; height: 100px; line-height: 100px;">
+            <b style="color: #000000; font-size: 20px;">Copyright@UCL Department of Computer Science</b>
+        </div>
+    </div>
+    <!-- END footer -->
+</div>
+
+<!-- END page-->
+
+<!--provide_form-->
+<!--{{each coachedGroups}}-->
+<!--<div class="modal fade in active" id="provide_form_{{$value.teamNumber}}" tabindex="-1" role="dialog" aria-labelledby="provide_form_label_{{$value.teamNumber}}" aria-hidden="true">-->
+<!--    <div class="modal-dialog" role="document" style="width: 850px;">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="provide_form_label">Provide new feedback</h5>-->
+<!--                <button class="close" type="button" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">×</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <form role="form" id="provideFeedback" action="/provideFeedback" method="post">-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="teamNumber" class="col-form-label">Group Number</label>-->
+<!--                        <textarea id="teamNumber" type="text" rows="1" name="teamNumber" required readonly="readonly" class="form-control">{{$value.teamNumber}}</textarea>-->
+<!--                        <small id="scoreHelp1" class="form-text text-muted"><span class="text-dange">* Required.</span></small>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="weekNumber" class="col-form-label">Week</label>-->
+<!--                        <div class="col-sm">-->
+<!--                            <select class="form-control" name="weekNumber" id="weekNumber" required>-->
+<!--                                <option value="Select">Select a week number</option>-->
+<!--                                {{each weekNumbers}}-->
+<!--                                <option value="{{$value}}">{{$value}}</option>-->
+<!--                                {{/each}}-->
+<!--                            </select>-->
+<!--                            <small id="weekHelp" class="form-text text-muted"><span class="text-dange">* Required.</span></small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="teamScore" class="col-form-label">Group Score</label>-->
+<!--                        <div class="col-sm">-->
+<!--                            <select class="form-control" name="teamScore" id="teamScore" required>-->
+<!--                                <option value="Select">Select a score for the group</option>-->
+<!--                                <option value="0">0</option>-->
+<!--                                <option value="1">1</option>-->
+<!--                                <option value="2">2</option>-->
+<!--                                <option value="3">3</option>-->
+<!--                                <option value="4">4</option>-->
+<!--                                <option value="5">5</option>-->
+<!--                            </select>-->
+<!--                            <small id="scoreHelp2" class="form-text text-muted"><span class="text-dange">* Required.</span></small>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="teamFeedback">Group Feedback</label>-->
+<!--                        <textarea class="form-control" name="feedbackTeam" id="feedbackTeam" required rows="5" placeholder="Enter feedback for the whole team for the past week"></textarea>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="message">Message to Lecturer</label>-->
+<!--                        <textarea class="form-control" name="message" rows="5" placeholder="Enter message to the lecturer, if any, for the whole team for the past week"></textarea>-->
+<!--                    </div>-->
+<!--                    <table class="table table-bordered">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th>Student Name</th>-->
+<!--                            <th>Score</th>-->
+<!--                            <th>Contribution(%)</th>-->
+<!--                            <th>Individual Feedback</th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody id="table_team{{$value.teamNumber}}">-->
+
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div class="modal-footer form-group">-->
+<!--                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>-->
+<!--                    <button class="btn btn-primary" id="mySubmit" type="submit">Submit</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{{/each}}-->
+
+<input type="hidden" value="{{studentNames}}" id="stu_index_team">
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindexnumber="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery -->
+<script src="/public/js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="/public/js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="/public/js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="/public/js/jquery.waypoints.min.js"></script>
+<!-- Owl Carousel -->
+<script src="/public/js/owl.carousel.min.js"></script>
+<!-- Magnific Popup -->
+<script src="/public/js/jquery.magnific-popup.min.js"></script>
+<!-- Stellar -->
+<script src="/public/js/jquery.stellar.min.js"></script>
+<!-- countTo -->
+<script src="/public/js/jquery.countTo.js"></script>
+<!-- WOW -->
+<script src="/public/js/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
+<!--table-->
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="/public/js/datatables-demo.js"></script>
+<!-- Main -->
+<script src="/public/js/main.js"></script>
+<!--<script>-->
+<!--    var stu_index_team = document.getElementById("stu_index_team").value  //获取{{teamFeedback}}，赋值给stu_weekly_feedback-->
+<!--    stu_index_team = JSON.parse(stu_index_team)-->
+<!--    // console.log(typeof stu_index_team)-->
+<!--    // console.log(stu_index_team)-->
+<!--    // console.log(Object.keys(stu_index_team).length)-->
+<!--    var length_obj_father = Object.keys(stu_index_team).length-->
+<!--    var stu_index_team_html = ""-->
+<!--    for (var i = 0; i < length_obj_father; i++) {-->
+<!--        // console.log(Object.keys(stu_index_team[i]).length)-->
+<!--        var length_obj_son = Object.keys(stu_index_team[i]).length-->
+<!--        for (var j = 0; j < length_obj_son; j++) {-->
+<!--            console.log(stu_index_team[i][j])-->
+<!--            stu_index_team_html = stu_index_team_html +-->
+<!--                '<tr>\n' +-->
+<!--                '                            <td>'+stu_index_team[i][j].name+'</td>\n' +-->
+<!--                '                            <td>\n' +-->
+<!--                '                                <select style="width: 10rem; text-align: center;" class="form-control" name="studentScore" id="studentScore_'+stu_index_team[i][j].teamNumber+'_'+stu_index_team[i][j].indexNumber+'" required>\n' +-->
+<!--                '                                    <option value="Select">Select</option>\n' +-->
+<!--                '                                    <option value="0">0</option>\n' +-->
+<!--                '                                    <option value="1">1</option>\n' +-->
+<!--                '                                    <option value="2">2</option>\n' +-->
+<!--                '                                    <option value="3">3</option>\n' +-->
+<!--                '                                    <option value="4">4</option>\n' +-->
+<!--                '                                    <option value="5">5</option>\n' +-->
+<!--                '                                </select>\n' +-->
+<!--                '                            </td>\n' +-->
+<!--                '                            <td>\n' +-->
+<!--                '                                <textarea class="form-control" name = "studentContribution" id="studentContribution_'+stu_index_team[i][j].teamNumber+'_'+stu_index_team[i][j].indexNumber+'" required rows="1" placeholder="Enter the contribution, 0-100."></textarea>\n' +-->
+<!--                '                            </td>\n' +-->
+<!--                '                            <td>\n' +-->
+<!--                '                                <textarea class="form-control" name = "studentFeedback" id="studentFeedback_'+stu_index_team[i][j].teamNumber+'_'+stu_index_team[i][j].indexNumber+'" required rows="1" placeholder="Enter a short feedback."></textarea>\n' +-->
+<!--                '                            </td>\n' +-->
+<!--                '                        </tr>'-->
+<!--        }-->
+<!--        id = "table_team"+(i+1)-->
+<!--        console.log(id)-->
+<!--        document.getElementById(id).innerHTML = stu_index_team_html    //将该周的html插入对应的modal-->
+<!--        stu_index_team_html = ""  //将html变量清空，准备下一次while循环-->
+<!--    }-->
+<!--</script>-->
+
+</body>
+</html>
