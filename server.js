@@ -584,7 +584,7 @@ web.post('/lecturer_addModule', function(req, res){
             for (var i = 1; i <= length; i++) {
                 for (var j = 0; j < membersInTeam; j++) {
                     var queryInsertModStuTe = 'INSERT INTO `ModStuTe`(`studentSPR`, `moduleCode`, `yearTerm`, `teamNumber`, `memberIndex`) ' +
-                        'VALUES ("'+groupingData[i][indexArray[j]]+'", "'+fields.modID+'", "'+selectedYT+'", "'+groupingData[i][0]+'", "'+(j+1)+'")'
+                        'VALUES ("'+groupingData[i][indexArray[j]]+'", "'+fields.modID+'", "'+fields.modYs+'", "'+groupingData[i][0]+'", "'+(j+1)+'")'
                     connection.query(queryInsertModStuTe, function (error, results) {
                         if (error) {
                             console.log(error)
@@ -596,7 +596,7 @@ web.post('/lecturer_addModule', function(req, res){
             // Insert into ProjectInfo table
             for (i = 1; i <= length; i++) {
                 var queryInsertProjectInfo = 'INSERT INTO `ProjectInfo`(`moduleCode`, `yearTerm`, `teamNumber`, `taStudentSPR`, `labCode`, `projectTitle`, `projectBrief`) ' +
-                    'VALUES ("'+fields.modID+'", "'+selectedYT+'", "'+groupingData[i][0]+'", "'+groupingData[i][3]+'", "" , "'+groupingData[i][1]+'", "'+groupingData[i][2]+'")'
+                    'VALUES ("'+fields.modID+'", "'+fields.modYs+'", "'+groupingData[i][0]+'", "'+groupingData[i][3]+'", "" , "'+groupingData[i][1]+'", "'+groupingData[i][2]+'")'
                 connection.query(queryInsertProjectInfo, function (error, results) {
                     if (error) {
                         console.log(error)
@@ -606,7 +606,7 @@ web.post('/lecturer_addModule', function(req, res){
 
             // Insert into Module table
             var queryInsertModule = 'INSERT INTO `Module`(`moduleCode`, `yearTerm`, `numberofWeeks`, `moduleName`, `moduleDescription`, `modulePlan`, `imgPath`, `employeeID`) ' +
-                'VALUES ("'+fields.modID+'", "'+selectedYT+'", "'+fields.NoW+'", "'+fields.modName+'", "'+fields.modDes+'", "'+fields.modPlan+'", "'+req.session.img_dstPath+'", "'+uname+'")'
+                'VALUES ("'+fields.modID+'", "'+fields.modYs+'", "'+fields.NoW+'", "'+fields.modName+'", "'+fields.modDes+'", "'+fields.modPlan+'", "'+req.session.img_dstPath+'", "'+uname+'")'
             connection.query(queryInsertModule, function (error, results) {
                 if (error) {
                     console.log(error)
@@ -1062,7 +1062,7 @@ web.get('/lecturer_admin', function(req, res){
         for (var i = 1; i <= moduleInfo.length; i++) {
             moduleInfo[i-1].index = i
         }
-        console.log(moduleInfo)
+        // console.log(moduleInfo)
         connection.query(queryAllModuleCodes, function (error, moduleCodes) {
             if (error) {
                 console.log(error)
