@@ -1,19 +1,21 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Voltage &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+	<title>Traffic Light Feedback System</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
 
-  	<!-- 
+	<!-- 
 	//////////////////////////////////////////////////////
 
 	FREE HTML5 TEMPLATE 
@@ -27,50 +29,58 @@
 	//////////////////////////////////////////////////////
 	-->
 
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="" />
+	<meta property="og:image" content="" />
+	<meta property="og:url" content="" />
+	<meta property="og:site_name" content="" />
+	<meta property="og:description" content="" />
 	<meta name="twitter:title" content="" />
 	<meta name="twitter:image" content="" />
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 	<style>
 		.menu li {
-			list-style:none;
-			float:left;
-			width:90px;
-			overflow:visible;
-			cursor:pointer;
+			list-style: none;
+			float: left;
+			width: 90px;
+			overflow: visible;
+			cursor: pointer;
 		}
 
 		ul.level2 {
-			width:90px;
-			display:none;
+			width: 90px;
+			display: none;
 		}
+
 		ul.level2 {
-			margin:-28px 0 0 90px;
+			margin: -28px 0 0 90px;
 		}
-		li.imyeah:hover > ul, ul.level2 > li.imyeah:hover > ul {
-			display:block;
+
+		li.imyeah:hover>ul,
+		ul.level2>li.imyeah:hover>ul {
+			display: block;
 		}
+
 		.fh5co-nav-style-1 .dropdown .dropdown-menu {
 			border: 1px solid #0b2e13;
-			background:#0f6674;
+			background: #0f6674;
 		}
+
 		.font1 {
 			font-weight: bold;
 			color: #000000;
 		}
+
 		.font2 {
 			font-weight: normal;
 			color: #495057;
 		}
+
 		.date {
 			width: 9rem;
 		}
+
 		#student_score_plot {
 			border: 1px solid #c0a16b;
 			width: 90%;
@@ -78,9 +88,11 @@
 			margin-left: auto;
 			margin-right: auto;
 		}
+
 		.table-responsive th {
 			text-align: center;
 		}
+
 		.table-responsive td {
 			text-align: center;
 		}
@@ -88,10 +100,12 @@
 
 	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 	<link rel="shortcut icon" href="/public/favicon.ico">
-	
+
 	<!-- Google Fonts -->
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700' rel='stylesheet' type='text/css'>
-	
+	<link
+		href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700'
+		rel='stylesheet' type='text/css'>
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="/public/css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -103,7 +117,7 @@
 	<link rel="stylesheet" href="/public/css/owl.theme.default.min.css">
 	<!-- Bootstrap  -->
 	<link rel="stylesheet" href="/public/css/bootstrap.css">
-	
+
 	<!-- Cards -->
 	<link rel="stylesheet" href="/public/css/cards.css">
 
@@ -114,17 +128,21 @@
 	<script src="/public/js/respond.min.js"></script>
 	<![endif]-->
 
-<!--table-->
-<!--	<link href="/public/css/styles.css" rel="stylesheet" />-->
-	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
+	<!--table-->
+	<!--	<link href="/public/css/styles.css" rel="stylesheet" />-->
+	<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
+		crossorigin="anonymous" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+		crossorigin="anonymous"></script>
 
 
-	</head>
-	<body>
-<!--Navigation bar-->
+</head>
+
+<body>
+	<!--Navigation bar-->
 	<div id="fh5co-page">
-		<nav class="fh5co-nav-style-1" role="navigation" data-offcanvass-position="fh5co-offcanvass-left" style="background-image: url(/public/images/moodle.jpg)">
+		<nav class="fh5co-nav-style-1" role="navigation" data-offcanvass-position="fh5co-offcanvass-left"
+			style="background-image: url(/public/images/moodle.jpg)">
 			<div class="container">
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 fh5co-logo">
 					<a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
@@ -134,19 +152,23 @@
 					<ul data-offcanvass="yes">
 						<li><a href="lecturer_homepage" style="margin-left: 0;">Home</a></li>
 						<li class="dropdown active">
-							<a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu" >
+							<a class="dropdown-toggle" data-toggle="dropdown">Module({{YS}})<span
+									class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
 								<div class="fh5co-link-wrap">
 									{{each modules}}
-									<li><a href="lecturer_module?moduleID={{$value.moduleCode}}&YT={{$value.yearTerm}}">{{$value.moduleCode}}</a></li>
+									<li><a
+											href="lecturer_module?moduleID={{$value.moduleCode}}&YT={{$value.yearTerm}}">{{$value.moduleCode}}</a>
+									</li>
 									{{/each}}
 								</div>
 							</ul>
 						</li>
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown">Semester<span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu" >
-								<div class="fh5co-link-wrap" style="width: 145px; text-align: center" id="year_semester">
+							<ul class="dropdown-menu" role="menu">
+								<div class="fh5co-link-wrap" style="width: 145px; text-align: center"
+									id="year_semester">
 
 								</div>
 							</ul>
@@ -157,25 +179,29 @@
 				<div class="col-lg-4 col-md-4 col-sm-4 text-right fh5co-link-wrap">
 					<ul class="fh5co-special" data-offcanvass="yes">
 						<li><a href="#">Hi, {{uname}}</a></li>
-						<li><a href="#" class="call-to-action" data-toggle="modal" data-target="#logoutModal">Logout</a></li>
+						<li><a href="#" class="call-to-action" data-toggle="modal" data-target="#logoutModal">Logout</a>
+						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 
-		<div class="fh5co-cover fh5co-cover-style-2" data-next="yes" style="background-image: url(/public/images/img_same_dimension_3.jpg);">
+		<div class="fh5co-cover fh5co-cover-style-2" data-next="yes"
+			style="background-image: url(/public/images/img_same_dimension_3.jpg);">
 			<div class="fh5co-cover-text">
 				<div class="container">
 					<br><br><br><br><br>
 					<nav class="navbar" role="navigation">
 						<ol class="breadcrumb">
 							<li class="li"><a href="lecturer_homepage">Home</a></li>
-							<li class="li"><a href="lecturer_module?moduleID={{module.moduleCode}}">{{module.moduleName}}</a></li>
+							<li class="li"><a
+									href="lecturer_module?moduleID={{module.moduleCode}}">{{module.moduleName}}</a></li>
 							<li class="active">Student feedback</li>
 						</ol>
 					</nav>
 				</div>
-				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"  style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
+				<div class="container wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s"
+					style="background-color: #f9f6f0; border: 1px solid #999999; margin:25px auto 25px auto">
 					<div id="layoutSidenav_content">
 						<br>
 						<main>
@@ -185,64 +211,90 @@
 										<div class="row">
 											<div class="text-center">
 												<div class="fh5co-cover-intro">
-													<h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s" style="color: #000000">Student Feedback</h1>
+													<h1 class="cover-text-lead wow fadeInUp" data-wow-duration="1s"
+														data-wow-delay="1.1s" style="color: #000000">Student Feedback
+													</h1>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="card-body">
-										<div class="fade in active wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+										<div class="fade in active wow fadeInUp" data-wow-duration="1s"
+											data-wow-delay="1.4s">
 											<div class="row">
 												<div class="img col-md-3" align="center">
 													<img src="{{student.fileLocation}}" width="180" height="200">
 												</div>
 												<div class="col-md-3" align="left">
 													<div class="row">
-														<h5><font class="font1">Name:</font><font class="font2"> {{student.forename}} {{student.surname}}</font></h5>
+														<h5>
+															<font class="font1">Name:</font>
+															<font class="font2"> {{student.forename}}
+																{{student.surname}}</font>
+														</h5>
 													</div>
 													<div class="row">
-														<h5><font class="font1">Group:</font><font class="font2"> {{student.teamNumber}}</font></h5>
+														<h5>
+															<font class="font1">Group:</font>
+															<font class="font2"> {{student.teamNumber}}</font>
+														</h5>
 													</div>
 													<div class="row">
-														<h5><font class="font1">Project:</font><font class="font2"> {{student.projectTitle}}</font></h5>
+														<h5>
+															<font class="font1">Project:</font>
+															<font class="font2"> {{student.projectTitle}}</font>
+														</h5>
 													</div>
 													<div class="row">
-														<h5><font class="font1">Average score:</font><font class="font2"> {{student.avgScore}}</font></h5>
+														<h5>
+															<font class="font1">Average score:</font>
+															<font class="font2"> {{student.avgScore}}</font>
+														</h5>
 													</div>
 													<div class="row">
-														<h5><font class="font1">Email:</font><font class="font2"> {{student.email}}</font></h5>
+														<h5>
+															<font class="font1">Email:</font>
+															<font class="font2"> {{student.email}}</font>
+														</h5>
 													</div>
 												</div>
 												<div class="col-md-6" style="text-align: center;">
 													<figure class="highcharts-figure">
-<!--														<p class="highcharts-description">Student Weekly Score</p>-->
+														<!--														<p class="highcharts-description">Student Weekly Score</p>-->
 														<div id="student_score_plot"></div>
 													</figure>
 												</div><br>
 											</div>
-											<div style="background-color: #ffffff; display: block; position: relative; margin:25px auto 25px auto">
+											<div
+												style="background-color: #ffffff; display: block; position: relative; margin:25px auto 25px auto">
 												<br>
 												<div class="table-responsive" style="margin:auto 25px auto 25px">
-													<table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0">
+													<table class="table table-bordered" id="dataTable1" width="100%"
+														cellspacing="0">
 														<thead>
-														<tr>
-															<th>Week</th>
-															<th>Score</th>
-															<th>Contribution</th>
-															<th>Feedback</th>
-															<th>Date</th>
-														</tr>
+															<tr>
+																<th>Week</th>
+																<th>Score</th>
+																<th>Contribution</th>
+																<th>Feedback</th>
+																<th>Date</th>
+															</tr>
 														</thead>
 														<tbody>
-														{{each feedback}}
-														<tr>
-															<td style="vertical-align: middle">{{$value.weekNumber}}</td>
-															<td style="vertical-align: middle" id="{{$value.weekNumber}}">{{$value.score}}</td>
-															<td style="vertical-align: middle">{{$value.contribution}}%</td>
-															<td style="vertical-align: middle">{{$value.writtenFeedback}}</td>
-															<td style="vertical-align: middle" class="date">{{$value.date}}</td>
-														</tr>
-														{{/each}}
+															{{each feedback}}
+															<tr>
+																<td style="vertical-align: middle">{{$value.weekNumber}}
+																</td>
+																<td style="vertical-align: middle"
+																	id="{{$value.weekNumber}}">{{$value.score}}</td>
+																<td style="vertical-align: middle">
+																	{{$value.contribution}}%</td>
+																<td style="vertical-align: middle">
+																	{{$value.writtenFeedback}}</td>
+																<td style="vertical-align: middle" class="date">
+																	{{$value.date}}</td>
+															</tr>
+															{{/each}}
 														</tbody>
 													</table>
 												</div>
@@ -259,9 +311,8 @@
 			<div style="background-image: url(/public/images/moodle.jpg); height: 100px;">
 				<br>
 				<div style="text-align: center;">
-					<h4>UCL COM0067 team1 </h4>
+					<h4>Copyright © 2020 UCL department of CS </h4>
 				</div>
-				<h6 style="margin-left: 50px;">Copyright@com0067.ucl.ac.uk</h6>
 			</div>
 			<!-- END footer -->
 		</div>
@@ -270,7 +321,7 @@
 
 	<!-- Logout Modal-->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		 aria-hidden="true">
+		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -282,7 +333,7 @@
 				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login">Logout</a>
+					<a class="btn btn-primary" href="/auth/signout">Logout</a>
 				</div>
 			</div>
 		</div>
@@ -296,7 +347,7 @@
 	<!-- Bootstrap -->
 	<script src="/public/js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-    <script src="/public/js/jquery.waypoints.min.js"></script>
+	<script src="/public/js/jquery.waypoints.min.js"></script>
 	<!-- Owl Carousel -->
 	<script src="/public/js/owl.carousel.min.js"></script>
 	<!-- Magnific Popup -->
@@ -325,7 +376,7 @@
 
 	<script>
 		var i = 1;
-		var student_score =[]
+		var student_score = []
 		while (1) {
 			score = document.getElementById(i)
 			if (score === null) {
@@ -335,8 +386,8 @@
 			i++;
 		}
 		Highcharts.chart('student_score_plot', {
-			credits:{
-				enabled:false
+			credits: {
+				enabled: false
 			},
 			title: {
 				text: 'Student Weekly Score'
@@ -345,16 +396,16 @@
 				title: {
 					text: 'Weekly Score '
 				},
-				min:0,
-				tickInterval:1,
-				max:5
+				min: 0,
+				tickInterval: 1,
+				max: 5
 			},
 			xAxis: {
 				accessibility: {
 					rangeDescription: 'Week'
 				},
-				min:1,
-				tickInterval:1,
+				min: 1,
+				tickInterval: 1,
 			},
 			legend: {
 				layout: 'vertical',
@@ -392,22 +443,23 @@
 			}
 		});
 	</script>
-<script>
-	var year_dropsown_list_html = ''
-	var date = new Date()
-	var cur_year = parseInt(date.getFullYear())
-	for (var i=0; i<4; i++) {
-		year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year '+(cur_year-i)+'</a>\n' +
+	<script>
+		var year_dropsown_list_html = ''
+		var date = new Date()
+		var cur_year = parseInt(date.getFullYear())
+		for (var i = 0; i < 4; i++) {
+			year_dropsown_list_html = year_dropsown_list_html + '<li class="imyeah"><a href="#">Year ' + (cur_year - i) + '</a>\n' +
 				'\t\t\t\t\t\t\t\t\t\t<ul class="level2">\n' +
 				'\t\t\t\t\t\t\t\t\t\t\t<li>select a semester</li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-1">1</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-2">2</a></li>\n' +
-				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS='+(cur_year-i)+'-3">3</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS=' + (cur_year - i) + '-1">1</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS=' + (cur_year - i) + '-2">2</a></li>\n' +
+				'\t\t\t\t\t\t\t\t\t\t\t<li><a href="lecturer_setYS?YS=' + (cur_year - i) + '-3">3</a></li>\n' +
 				'\t\t\t\t\t\t\t\t\t\t</ul>\n' +
 				'\t\t\t\t\t\t\t\t\t</li><br>'
-	}
-	document.getElementById("year_semester").innerHTML = year_dropsown_list_html
-</script>
+		}
+		document.getElementById("year_semester").innerHTML = year_dropsown_list_html
+	</script>
 
-	</body>
+</body>
+
 </html>

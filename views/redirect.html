@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Example SSO Login</title>
+  <!-- <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.12.0/js/msal-browser.min.js"></script>
+  <script src="script.js"></script> -->
+  <style>
+    /* Makes it possible to set the class on body to determine what's visible */
+    /* body.login #result {
+      display: none;
+    } */
+
+    body.result #login {
+      display: none;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+
+<body class="login">
+  <p class="error"></p>
+
+  <div id="result">
+    <p>Congratulations <span class="name"></span> you succesfully logged in!</p>
+    <p>
+      You can now use the auth token with the Graph client to query data and perform actions on behalf
+      of the user.
+    </p>
+  </div>
+</body>
+
+<!-- <script>
+  var headers = new Headers();
+  var bearer = "Bearer " + tokenResponse.accessToken;
+  headers.append("Authorization", bearer);
+  var options = {
+    method: "GET",
+    headers: headers,
+  };
+  var graphEndpoint = "https://graph.microsoft.com/v1.0/me";
+
+  fetch(graphEndpoint, options)
+    .then((response) => {
+      return response.json();
+    })
+    .then((response) => {
+      console.log(response);
+      document.querySelector("#result .name").textContent = response.givenName;
+      // setVisible("result");
+    });
+</script> -->
+
+</html>

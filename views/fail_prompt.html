@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>fail_prompt</title>
     <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <style>
         .navbar .breadcrumb {
-            background-color:#fff;
+            background-color: #fff;
         }
+
         .navbar .breadcrumb .li {
-            background-color:#fff;
+            background-color: #fff;
             margin-left: 20px;
         }
+
         .navbar .control-label {
             margin-left: 20px;
             margin-right: 20px;
         }
+
         .navbar {
-            margin-bottom:0;
+            margin-bottom: 0;
         }
+
         .jumbotron {
-            margin-bottom:0;
-            margin-top:0;
+            margin-bottom: 0;
+            margin-top: 0;
         }
-        body
-        {
-            background-image:url('/public/img/bg_2.jpeg');
-            background-color:#cccccc;
+
+        body {
+            background-image: url('/public/img/bg_2.jpeg');
+            background-color: #cccccc;
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-default" role="navigation">
         <div class="control-label">
@@ -70,7 +76,7 @@
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -87,22 +93,23 @@
             </div>
         </div>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
-<script>
-    // $("#mainNav a").click(function(e){
-    //     e.preventDefault();
-    //     $(this).tab("show");
-    // })
-    var module=["App engineering", "Software engineering", "Artificial intelligence", "Machine learning", "Algorithm"]
-    function setModule() {
-        for (var i = 0; i < module.length; i++){
-            $(".dropdown-menu").append('<li><a href="/views/lecturer_module.html">'+module[i]+'</a></li>')
-            // console.log(module[i])
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+    <script>
+        // $("#mainNav a").click(function(e){
+        //     e.preventDefault();
+        //     $(this).tab("show");
+        // })
+        var module = ["App engineering", "Software engineering", "Artificial intelligence", "Machine learning", "Algorithm"]
+        function setModule() {
+            for (var i = 0; i < module.length; i++) {
+                $(".dropdown-menu").append('<li><a href="/views/lecturer_module.html">' + module[i] + '</a></li>')
+                // console.log(module[i])
+            }
         }
-    }
-    setModule()
-</script>
+        setModule()
+    </script>
 
 </body>
+
 </html>
